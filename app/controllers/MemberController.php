@@ -12,11 +12,16 @@ class MemberController extends BaseController {
 				->take(10)
 				->get();
 		
-		$types = Type::select('title', 'text', 'id')
-				->where('featured', '=', 1)
+		$types = Type::where('featured', '=', 1)
 				->get();
 
 		return View::make('member.index')->withUsers($users)->withTypes($types);
 	}
 
+	public function type($slug)
+	{
+		$type = Type::where('slug', '=', $slug)->with('users')->first();
+
+		return View::make('member.type')->withType($type);
+	}
 }

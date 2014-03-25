@@ -87,7 +87,7 @@
 						@endforeach
 						
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block'><i class='icon-zoom-in'> </i> View All {{ $type->title }}</a>
+							<a class='btn btn-xlg btn-block' href="<?php echo url("type/{$type->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $type->title }}</a>
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
