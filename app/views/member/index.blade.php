@@ -58,8 +58,6 @@
 
 			<div class='row top-lists'>
 
-			@foreach ($lists as $list)
-
 				<div class='col-sm-3'>
 					<ul class="list-group klout-list">
 						<li class="list-group-item main">
