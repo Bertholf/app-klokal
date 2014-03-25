@@ -11,8 +11,12 @@ class MemberController extends BaseController {
 				->where('type_id', '=', 1)
 				->take(10)
 				->get();
+		
+		$types = Type::select('title', 'text', 'id')
+				->where('featured', '=', 1)
+				->get();
 
-		return View::make('member.index')->withUsers($users);
+		return View::make('member.index')->withUsers($users)->withTypes($types);
 	}
 
 }
