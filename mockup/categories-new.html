@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Categories - New</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="assets/css/admin.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+  
+  <div id='wrap'>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+          <a class="navbar-brand" href="#"><img src='assets/images/admin-logo.png'></a>
+        </div><!--/.navbar-header-->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-right navbar-nav">
+                <li class=""><a href="#"><i class='icon-dashboard'> </i> Dashboard</a></li>
+                <li class='dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-compass'> </i> Locations<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="locations.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="locations-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class='active dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-list-ul'> </i> Categories<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="categories.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="categories-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class=''><a href='topics.html'><i class='icon-tags'> </i> Topics</a></li>
+                <li class='dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user'> </i> Users <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="users.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="users-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class=""><a href="#"><i class='icon-off'> </i> Sign Out</a></li>
+              </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-->
+    </div><!--/.navbar-->
+
+    <div class='container'>
+      <div id='content-wrapper' class='row'>
+        <div class='col-xs-12'>
+          <div class='row'>
+            <div class='col-sm-12'>
+              <div class='page-header'>
+                <div class='pull-left'>
+                 <h1><i class='icon-list-ul text-contrast'></i> Categories <small>Add New</small></h1>
+                </div><!--/.pull-left-->
+                <div class='pull-right'>
+                  <ul class="breadcrumb">
+                    <li class=''><a href="#">Admin</a></li>
+                    <li class=''><a href="#">Categories</a></li>
+                    <li class='active'><a href="#">Add New</a></li>
+                  </ul>
+                </div><!--/.pull-right-->
+              </div><!--/.page-header-->
+
+            </div><!--/.col-sm-12-->
+          </div><!--/.row-->
+
+          
+
+          <div class='row'>
+            <div class='col-md-6'>
+                <div class='well'>
+                  <form role="form" class='validate-form'>
+                    <div class='row'>
+                      <div class="form-group col-sm-12">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Ex: Actors" required="required">
+                      </div>
+                    </div><!--/.row-->
+                    <div class='row'>
+                      <div class="form-group col-sm-12">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id='description' rows="3" placeholder='Ex: Movie Stars from popular Blockbuster Films. '></textarea>
+                      </div>
+                    </div><!--/.row-->
+
+                    <div class='row'>
+                      <div class="form-group col-sm-12">
+                        <hr class='normal'>
+                        <label for="exampleInputFile">Image</label>
+                        <p class="help-block">Upload an Image to represent this Category</p>
+                        <input type="file" id="category-image" class='btn-primary' title='Upload an Image'>
+                        
+                        <hr class='normal'>
+                      </div>
+                    </div><!--/.row-->
+                    <div class='row'>
+                      <div class='form-group col-sm-12'>
+                        <label for="Status">Status</label>
+                        <p class='help-block'>Do you want this category to be visible in the application?</p>
+                        <select class="form-control" id='scan-mode'>
+                          <option>Yes, Active</option>
+                          <option>No, Inactive</option>
+                        </select>
+                        <hr class='normal'>
+                      </div><!--/.form-group-->
+                    </div><!--/.row-->
+                    <div class='row'>
+                      <div class='col-lg-12'>
+                        <button class="btn btn-lg btn-default"><i class='icon-arrow-left'> </i> Go Back</button>
+                        <button type="submit" class="btn btn-lg btn-success"><i class='icon-magic'> </i> Create Category</button>
+                      </div><!--/.col-lg-12-->
+                    </div><!--/.row-->
+                  </form>
+                </div><!--/.well-->
+            </div><!--/.col-mid-8-->
+          </div><!--/.row-->
+        </div><!--/.col-xs-12-->
+      </div><!--/#content-wrapper-->
+    </div><!--/.container-->
+  </div><!--/.wrap-->
+     <!-- FOOTER -->
+  
+
+  <div id='footer'>
+    <div class='container'>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>&copy; 2013 SaaS Venture Group &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </div><!--/.container-->
+  </div><!--/.footer-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/holder.js"></script>
+    <script src="assets/js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/validate/additional-methods.js" type="text/javascript"></script>
+    <script src="assets/js/custom.js" type="text/javascript"></script>
+
+  </body>
+</html>

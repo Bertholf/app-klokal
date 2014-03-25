@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Categories</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="assets/css/admin.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+  
+  <div id='wrap'>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+          <a class="navbar-brand" href="#"><img src='assets/images/admin-logo.png'></a>
+        </div><!--/.navbar-header-->
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-right navbar-nav">
+                <li class=""><a href="#"><i class='icon-dashboard'> </i> Dashboard</a></li>
+                <li class='dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-compass'> </i> Locations<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="locations.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="locations-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class='dropdown'>
+                  <a href="#" class="active dropdown-toggle" data-toggle="dropdown"><i class='icon-list-ul'> </i> Categories<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="categories.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="categories-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class=''><a href='topics.html'><i class='icon-tags'> </i> Topics</a></li>
+                
+                <li class='dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user'> </i> Users <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="users.html">Overview</a></li>
+                    <li class="divider"></li>
+                    <li><a href="users-new.html">Add New</a></li>
+                  </ul>
+                </li>
+                <li class=""><a href="#"><i class='icon-off'> </i> Sign Out</a></li>
+              </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-->
+    </div><!--/.navbar-->
+
+    <div class='container'>
+      <div id='content-wrapper' class='row'>
+        <div class='col-xs-12'>
+          <div class='row'>
+            <div class='col-sm-12'>
+              <div class='page-header'>
+                <div class='pull-left'>
+                 <h1><i class='icon-list-ul text-contrast'></i> Categories</h1>
+                </div><!--/.pull-left-->
+                <div class='pull-right'>
+                  <ul class="breadcrumb">
+                    <li class=''><a href="#">Admin</a></li>
+                    <li class='active'><a href="#">Categories</a></li>
+                  </ul>
+                </div><!--/.pull-right-->
+              </div><!--/.page-header-->
+
+            </div><!--/.col-sm-12-->
+          </div><!--/.row-->
+
+          
+
+          <div class='row'>
+            <div class='col-md-12'>
+              <div class='box'>
+                <div class='box-header'>
+                  <div class='title'>
+                   Current Categories
+                  </div><!--/.title-->
+                  <div class='actions'>
+                    <a href='categories-new.html' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Category</a>
+                  </div>
+                </div><!--/.box-header-->
+                <div class='box-content box-no-padding'>
+                  <table class="data-table admin table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Icon</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-title='ID'>1</td>
+                        <td data-title='Title'>Celebrities</td>
+                        <td data-title='Icon'><img src="holder.js/40x40"></img></td>
+                        <td data-title='Description'>TV people, athletes, and all around well-known people</td>
+                        <td data-title='Status'><span class='label label-success'>Active</span></td>
+                        <td><a class='btn btn-default btn-sm' href='categories-edit.html'><i class='icon-cog'> </i> Edit</a>
+                          <a class='btn btn-default btn-sm' data-toggle='modal' href='#confirmDelete'><i class='icon-trash'> </i></a>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td data-title='ID'>2</td>
+                        <td data-title='Title'>Politicians</td>
+                        <td data-title='Icon'><img src="holder.js/40x40"></img></td>
+                        <td data-title='Description'>TV people, athletes, and all around well-known people</td>
+                        <td data-title='Status'><span class='label label-success'>Active</span></td>
+                        <td><a class='btn btn-default btn-sm' href='categories-edit.html'><i class='icon-cog'> </i> Edit</a>
+                          <a class='btn btn-default btn-sm' data-toggle='modal' href='#confirmDelete'><i class='icon-trash'> </i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div><!--/.box-content-->
+              </div><!--/.box-->
+            </div><!--/.col-mid-8-->
+          </div><!--/.row-->
+        </div><!--/.col-xs-12-->
+      </div><!--/#content-wrapper-->
+    </div><!--/.container-->
+     
+
+  </div><!--/.wrap-->
+     <!-- FOOTER -->
+      <div id='footer'>
+        <div class='container'>
+          <p class="pull-right"><a href="#">Back to top</a></p>
+          <p>&copy; 2013 SaaS Venture Group &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div><!--/.container-->
+      </div><!--/.footer-->
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+              You will delete everything within this category if you delete this.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger">Yes, Delete this</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/holder.js"></script>
+    <script src="assets/js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>
+  </body>
+</html>

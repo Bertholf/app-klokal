@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^year/([^/]*)$ /index.php?view=list&year=$2 [L]
