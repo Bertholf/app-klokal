@@ -21,13 +21,15 @@ class MemberController extends BaseController {
 	public function type($slug)
 	{
 		$type = Type::where('slug', '=', $slug)->with('users')->first();
+		$users = $type->users()->orderBy('klout_metric_score', 'desc')->paginate(50);
 
-		return View::make('member.type')->withType($type);
+		return View::make('member.type', array('type'=>$type, 'users'=>$users));
 	}
 
 	public function user($twitter_handle)
 	{
 		$user = User::where('twitter_handle', '=', $twitter_handle)->first();
-		return View::make('member.user')->withUser($user);
+		
+		return View::make('member.user', array('user'=>$user));
 	}
 }

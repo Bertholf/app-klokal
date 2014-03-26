@@ -16,6 +16,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->belongsTo('Type');
 	}
+	
+	public function getRankInType()
+	{
+		$rank = User::where('klout_metric_score', '>', $this->klout_metric_score)
+				->where('type_id', '=', $this->type_id)->count();
+		return $rank+1;
+	}
 
 	/**
 	 * The attributes excluded from the model's JSON form.

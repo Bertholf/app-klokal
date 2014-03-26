@@ -12,8 +12,8 @@
 							<p class="list-group-item-text">{{ $type->text }}</p>
 						</li>
 						
-						<?php $c = 1; ?>
-						@foreach ($type->users()->orderBy('klout_metric_score', 'desc')->take(50)->get() as $user)
+						<?php $c = $users->getFrom(); ?>
+						@foreach ($users as $user)
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">
@@ -33,7 +33,7 @@
 						@endforeach
 						
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block'><i class='icon-zoom-in'> </i> View All {{ $type->title }}</a>
+							{{ $users->links() }}
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
