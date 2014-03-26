@@ -27,6 +27,7 @@ class MemberController extends BaseController {
 
 	public function user($twitter_handle)
 	{
-		return 'User page comming soon';
+		$user = User::where('twitter_handle', '=', $twitter_handle)->first();
+		return View::make('member.user')->withUser($user);
 	}
 }
