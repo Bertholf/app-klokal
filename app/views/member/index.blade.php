@@ -19,11 +19,11 @@
 						<div class='box'>
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img class="media-object" src="holder.js/48x48" alt="...">
+									<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
 								</a>
 							<div class="media-body">
 								<h3 class="media-heading">#{{ $c }}</h3>
-								<h4>{{ $user->name }}</h4>
+								<h4><a href="<?php echo url("user/{$user->twitter_handle}"); ?>">{{ $user->name }}</a></h4>
 								<div class="score">
 									{{ round($user->klout_metric_score) }}
 									<span class="callout"></span>
@@ -71,12 +71,12 @@
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img class="media-object" src="holder.js/48x48" alt="...">
+									<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
 								</a>
 								<div class="media-body">
 									<h3 class="media-heading">
 										<div class="score">{{ round($user->klout_metric_score) }}</div><!--/.score-->
-										<span class='user-name'>{{ $user->name }}</span>
+										<a href="<?php echo url("user/{$user->twitter_handle}"); ?>"><span class='user-name'>{{ $user->name }}</span></a>
 									</h3> 
 									<div class='rank'>#{{ $c }}</div><!--/.div-->
 									<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
