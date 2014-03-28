@@ -19,3 +19,5 @@ Route::get('/type/{slug}', 'MemberController@type');
 Route::get('/user/{twitter_handle}', 'MemberController@user');
 Route::get('/sign_in_with_twitter', 'MemberController@twitterSignIn');
 Route::get('/twitter_callback', 'MemberController@twitterCallback');
+Route::get('/tag', 'TagController@index');
+Route::get('/tag/{slug}', 'TagController@tag');

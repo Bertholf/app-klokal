@@ -16,6 +16,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function type()
 	{
 		return $this->belongsTo('Type');
+	}	
+
+	public function userTags()
+	{
+		return $this->hasMany('UserTag', 'user_id');
 	}
 	
 	public function getRankInType()
