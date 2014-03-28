@@ -11,6 +11,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
+	public $timestamps = false;
 	
 	public function type()
 	{
@@ -20,7 +21,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getRankInType()
 	{
 		$rank = User::where('klout_metric_score', '>', $this->klout_metric_score)
-				->where('type_id', '=', $this->type_id)->count();
+				->where('type_id', '=', $this->type_id)
+				->where('location_id', '=', 1)->count();
+		
 		return $rank+1;
 	}
 

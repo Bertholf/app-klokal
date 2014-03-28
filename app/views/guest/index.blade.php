@@ -14,7 +14,7 @@
 						<div class="carousel-caption">
 							<h1>You are just one click away from seeing Hawaii's top influencers!</h1>
 							
-							<p><a class="btn btn-lg btn-success" href="/dashboard"><i class='icon-twitter'> </i> Sign in with Twitter</a></p>
+							<p><a class="btn btn-lg btn-success" href="/sign_in_with_twitter"><i class='icon-twitter'> </i> Sign in with Twitter</a></p>
 						</div> <!--carousel-caption -->
 					</div><!--/.container-->
 				</div> <!--/.item-active-->

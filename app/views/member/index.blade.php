@@ -66,8 +66,13 @@
 							<p class="list-group-item-text">{{ $type->text }}</p>
 						</li>
 						
-						<?php $c = 1; ?>
-						@foreach ($type->users()->orderBy('klout_metric_score', 'desc')->take(3)->get() as $user)
+						<?php 
+							$c = 1; 
+							$users = $type->users()->orderBy('klout_metric_score', 'desc')
+									->where('location_id', '=', 1)
+									->take(3)->get();
+						?>
+						@foreach ($users as $user)
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">
