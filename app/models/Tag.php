@@ -2,6 +2,7 @@
 class Tag extends  Eloquent {
 	
 	protected $table = 'tag';
+	public $timestamps = false;
 	protected $fillable = array('title', 'text', 'image','title', 'slug', 'active','count', 'user_id', 'date_updated', 'date_created');
 	
 	public function users()

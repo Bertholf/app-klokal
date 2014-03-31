@@ -14,7 +14,7 @@ class TagController extends BaseController {
 		{
 			$user_id = Input::get('userId');
 			$twitter_handle = Input::get('twitterHandle');
-			var_dump($twitter_handle);die;
+// 			var_dump($twitter_handle);die;
 			$title = Input::get('tag');
 			$text = '';
 			$image = '';

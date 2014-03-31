@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+
+@section('content')
 	<div class='col-sm-4'>
 		<p><label>Name: </label>{{ $user->name }}</p>
 		<p><label>Twitter Handle: </label>{{ $user->twitter_handle }}</p>
