@@ -29,7 +29,6 @@ class MemberController extends BaseController {
 	public function user($twitter_handle)
 	{
 		$user = User::where('twitter_handle', '=', $twitter_handle)->first();
-		
 				//list all tags for this user
 		$tags = Tag::select('user_tag.*')
 					->join('user_tag','tag.id','=','user_tag.tag_id')
@@ -37,7 +36,9 @@ class MemberController extends BaseController {
 					->orderBy('user_tag.tag_id','desc')
 					->lists('tag_id');
 
-		$tags_info= Tag::whereIn('id',$tags)->get();
+		$tags_info= Tag::whereIn('id',$tags)
+						->orderBy('id','desc')
+						->paginate(5);
 
 		return View::make('member.user', array('user'=>$user,'tags_info' => $tags_info));
 	}

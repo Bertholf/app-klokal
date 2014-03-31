@@ -31,13 +31,18 @@
 									<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
 								</div><!--/.media-body-->
 								<div class="media-body" style='float:right;'>
-									<a class="pull-left" href="/tag/update/user_id/<?php echo $user->id;?>/tag_id/<?php  echo $tag->id;?>" alt='+ 1'>
+									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag->id;?>" alt='+ 1'>
 										<span class="glyphicon glyphicon-chevron-up" ></span>
 									</a>
 								</div>
 							</div><!--/.media-->
 						</li><!--/.list-group-item-->
 						@endforeach
+						<li class="list-group-item">
+							<div class="media row">
+								{{ $tags_info->links() }}
+							</div><!--/.media-->
+						</li><!--/.list-group-item-->
 		</ul>
 	</div><!--/.col-sm-4-->
 	
@@ -49,7 +54,7 @@
 	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
 	    <?php echo Form::file('tagImage'); ?>
 	</div>
-	  <input type="submit" class="btn btn-default" value='Submit'/>
+	  <input type="submit" class="btn btn-default" value='Add Tag'/>
 	{{ Form::close() }}
 	</div><!--/.col-sm-4-->	
 @stop
