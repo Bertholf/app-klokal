@@ -28,19 +28,33 @@ class MemberController extends BaseController {
 
 	public function user($twitter_handle)
 	{
+		$tags_id_array = array();
+		$tags_count_array = array();
+		$tags_count_total = 0;
 		$user = User::where('twitter_handle', '=', $twitter_handle)->first();
 				//list all tags for this user
-		$tags = Tag::select('user_tag.*')
+		$tags = Tag::select(DB::raw(' user_tag.* , count(user_tag.tag_id) as ctid'))
 					->join('user_tag','tag.id','=','user_tag.tag_id')
 					->where('user_tag.user_id', '=', $user->id)
+					->groupBy('user_tag.tag_id')
 					->orderBy('user_tag.tag_id','desc')
-					->lists('tag_id');
+					->get();
 
-		$tags_info= Tag::whereIn('id',$tags)
+		foreach ($tags as $tag)
+		{
+				$tags_id_array[] = $tag->tag_id; //store all tags id in this array
+				$tags_count_array[$tag->tag_id] = $tag->ctid; // every kind tag count
+		}
+
+		foreach ($tags_count_array as $count){
+				$tags_count_total += $count; //count all tag for this user
+		}
+			
+		$tags_info= Tag::whereIn('id',$tags_id_array)
 						->orderBy('id','desc')
-						->paginate(5);
-
-		return View::make('member.user', array('user'=>$user,'tags_info' => $tags_info));
+						->paginate(4);
+		
+		return View::make('member.user', array('user'=>$user,'tags_info' => $tags_info , 'tags_count_array' => $tags_count_array, 'tags_count_total' => $tags_count_total));
 	}
 
 	public function twitterSignIn()

@@ -48,7 +48,7 @@ class TagController extends BaseController {
 		$this->addUserTag($user_id, $tag_id);
 
 		$user_top_tag = Tag::where('id', '=', $tag_id)
-		->orderBy('count', 'DESC')->first();
+							->orderBy('count', 'DESC')->first();
 		
 		$tag_count = UserTag::select(DB::raw(' * , count(user_id) as cuid'))
 						->where('tag_id', '=', $tag_id)

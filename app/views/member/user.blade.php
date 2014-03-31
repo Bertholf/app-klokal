@@ -28,7 +28,46 @@
 								</a>
 								<div class="media-body" style="display: inline;">
 									<p><b>{{ $tag->title }}</b></p>
-									<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
+										<?php 
+										$percent = 0;
+										$count = 0;
+										if (!empty($tags_count_array)){
+										foreach ($tags_count_array as $count_key => $count_value){
+											if($tags_count_total == 0){
+												$percent = 0;?>
+										<div class="progress" style="width: 75%">
+										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
+										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
+										  </div>
+										</div>
+										<div><?php echo $count_value;?></div>
+											<?php }else{
+												if($count_key == $tag->id && $count_value != 0){
+													$count = $count_value;
+												  $percent = round((floatval($count_value / $tags_count_total))*100, 2);?>
+										<div class="progress" style="width: 75%">
+										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
+										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
+										  </div>
+										</div>
+										<div><?php echo $count_value;?></div>
+												<?php }else{
+												  $percent = 0;
+												}
+											}
+										?>
+										 
+										<?php 
+										$count = 0;
+										}
+										}else{?>
+										<div class="progress" style="width: 75%">
+										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
+										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
+										  </div>
+										</div>
+										<div><?php echo $count_value;?></div>	
+										<?php }?>
 								</div><!--/.media-body-->
 								<div class="media-body" style='float:right;'>
 									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag->id;?>" alt='+ 1'>
