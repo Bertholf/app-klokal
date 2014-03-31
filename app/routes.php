@@ -21,3 +21,5 @@ Route::get('/sign_in_with_twitter', 'MemberController@twitterSignIn');
 Route::get('/twitter_callback', 'MemberController@twitterCallback');
 Route::get('/tag', 'TagController@index');
 Route::get('/tag/{slug}', 'TagController@tag');
+Route::post('/tag/add', 'TagController@addTag');
+Route::get('/tag/update/{user_id}/{tag_id}', 'TagController@updateTagByUserId');
