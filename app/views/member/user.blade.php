@@ -86,7 +86,7 @@
 	</div><!--/.col-sm-4-->
 	
 	<div class='col-sm-4'>			
-	{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files'=> true)) }}
+	{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true)) }}
 	<div class='col-sm-6'>
 	    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
 	    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>

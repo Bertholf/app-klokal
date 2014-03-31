@@ -7,7 +7,16 @@ class TagController extends BaseController {
 
 		return 	View::make('tag.index', array('tags'=>$tags));
 	}
-
+	
+	public function validateUploadImage($input) {
+	
+		$rules = array(
+				'image' => 'Required|Min:3|Max:80|Alpha'
+		);
+	
+		return Validator::make($input, $rules);
+	}
+	
 	public function addTag()
 	{
 		if (Input::has('tag'))
@@ -17,10 +26,12 @@ class TagController extends BaseController {
 			$title = Input::get('tag');
 			$text = '';
 			$image = '';
-			if (Input::hasFile('tagImage'))
-			{
-				$path = Input::file('tagImage')->getRealPath();
-			}
+			
+// 			if (Input::hasFile('tagImage'))
+// 			{
+// 				$image = Input::file('tagImage');
+// 			}
+
 			$slug = str_replace(' ', '-',  strtolower(trim($title)));
 			$slug = str_replace('&', '-and-',  strtolower(trim($slug)));
 			$active = 1;
@@ -28,8 +39,18 @@ class TagController extends BaseController {
 			$count = 1;
 			$date_updated = date('Y-m-d H:i:s',time());
 			$date_created = date('Y-m-d H:i:s',time());
-			// Create a new tag in the tag table
 			
+			//get all tag for avoid error: Integrity constraint violation: 1062 Duplicate entry
+			$tags = Tag::get();
+			
+			foreach ($tags as $tag){
+				if($tag->title == $title&& $tag->slug ==$slug ) //if Integrity constraint violation
+				{
+					return Redirect::to("/user/{$twitter_handle}");  //return this user's page
+				} 
+			}
+			
+			// Create a new tag in the tag table
 			$tag = Tag::create(array('title' => $title, 'text' => $text, 'image' => $image,'title' => $title, 'slug' => $slug, 'active' => $active,'count' => $count, 'user_id' => $user_id, 'date_updated' => $date_updated, 'date_created' => $date_created));
 			$tag_id = $tag->id;
 			
