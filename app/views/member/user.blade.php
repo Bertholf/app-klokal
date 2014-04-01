@@ -35,21 +35,11 @@
 										foreach ($tags_count_array as $count_key => $count_value){
 											if($tags_count_total == 0){
 												$percent = 0;?>
-										<div class="progress" style="width: 75%">
-										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
-										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
-										  </div>
-										</div>
 										<div><?php echo $count_value;?></div>
 											<?php }else{
 												if($count_key == $tag->id && $count_value != 0){
 													$count = $count_value;
 												  $percent = round((floatval($count_value / $tags_count_total))*100, 2);?>
-										<div class="progress" style="width: 75%">
-										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
-										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
-										  </div>
-										</div>
 										<div><?php echo $count_value;?></div>
 												<?php }else{
 												  $percent = 0;
@@ -61,11 +51,6 @@
 										$count = 0;
 										}
 										}else{?>
-										<div class="progress" style="width: 75%">
-										  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo  $percent;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo  $percent;?>%">
-										    <span class="sr-only"><?php echo  $percent ;?>% Complete</span>
-										  </div>
-										</div>
 										<div><?php echo $count_value;?></div>	
 										<?php }?>
 								</div><!--/.media-body-->
@@ -85,7 +70,21 @@
 		</ul>
 	</div><!--/.col-sm-4-->
 	
-	<div class='col-sm-4'>			
+	<div class='col-sm-4'>	
+		{{ Form::open(array('method' => 'GET', 'url' => '/tag/update/{twitter_handle}/{user_id}/{tag_id}' ,'files' => true , 'id' => 'update_tag')) }}
+	<div class='col-sm-6'>
+		<div id="tag_list">
+			<input class="typeahead form-control" autocomplete="off" id='tag_selected' type="text" placeholder="Select a Tag" value='' name="tags">
+		</div>
+	    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
+	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
+	</div>
+	  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
+		{{ Form::close() }}
+	<br/>
+	<br/>
+	<br/>
+			
 	{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true)) }}
 	<div class='col-sm-6'>
 	    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
@@ -93,8 +92,10 @@
 	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
 	    <?php echo Form::file('tagImage'); ?>
 	</div>
-	  <input type="submit" class="btn btn-default" value='Add Tag'/>
+	  <input type="submit" class="btn btn-default" value='Add a New Tag'/>
 	{{ Form::close() }}
+
+
 	</div><!--/.col-sm-4-->	
 @stop
 

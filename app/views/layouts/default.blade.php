@@ -61,6 +61,8 @@
 		<script src="http:///ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/holder.js"></script>
+		<script src="/js/typeahead.js"></script>
 		<script src="/js/custom.js"></script>
+		<script src="/js/autocomplete.js"></script>
 	</body>
 </html>

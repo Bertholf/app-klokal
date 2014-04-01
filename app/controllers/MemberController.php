@@ -53,8 +53,7 @@ class MemberController extends BaseController {
 		$tags_info= Tag::whereIn('id',$tags_id_array)
 						->orderBy('id','desc')
 						->paginate(4);
-		
-		return View::make('member.user', array('user'=>$user,'tags_info' => $tags_info , 'tags_count_array' => $tags_count_array, 'tags_count_total' => $tags_count_total));
+		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info , 'tags_count_array' => $tags_count_array, 'tags_count_total' => $tags_count_total));
 	}
 
 	public function twitterSignIn()

@@ -61,6 +61,30 @@ class TagController extends BaseController {
 		}
 	}
 	
+	public function getTags()
+	{
+		$tags = Tag::get();
+		$list = array();
+		foreach ($tags as $tag){
+			$list[] = $tag->title;
+		}
+		return json_encode($list);
+	}
+	
+	public function updateTagByTagTitle($twitter_handle,$user_id, $tag_title)
+	{
+		$tags = Tag::get();
+		foreach ($tags as $tag){
+			if($tag_title == $tag->title){
+				$tag_id = $tag->id;
+				return $this->updateTagByUserId($twitter_handle, $user_id, $tag_id);
+			}else{
+				Redirect::to("/user/{$twitter_handle}");
+			}
+		}
+	
+	}
+	
 	public function updateTagByUserId($twitter_handle,$user_id, $tag_id)
 	{
 		$user_id = intval($user_id);
