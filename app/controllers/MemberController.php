@@ -118,6 +118,7 @@ class MemberController extends BaseController {
 				$user->text = $user_info->description;
 				$user->location = $user_info->location;
 				$user->location_id = 1;		//@todo
+				$user->type_id = 1;		//@todo
 				$user->image = $user_info->profile_image_url;
 				$user->url = $user_info->url;
 				$user->twitter_metric_followers = $user_info->followers_count;
@@ -152,5 +153,12 @@ class MemberController extends BaseController {
 					
 			return Redirect::to('/dashboard');
 	    }
+	}
+
+	public function logout()
+	{
+		Auth::logout();
+
+		return Redirect::to('/');
 	}
 }

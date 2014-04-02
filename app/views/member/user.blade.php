@@ -15,6 +15,7 @@
 		<p><label>Updated: </label>{{ $user->klout_updated }}</p>
 	</div><!--/.col-sm-4-->	
 	
+	@if($tags_info)
 	<div class='col-sm-4'>
 		<ul class="list-group klout-list">
 						<li class="list-group-item main">
@@ -29,16 +30,21 @@
 								<div class="media-body" style="display: inline;">
 									<p><b>{{ $tag->title }}</b></p>
 										<?php 
+										$percent = 0;
 										$count = 0;
 										if (!empty($tags_count_array)){
 										foreach ($tags_count_array as $count_key => $count_value){
-											if($tags_count_total == 0){?>
+											if($tags_count_total == 0){
+												$percent = 0;?>
 										<div><?php echo $count_value;?></div>
 											<?php }else{
 												if($count_key == $tag->id && $count_value != 0){
-													$count = $count_value;?>
+													$count = $count_value;
+												  $percent = round((floatval($count_value / $tags_count_total))*100, 2);?>
 										<div><?php echo $count_value;?></div>
-												<?php }
+												<?php }else{
+												  $percent = 0;
+												}
 											}
 										?>
 										 
@@ -59,14 +65,12 @@
 						@endforeach
 						<li class="list-group-item">
 							<div class="media row">
-								<?php if(count($tags_info) != 0)
-								{
-									$tags_info->links();
-								}?>
+								{{ $tags_info->links() }}
 							</div><!--/.media-->
 						</li><!--/.list-group-item-->
 		</ul>
 	</div><!--/.col-sm-4-->
+	@endif
 	
 	<div class='col-sm-4'>	
 		{{ Form::open(array('method' => 'GET', 'url' => '/tag/update/{twitter_handle}/{user_id}/{tag_id}' ,'files' => true , 'id' => 'update_tag')) }}

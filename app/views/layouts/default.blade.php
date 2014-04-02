@@ -38,6 +38,14 @@
 						<img src='/images/Klout.png'>
 					</div><!--/.navbar-right-->
 				</div><!--/.nav-collapse -->
+				@if (Auth::check())
+				<div style="text-align: right">
+					<span>Hi, </span>
+					<a href="/user/{{Auth::user()->twitter_handle}}">{{ Auth::user()->name }}</a>
+					<span> | </span>
+					<a href="/logout">Logout</a>
+				</div>
+				@endif
 			</div>
 		</div><!--/.navbar-->
 

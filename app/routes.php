@@ -14,7 +14,6 @@
 
 // Homepage
 Route::get('/', 'GuestController@index');
-Route::get('/dashboard', 'MemberController@index');
 Route::get('/type/{slug}', 'MemberController@type');
 Route::get('/user/{twitter_handle}', 'MemberController@user');
 Route::get('/sign_in_with_twitter', 'MemberController@twitterSignIn');
@@ -25,3 +24,9 @@ Route::post('/tag/add', 'TagController@addTag');
 Route::get('/getTags', 'TagController@getTags');
 Route::get('/tag/updatebytitle/{twitter_handle}/{user_id}/{tag_title}', 'TagController@updateTagByTagTitle');
 Route::get('/tag/update/{twitter_handle}/{user_id}/{tag_id}', 'TagController@updateTagByUserId');
+Route::get('/logout', 'MemberController@logout');
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('/dashboard', 'MemberController@index');
+});
