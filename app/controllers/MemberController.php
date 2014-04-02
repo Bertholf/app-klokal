@@ -40,19 +40,29 @@ class MemberController extends BaseController {
 					->orderBy('user_tag.tag_id','desc')
 					->get();
 
-		foreach ($tags as $tag)
-		{
-				$tags_id_array[] = $tag->tag_id; //store all tags id in this array
-				$tags_count_array[$tag->tag_id] = $tag->ctid; // every kind tag count
-		}
-
-		foreach ($tags_count_array as $count){
-				$tags_count_total += $count; //count all tag for this user
-		}
+		if(count($tags) == 0){
+			$tags_info = array();
+		}else{
 			
-		$tags_info= Tag::whereIn('id',$tags_id_array)
-						->orderBy('id','desc')
-						->paginate(4);
+			foreach ($tags as $tag)
+			{
+				$tags_id_array[] = $tag->tag_id; //store all tags id in this array
+				if(empty($tags_id_array))
+				{
+					$tags_id_array[] = 1;
+				}
+				$tags_count_array[$tag->tag_id] = $tag->ctid; // every kind tag count
+			}
+			
+			foreach ($tags_count_array as $count){
+				$tags_count_total += $count; //count all tag for this user
+			}
+			
+			$tags_info= Tag::whereIn('id',$tags_id_array)
+			->orderBy('id','desc')
+			->paginate(4);
+		}
+		
 		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info , 'tags_count_array' => $tags_count_array, 'tags_count_total' => $tags_count_total));
 	}
 
