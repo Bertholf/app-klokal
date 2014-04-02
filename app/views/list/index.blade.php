@@ -35,10 +35,20 @@
 						@endforeach
 						
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block' href="<?php echo url("type/{$list->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $list->title }}</a>
+							<a class='btn btn-xlg btn-block' href="<?php echo url("lists/{$list->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $list->title }}</a>
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
 
 			@endforeach
+			<div class='col-sm-11'>
+			 <ul>
+				<li class="list-group-item">
+					<div class="media row">
+						{{ $lists->links() }}
+					</div><!--/.media-->
+				</li><!--/.list-group-item-->
+			</ul>
+			</div>
+
 @stop

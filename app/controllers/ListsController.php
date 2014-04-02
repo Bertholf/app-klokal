@@ -6,10 +6,9 @@ class ListsController extends BaseController {
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
 				->orderBy('klout_metric_score', 'desc')
 				->where('location_id', '=', 1)
-				->where('type_id', '=', 1)
 				->take(10)
 				->get();
-		$lists = Lists::where('featured', '=', 1)->get();
+		$lists = Lists::paginate(4);
 
 		return View::make('list.index')->withUsers($users)->withLists($lists);
 	}

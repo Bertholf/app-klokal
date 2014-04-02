@@ -17,7 +17,7 @@ class MemberController extends BaseController {
 
 	public function lists($slug)
 	{
-		$type = Type::where('slug', '=', $slug)->with('users')->first();
+		$type = Lists::where('slug', '=', $slug)->with('users')->first();
 		$users = $type->users()->orderBy('klout_metric_score', 'desc')
 				->where('location_id', '=', 1)
 				->paginate(50);
