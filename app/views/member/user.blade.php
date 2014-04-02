@@ -90,7 +90,11 @@
 	    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
 	    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
 	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
-	    <?php echo Form::file('tagImage'); ?>
+	    <br>
+	    <input type="text" class="form-control" id="newImage" name ='newImage' placeholder="Enter a image url"/>
+	    <?php 
+// 	    echo Form::file('tagImage'); 
+	    ?>
 	</div>
 	  <input type="submit" class="btn btn-default" value='Add a New Tag'/>
 	{{ Form::close() }}

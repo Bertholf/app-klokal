@@ -24,8 +24,15 @@ class TagController extends BaseController {
 			$user_id = Input::get('userId');
 			$twitter_handle = Input::get('twitterHandle');
 			$title = Input::get('tag');
+// 			var_dump( Input::get('tag'));
+// 			dd(Input::get('newImage'));
 			$text = '';
-			$image = 'http://kcdn3.klout.com/static/images/topics/social-media.png';
+			if(!empty(Input::get('newImage')))
+			{
+				$image = Input::get('newImage');
+			}else{
+				$image = '';
+			}
 			
 // 			if (Input::hasFile('tagImage'))
 // 			{
