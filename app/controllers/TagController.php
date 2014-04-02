@@ -78,18 +78,13 @@ class TagController extends BaseController {
 	
 	public function updateTagByTagTitle($twitter_handle,$user_id, $tag_title)
 	{
-		$tags = Tag::get();
-		foreach ($tags as $tag){
-			if($tag_title == $tag->title)
-			{
-				$tag_id = $tag->id;
-				return $this->updateTagByUserId($twitter_handle, $user_id, $tag_id);
-			}
-// 			else{
-// 			 return	Redirect::to("/user/{$twitter_handle}");
-// 			}
+		$tag = Tag::where('title', '=', $tag_title)->first();
+		if ($tag){
+			$tag_id = $tag->id;
+			return $this->updateTagByUserId($twitter_handle, $user_id, $tag_id);
+		}else{
+			return	Redirect::to("/user/{$twitter_handle}");
 		}
-	
 	}
 	
 	public function updateTagByUserId($twitter_handle,$user_id, $tag_id)

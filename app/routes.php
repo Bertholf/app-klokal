@@ -14,7 +14,8 @@
 
 // Homepage
 Route::get('/', 'GuestController@index');
-Route::get('/type/{slug}', 'MemberController@type');
+Route::get('/lists', 'ListsController@index');
+Route::get('/lists/{slug}', 'MemberController@lists');
 Route::get('/user/{twitter_handle}', 'MemberController@user');
 Route::get('/sign_in_with_twitter', 'MemberController@twitterSignIn');
 Route::get('/twitter_callback', 'MemberController@twitterCallback');

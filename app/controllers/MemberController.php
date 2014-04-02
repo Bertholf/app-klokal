@@ -10,13 +10,12 @@ class MemberController extends BaseController {
 				->where('type_id', '=', 1)
 				->take(10)
 				->get();
-		
-		$types = Type::where('featured', '=', 1)->get();
+		$lists = Lists::where('featured', '=', 1)->get();
 
-		return View::make('member.index')->withUsers($users)->withTypes($types);
+		return View::make('member.index')->withUsers($users)->withLists($lists);
 	}
 
-	public function type($slug)
+	public function lists($slug)
 	{
 		$type = Type::where('slug', '=', $slug)->with('users')->first();
 		$users = $type->users()->orderBy('klout_metric_score', 'desc')

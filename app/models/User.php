@@ -13,9 +13,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'users';
 	public $timestamps = false;
 	
-	public function type()
+	public function lists()
 	{
-		return $this->belongsTo('Type');
+		return $this->BelongsToMany('Lists', 'user_list', 'list_id', 'user_id');
 	}	
 
 	public function userTags()

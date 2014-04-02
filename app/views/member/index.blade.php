@@ -47,7 +47,12 @@
 				<div class='row'>
 					<div class='col-sm-6'>
 						<div class='lead'>
-						<h2>Hawaii's Popular Lists <small style='margin-left:20px;'>Updated daily.</small></h2>
+						<h2>
+						<a href='/lists'>
+							Hawaii's Popular Lists 
+						</a>
+						<small style='margin-left:20px;'>Updated daily.</small>
+						</h2>
 						</div>
 					</div><!--/.col-sm-4-->
 					<div class='col-sm-6'>
@@ -58,17 +63,17 @@
 
 			<div class='row top-lists'>
 
-			@foreach ($types as $type)
+			@foreach ($lists as $list)
 				<div class='col-sm-3'>
 					<ul class="list-group klout-list">
 						<li class="list-group-item main">
-							<h4 class="list-group-item-heading">{{ $type->title }}</h4>
-							<p class="list-group-item-text">{{ $type->text }}</p>
+							<h4 class="list-group-item-heading">{{ $list->title }}</h4>
+							<p class="list-group-item-text">{{ $list->text }}</p>
 						</li>
 						
 						<?php 
 							$c = 1; 
-							$users = $type->users()->orderBy('klout_metric_score', 'desc')
+							$users = $list->users()->orderBy('klout_metric_score', 'desc')
 									->where('location_id', '=', 1)
 									->take(3)->get();
 						?>
@@ -92,7 +97,7 @@
 						@endforeach
 						
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block' href="<?php echo url("type/{$type->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $type->title }}</a>
+							<a class='btn btn-xlg btn-block' href="<?php echo url("type/{$list->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $list->title }}</a>
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
