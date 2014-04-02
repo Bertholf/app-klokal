@@ -80,12 +80,14 @@ class TagController extends BaseController {
 	{
 		$tags = Tag::get();
 		foreach ($tags as $tag){
-			if($tag_title == $tag->title){
+			if($tag_title == $tag->title)
+			{
 				$tag_id = $tag->id;
 				return $this->updateTagByUserId($twitter_handle, $user_id, $tag_id);
-			}else{
-				Redirect::to("/user/{$twitter_handle}");
 			}
+// 			else{
+// 			 return	Redirect::to("/user/{$twitter_handle}");
+// 			}
 		}
 	
 	}
