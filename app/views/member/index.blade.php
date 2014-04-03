@@ -56,11 +56,33 @@
 						</div>
 					</div><!--/.col-sm-4-->
 					<div class='col-sm-6'>
-						<a class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'><i class='icon-pencil'> </i> Create your own list</a>
+						<a id='add_list_a' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
+							<i class='icon-pencil'> </i> 
+							Create your own list
+						</a>
 					</div><!--/.col-sm-6-->
 				</div><!--/.row-->
+				<div id = 'add_list_div' class='row'>
+					{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
+						<div class="form-group">
+						 <label for="title">List Title</label>
+						<input type='text' name='title' class="form-control" placeholder='Enter a list title'>
+						</div>
+						<div class="form-group">
+						 <label for="image">List Image</label>
+						<input type='text' name='image' class="form-control" placeholder='Enter a list image'>
+						</div>
+						<div class="form-group">
+						<label for="textarea">List Textarea</label>
+						<textarea class="form-control"  name='textarea' rows="3"></textarea>
+						</div>
+						<div class="form-group">
+						<input type ='submit' class="btn btn-default" value="Submit"/>
+						</div>
+					{{ Form::close() }}
+				</div><!--/.row-->
 			</div><!--/.well-->
-
+					
 			<div class='row top-lists'>
 
 			@foreach ($lists as $list)

@@ -31,38 +31,28 @@ class MemberController extends BaseController {
 		$tags_count_array = array();
 		$tags_count_total = 0;
 		$user = User::where('twitter_handle', '=', $twitter_handle)->first();
-				//list all tags for this user
-		$tags = Tag::select(DB::raw(' user_tag.* , count(user_tag.tag_id) as ctid'))
-					->join('user_tag','tag.id','=','user_tag.tag_id')
-					->where('user_tag.user_id', '=', $user->id)
-					->groupBy('user_tag.tag_id')
-					->orderBy('user_tag.tag_id','desc')
-					->get();
+		//list all tags for this user
+		$tags = UserTag::select(DB::raw(' user_tag.user_id ,user_tag.tag_id , user_tag.actor_user_id , tag.* '))
+		->join('tag','tag.id','=','user_tag.tag_id')
+		->where('user_tag.user_id', '=', $user->id)
+		->orderBy('user_tag.tag_id','desc')
+		->get();
 
 		if(count($tags) == 0){
 			$tags_info = array();
+			$tags_actor_id = array();
 		}else{
 			
-			foreach ($tags as $tag)
+			foreach ($tags as $tag_key => $tag_value) //merge the same item
 			{
-				$tags_id_array[] = $tag->tag_id; //store all tags id in this array
-				if(empty($tags_id_array))
-				{
-					$tags_id_array[] = 1;
-				}
-				$tags_count_array[$tag->tag_id] = $tag->ctid; // every kind tag count
+				$tags_info[$tag_value->tag_id] = $tag_value;
+				$tags_actor_id[$tag_value->tag_id][$tag_value->actor_user_id] = $tag_value->actor_user_id;
 			}
-			
-			foreach ($tags_count_array as $count){
-				$tags_count_total += $count; //count all tag for this user
-			}
-			
-			$tags_info= Tag::whereIn('id',$tags_id_array)
-			->orderBy('id','desc')
-			->paginate(4);
 		}
-		
-		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info , 'tags_count_array' => $tags_count_array, 'tags_count_total' => $tags_count_total));
+		//user list created
+		$lists = array();
+		$lists = Lists::where('user_id', '=', Session::get('id'))->get();
+		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'lists' => $lists));
 	}
 
 	public function twitterSignIn()
@@ -71,7 +61,6 @@ class MemberController extends BaseController {
 		$consumer_key = $twitter_config['consumer_key'];
 		$consumer_secret = $twitter_config['consumer_secret'];
 		$callback = url('twitter_callback');
-		
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
 		$request_token = $connection->getRequestToken($callback);
 		
@@ -124,12 +113,12 @@ class MemberController extends BaseController {
 				$user->twitter_metric_friends = $user_info->friends_count;
 				$user->twitter_date_created = date("Y-m-d H:i:s",strtotime($user_info->created_at));
 				$user->timezone = $user_info->time_zone;
+				
 			}
 			
 			$user->twitter_oauth_token = Session::get('oauth_token');
 			$user->twitter_oauth_secret = Session::get('oauth_token_secret');
 			$user->twitter_logged = date('Y-m-d H:i:s');
-
 			$klout = new KloutAPIv2($twitter_config['klout_key']);
 			$kloutID = $klout->KloutIDLookupByName("twitter", $user->twitter_handle);
 			
@@ -148,6 +137,10 @@ class MemberController extends BaseController {
 			}
 				
 			$user->save();
+				Session::put('id',$user->id);
+				Session::put('twitter_handle',$user_info->name);
+				Session::put('location_id',$user_info->name);
+				Session::put('type_id',$user_info->name);
 			Auth::login($user);
 					
 			return Redirect::to('/dashboard');

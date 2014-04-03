@@ -119,11 +119,10 @@ class TagController extends BaseController {
 	public function addUserTag($user_id, $tag_id){
 		$user_tag = new UserTag;
 		$date_created = date('Y-m-d H:i:s',time());
-		
 		$user_tag->tag_id = $tag_id;
 		$user_tag->user_id = $user_id;
 		$user_tag->date_created = $date_created;
-		$user_tag->actor_user_id = 0;
+		$user_tag->actor_user_id = Session::get('id');
 		$user_tag->save();
 	}
 	
