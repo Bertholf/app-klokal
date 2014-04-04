@@ -37,7 +37,19 @@
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
-
+				<div class='col-sm-3'>
+				{{ Form::open(array('method' => 'POST', 'url' => '/lists/addListForUser' , 'id' => 'add_list_form')) }}
+						<div class='col-sm-8'>
+							<div id="select_list_to_user">
+								<input class="typeahead form-control" autocomplete="off" id='user_name' type="text" placeholder="Select a User" value='' name="user_name">
+								<input id='user_id' type="hidden" value='' name="user_id">
+								<input id='list_selected_id' type="hidden" value="{{ $type->id }}" name="list_id">
+								<input id='user_listedby' type="hidden" value="{{Session::get('id')}}" name="user_listedby">
+							</div>
+						</div>
+						  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
+				{{ Form::close() }}
+				</div>
 		</div><!-- /.container -->
 
 @stop

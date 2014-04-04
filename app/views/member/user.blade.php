@@ -23,7 +23,18 @@
 					@foreach($list_actor as $list)
 					<li class="list-group-item">
 						<div class="media">
-							<a class="pull-left" href="/lists/{<?php echo $list->slug;?>}">
+							<a class="pull-left" href="
+							<?php 
+							if(intval($list->user_id)>0)
+							{
+								$user = User::where('id', '=', $list->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$user->twitter_handle}/{$list->slug}");
+							}else{
+								echo url("lists/{$list->slug}");
+							} 
+							?>
+							">
 								<img height=48 width=48 class="media-object" src="{{ $list->image }}" alt="...">
 							</a>
 							<div class="media-body" style="display: inline;">
@@ -59,7 +70,18 @@
 					@foreach($listedby as $item)
 					<li class="list-group-item">
 						<div class="media">
-							<a class="pull-left" href="/lists/{<?php echo $item->slug;?>}">
+							<a class="pull-left" href="
+							<?php 
+							if(intval($item->user_id)>0)
+							{
+								$user = User::where('id', '=', $item->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$user->twitter_handle}/{$item->slug}");
+							}else{
+								echo url("lists/{$item->slug}");
+							} 
+							?>
+							">
 								<img height=48 width=48 class="media-object" src="{{ $item->image }}" alt="...">
 							</a>
 							<div class="media-body" style="display: inline;">

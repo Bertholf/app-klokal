@@ -16,7 +16,8 @@ class ListsController extends BaseController {
 		return View::make('list.index')->withUsers($users)->withLists($lists);
 	}
 	
-	public function addList(){
+	public function addList()
+	{
 		if(Input::has('title'))
 		{
 			$list_title = Input::get('title');
@@ -39,20 +40,60 @@ class ListsController extends BaseController {
 			return Redirect::to('/dashboard');
 	}
 	
-	public function addListForUser(){
+	public function addListForUser()
+	{
 		$post = Input::all();
 		if($post){
-				$user_list = new Userlist();
-				$user_list->list_id = $post['list_id'];
-				$user_list->user_id = $post['user_id'];
-				$user_list->user_listedby = $post['user_listedby'];
-				$user_list->date_created = date("Y-m-d H:i:s",time());
-				$user_list->save();
-				if ($post['twitterHandle']){
-				return Redirect::to('/user/'.$post['twitterHandle']);
-			}else{
-				return Redirect::to('/dashboard');
-			}
+			
+				$url = '';
+				if(isset($post['twitterHandle'])){
+					$twitterHandle = $post['twitterHandle'];
+				}else{
+					$twitterHandle = '';
+				}
+				
+				$list_id = $post['list_id'];
+				$user_id = $post['user_id'];
+				$user_listedby = $post['user_listedby'];
+				$date_created = date("Y-m-d H:i:s",time());
+				
+				$list = Lists::where('id', '=', $list_id)->first();
+				if(intval($list->user_id)>0)
+				{
+					$user = User::where('id', '=', $list->user_id)->first();
+					$url = "user/{$user->twitter_handle}/{$list->slug}"; //customer list
+						
+				}else{
+					$url = "lists/{$list->slug}"; //default list
+				}
+				
+				$duplicate = UserList::where('list_id', '=', $list_id)
+									 ->where('user_id','=', $user_id)
+									 ->get();
+				
+				if(count($duplicate)>0) //this user already have got this list
+				{
+					if (!empty($twitterHandle)) //add list for user from user edit
+						{
+							return Redirect::to('/user/'.$twitterHandle);
+						}else{					    //add list for user from list edit
+							return Redirect::to($url);
+						}
+				}else{					//add a list for this user
+					$user_list = new Userlist();
+					$user_list->list_id = $list_id;
+					$user_list->user_id = $user_id;
+					$user_list->user_listedby = $user_listedby;
+					$user_list->date_created = $date_created;
+					$user_list->save();
+					
+					if (!empty($twitterHandle))
+					{
+						return Redirect::to('/user/'.$twitterHandle);
+					}else{
+						return Redirect::to($url);
+					}
+				}
 		}else {
 			return Redirect::to('/dashboard');
 		}
@@ -60,7 +101,8 @@ class ListsController extends BaseController {
 		
 	}
 	
-	public function select(){
+	public function select()
+	{
 		$i = 0;
 		$query = Input::all();
 		$str = $query['search'];
@@ -74,5 +116,21 @@ class ListsController extends BaseController {
 			if($i<count($result)) $i++;
 		}
 		return json_encode($list);
+	}
+	
+	public function selectUser()
+	{
+		$i = 0;
+		$query = Input::all();
+		$str = $query['search'];
+		$result = User::where('twitter_handle', 'like' ,'%'.$str.'%')->get();
+		$users = array();
+		foreach($result as $key => $value)
+		{
+			$users[$i]['id'] = $value->id;
+			$users[$i]['name'] = $value->name;
+			if($i<count($result)) $i++;
+		}
+		return json_encode($users);
 	}
 }

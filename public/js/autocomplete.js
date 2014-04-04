@@ -42,6 +42,33 @@ $(document).ready(function(){
 	    },
 	});
 	
+	$("#select_list_to_user .typeahead").typeahead({
+	    onSelect: function(item) {
+	        $('#user_name').attr('value', item.text);
+	        $('#user_id').attr('value', item.value);
+	    },
+	    ajax: {
+	        url: "/lists/selectuser",
+	        timeout: 500,
+	        displayField: "name",
+	        triggerLength: 1,
+	        method: "get",
+	        loadingClass: "loading-circle",
+	        preDispatch: function (query) {
+	            return {
+	                search: query
+	            }
+	        },
+	        
+	        preProcess: function (data) {
+	            if (data.success === false) {
+	                return false;
+	            }
+	            return data;
+	        }
+	    },
+	});
+	
 	$('#show_add_content').click(function(){
 		if($('.show_add_list').css('visibility') == 'hidden')
 		{
