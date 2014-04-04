@@ -12,7 +12,7 @@ $(document).ready(function(){
 		var tag_title =  myVal.prop('value');
 		var userId = $('#userId').attr('value');
 		var twitterHandle = $('#twitterHandle').attr('value');
-		$('#update_tag').attr('action',"/tag/updatebytitle/"+twitterHandle+"/"+userId+"/"+tag_title)
+		$('#update_tag').attr('action',"/tag/updatebytitle/"+twitterHandle+"/"+userId+"/"+tag_title);
 	});
 
 	$("#add_list_to_user .typeahead").typeahead({

@@ -91,7 +91,6 @@ class TagController extends BaseController {
 	{
 		$user_id = intval($user_id);
 		$tag_id = intval($tag_id);
-		
 		$this->addUserTag($user_id, $tag_id);
 
 		$user_top_tag = Tag::where('id', '=', $tag_id)
@@ -102,16 +101,11 @@ class TagController extends BaseController {
 						->groupBy('user_id')
 						->orderBy('cuid','DESC ')
 						->first();
-		
-		$queries = DB::getQueryLog();
-		$last_query = end($queries);
-
 		//update  tag count and user_id here 
 		if($user_top_tag->count < $tag_count->cuid){
 			$tag = Tag::where('id', $tag_id)
 						->update(array('count' => $tag_count->cuid , 'user_id' => $tag_count->user_id));
 		} 
-
 		return Redirect::to("/user/{$twitter_handle}");
 		
 	}

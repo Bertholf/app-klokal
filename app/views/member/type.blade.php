@@ -47,7 +47,7 @@
 								<input id='user_listedby' type="hidden" value="{{Session::get('id')}}" name="user_listedby">
 							</div>
 						</div>
-						  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
+						  <input type="submit" class="btn btn-default" id="select_tag" value='Assign'/>
 				{{ Form::close() }}
 				</div>
 		</div><!-- /.container -->

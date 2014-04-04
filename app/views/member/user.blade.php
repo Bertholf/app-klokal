@@ -27,9 +27,9 @@
 							<?php 
 							if(intval($list->user_id)>0)
 							{
-								$user = User::where('id', '=', $list->user_id)->first();
+								$luser = User::where('id', '=', $list->user_id)->first();
 								///user/{user.twitter_handle}/{list.slug}
-								echo url("user/{$user->twitter_handle}/{$list->slug}");
+								echo url("user/{$luser->twitter_handle}/{$list->slug}");
 							}else{
 								echo url("lists/{$list->slug}");
 							} 
@@ -53,20 +53,6 @@
 					<li class="list-group-item main">
 							<h5 class="list-group-item-heading"> List apart of</h5>
 					</li>
-					<li class="list-group-item">
-					{{ Form::open(array('method' => 'POST', 'url' => '/lists/addListForUser' , 'id' => 'add_list_form')) }}
-						<div class='col-sm-8'>
-							<div id="add_list_to_user">
-								<input class="typeahead form-control" autocomplete="off" id='list_selected_title' type="text" placeholder="Select a List" value='' name="list_title">
-								<input id='list_selected_id' type="hidden" value="" name="list_id">
-								<input id='user_id' type="hidden" value="{{ $user->id }}" name="user_id">
-								<input id='user_listedby' type="hidden" value="{{Session::get('id')}}" name="user_listedby">
-								<input id="twitterHandle" type="hidden" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
-							</div>
-						</div>
-						  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
-					{{ Form::close() }}
-					</li>
 					@foreach($listedby as $item)
 					<li class="list-group-item">
 						<div class="media">
@@ -74,9 +60,9 @@
 							<?php 
 							if(intval($item->user_id)>0)
 							{
-								$user = User::where('id', '=', $item->user_id)->first();
+								$liuser = User::where('id', '=', $item->user_id)->first();
 								///user/{user.twitter_handle}/{list.slug}
-								echo url("user/{$user->twitter_handle}/{$item->slug}");
+								echo url("user/{$liuser->twitter_handle}/{$item->slug}");
 							}else{
 								echo url("lists/{$item->slug}");
 							} 
@@ -117,11 +103,11 @@
 									@foreach ($tags_actor_id[$tag_key] as $id)
 										@if($id != 0)
 										<?php 
-											$user = User::where('id' ,'=', $id)->first();
+											$actor = User::where('id' ,'=', $id)->first();
 // 											dd($user->image);
-											if($user){
-												$image = $user->image;
-												$twitter_handle = $user->twitter_handle;
+											if($actor){
+												$image = $actor->image;
+												$twitter_handle = $actor->twitter_handle;
 											}else{
 												$image = '';
 												$twitter_handle = '';
@@ -138,7 +124,7 @@
 									@endforeach
 								</div><!--/.media-body-->
 								<div class="media-body" style='float:right;'>
-									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
+									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $actor->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
 										<span class="glyphicon glyphicon-chevron-up" ></span>
 									</a>
 								</div>
@@ -163,7 +149,7 @@
 	    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
 	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
 	</div>
-	  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
+	  <input type="submit" class="btn btn-default" id="select_tag" value='Assign'/>
 		{{ Form::close() }}
 	<br/>
 	<br/>

@@ -58,42 +58,49 @@ class ListsController extends BaseController {
 				$date_created = date("Y-m-d H:i:s",time());
 				
 				$list = Lists::where('id', '=', $list_id)->first();
-				if(intval($list->user_id)>0)
+				if($list) // input list exist
 				{
-					$user = User::where('id', '=', $list->user_id)->first();
-					$url = "user/{$user->twitter_handle}/{$list->slug}"; //customer list
-						
-				}else{
-					$url = "lists/{$list->slug}"; //default list
-				}
-				
-				$duplicate = UserList::where('list_id', '=', $list_id)
-									 ->where('user_id','=', $user_id)
-									 ->get();
-				
-				if(count($duplicate)>0) //this user already have got this list
-				{
-					if (!empty($twitterHandle)) //add list for user from user edit
+					if(intval($list->user_id)>0)
+					{
+						$user = User::where('id', '=', $list->user_id)->first();
+						$url = "user/{$user->twitter_handle}/{$list->slug}"; //customer list
+					
+					}else{
+						$url = "lists/{$list->slug}"; //default list
+					}
+					
+					$duplicate = UserList::where('list_id', '=', $list_id)
+					->where('user_id','=', $user_id)
+					->get();
+					
+					if(count($duplicate)>0) //this user already have got this list
+					{
+						if (!empty($twitterHandle)) //add list for user from user edit
 						{
 							return Redirect::to('/user/'.$twitterHandle);
 						}else{					    //add list for user from list edit
 							return Redirect::to($url);
 						}
-				}else{					//add a list for this user
-					$user_list = new Userlist();
-					$user_list->list_id = $list_id;
-					$user_list->user_id = $user_id;
-					$user_list->user_listedby = $user_listedby;
-					$user_list->date_created = $date_created;
-					$user_list->save();
-					
-					if (!empty($twitterHandle))
-					{
-						return Redirect::to('/user/'.$twitterHandle);
-					}else{
-						return Redirect::to($url);
-					}
+					}else{					//add a list for this user
+						$user_list = new Userlist();
+						$user_list->list_id = $list_id;
+						$user_list->user_id = $user_id;
+						$user_list->user_listedby = $user_listedby;
+						$user_list->date_created = $date_created;
+						$user_list->save();
+							
+						if (!empty($twitterHandle))
+						{
+							return Redirect::to('/user/'.$twitterHandle);
+						}else{
+							return Redirect::to($url);
+						}
+					}	
+				}else{ //input list doesn't exist
+					return Redirect::to('/dashboard');
 				}
+					
+				
 		}else {
 			return Redirect::to('/dashboard');
 		}
