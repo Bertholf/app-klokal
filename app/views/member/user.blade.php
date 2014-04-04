@@ -94,8 +94,23 @@
 								<div class="media-body" style="display: inline;">
 									@foreach ($tags_actor_id[$tag_key] as $id)
 										@if($id != 0)
-									<a class="pull-left" href="#">
-										<img height=48 width=48 class="media-object" src="<?php echo(User::where('id' ,'=', $id)->lists('image')[0]) ;?>" alt="...">
+										<?php 
+											$user = User::where('id' ,'=', $id)->first();
+// 											dd($user->image);
+											if($user){
+												$image = $user->image;
+												$twitter_handle = $user->twitter_handle;
+											}else{
+												$image = '';
+												$twitter_handle = '';
+											}
+										?>
+									<a class="pull-left" href="/user/<?php echo $twitter_handle;?>">
+										<img height=48 width=48 class="media-object" src="
+										<?php 
+											echo $image;
+										?>
+										" alt="...">
 									</a>
 										@endif
 									@endforeach
