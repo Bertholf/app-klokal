@@ -44,6 +44,17 @@ $(document).ready(function(){
 //	        }
 //	    }
 //	});
-
+	
+	$('#show_add_content').click(function(){
+		if($('.show_add_list').css('visibility') == 'hidden')
+		{
+			$('.show_add_list').css('visibility','visible');
+			$(this).children('.icon-pencil-text').text('Close Create Form');
+		}else if($('.show_add_list').css('visibility') == 'visible')
+		{
+			$('.show_add_list').css('visibility','hidden');
+			$(this).children('.icon-pencil-text').text('Create your own list');
+		}
+	});
 });
 

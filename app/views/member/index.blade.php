@@ -56,30 +56,23 @@
 						</div>
 					</div><!--/.col-sm-4-->
 					<div class='col-sm-6'>
-						<a id='add_list_a' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
-							<i class='icon-pencil'> </i> 
-							Create your own list
-						</a>
-					</div><!--/.col-sm-6-->
-				</div><!--/.row-->
-				<div id = 'add_list_div' class='row'>
+
 					{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
-						<div class="form-group">
-						 <label for="title">List Title</label>
-						<input type='text' name='title' class="form-control" placeholder='Enter a list title'>
-						</div>
-						<div class="form-group">
-						 <label for="image">List Image</label>
-						<input type='text' name='image' class="form-control" placeholder='Enter a list image'>
-						</div>
-						<div class="form-group">
-						<label for="textarea">List Textarea</label>
-						<textarea class="form-control"  name='textarea' rows="3"></textarea>
-						</div>
-						<div class="form-group">
-						<input type ='submit' class="btn btn-default" value="Submit"/>
+						<div class="input-group input-group-sm merged pull-right ">
+							<input type='text' name='title' class="form-control show_add_list" placeholder='Enter a List Title' style = 'margin-bottom: 27px; margin-left: 60px; visibility:hidden;' />
+							<span class="input-group-btn show_add_list" style='padding-left: 50px; visibility:hidden;'>
+								<input type ='submit' class="btn btn-default" value="Go"/>
+							</span>
+						<a id='show_add_content' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
+							<i class='icon-pencil'> </i> 
+							<span class='icon-pencil-text'>
+								Create your own list
+							</span>
+						</a>
 						</div>
 					{{ Form::close() }}
+
+					</div><!--/.col-sm-6-->
 				</div><!--/.row-->
 			</div><!--/.well-->
 					
@@ -119,7 +112,22 @@
 						@endforeach
 						
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block' href="<?php echo url("lists/{$list->slug}"); ?>"><i class='icon-zoom-in'> </i> View All {{ $list->title }}</a>
+							<a class='btn btn-xlg btn-block' 
+							href="
+							<?php 
+							if(intval($list->user_id)>0)
+							{
+								$user = User::where('id', '=', $list->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$user->twitter_handle}/{$list->slug}");
+							}else{
+								echo url("lists/{$list->slug}");
+							} 
+							?>
+								"
+							>
+								<i class='icon-zoom-in'> </i> View All {{ $list->title }}
+							</a>
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->

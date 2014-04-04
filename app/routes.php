@@ -17,7 +17,10 @@ Route::get('/', 'GuestController@index');
 Route::get('/lists', 'ListsController@index');
 Route::get('/lists/addToUser', 'ListsController@addToUser');
 Route::get('/lists/select', 'ListsController@select');
+
 Route::get('/lists/{slug}', 'MemberController@lists');
+Route::get('/user/{twitter_handle}/{slug}', 'MemberController@customlists');
+
 Route::post('/lists/addList', 'ListsController@addList');
 Route::get('/user/{twitter_handle}', 'MemberController@user');
 Route::get('/sign_in_with_twitter', 'MemberController@twitterSignIn');

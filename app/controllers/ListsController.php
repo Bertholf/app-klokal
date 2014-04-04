@@ -21,17 +21,16 @@ class ListsController extends BaseController {
 		{
 			$list_title = Input::get('title');
 			$list_slug = str_replace(' ', '-',  strtolower(trim($list_title)));
-			$list_slug = str_replace('&', '-and-',  strtolower(trim($list_title)));
-			$list_slug = $list_slug.'-'.time();
-			$list_textarea = Input::get('textarea');
-			$list_image = Input::get('image');
-			
+// 			$list_slug = str_replace('&', '-and-',  strtolower(trim($list_title)));
+			if(strpos($list_slug, '&')){
+				$list_slug = preg_replace("/&/", "-and-", $list_slug);  
+			}
+// 			$list_slug = $list_slug.''.time();
 			$Lists = new Lists();
 			$Lists->title = $list_title;
 			$Lists->slug = $list_slug;
-			$Lists->text = $list_textarea;
-			$Lists->image = $list_image;
-			$Lists->image = $list_image;
+			$Lists->text = '';
+			$Lists->image = '';
 			$Lists->active = 1;
 			$Lists->featured = 1;
 			$Lists->user_id = Session::get('id');

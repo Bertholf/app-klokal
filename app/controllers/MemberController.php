@@ -24,6 +24,20 @@ class MemberController extends BaseController {
 
 		return View::make('member.type', array('type'=>$type, 'users'=>$users));
 	}
+	
+	public function customlists($twitter_handle, $slug)
+	{
+		$actor = User::where('twitter_handle', '=', $twitter_handle)->first();
+		$type = Lists::where('slug', '=', $slug)
+		->where('user_id', '=', $actor->id)
+		->with('users')->first();
+		
+		$users = $type->users()->orderBy('klout_metric_score', 'desc')
+		->where('location_id', '=', 1)
+		->paginate(50);
+	
+		return View::make('member.type', array('type'=>$type, 'users'=>$users));
+	}
 
 	public function user($twitter_handle)
 	{
