@@ -39,7 +39,6 @@
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
-
 			@endforeach
 			<div class='col-sm-11'>
 			 <ul>

@@ -27,6 +27,12 @@ class ListsController extends BaseController {
 				$list_slug = preg_replace("/&/", "-and-", $list_slug);  
 			}
 // 			$list_slug = $list_slug.''.time();
+			//input list slug already exist
+			$list_exist = Lists::where('slug' ,'=', $list_slug)->get(); 
+			if(count($list_exist)>0){
+				$count = count($list_exist)+1;
+				$list_slug = $list_slug.'-'.$count;
+			}
 			$Lists = new Lists();
 			$Lists->title = $list_title;
 			$Lists->slug = $list_slug;
@@ -44,7 +50,6 @@ class ListsController extends BaseController {
 	{
 		$post = Input::all();
 		if($post){
-			
 				$url = '';
 				if(isset($post['twitterHandle'])){
 					$twitterHandle = $post['twitterHandle'];
@@ -99,13 +104,9 @@ class ListsController extends BaseController {
 				}else{ //input list doesn't exist
 					return Redirect::to('/dashboard');
 				}
-					
-				
 		}else {
 			return Redirect::to('/dashboard');
 		}
-		
-		
 	}
 	
 	public function select()

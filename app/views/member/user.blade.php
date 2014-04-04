@@ -104,7 +104,6 @@
 										@if($id != 0)
 										<?php 
 											$actor = User::where('id' ,'=', $id)->first();
-// 											dd($user->image);
 											if($actor){
 												$image = $actor->image;
 												$twitter_handle = $actor->twitter_handle;
@@ -124,7 +123,7 @@
 									@endforeach
 								</div><!--/.media-body-->
 								<div class="media-body" style='float:right;'>
-									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $actor->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
+									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
 										<span class="glyphicon glyphicon-chevron-up" ></span>
 									</a>
 								</div>
