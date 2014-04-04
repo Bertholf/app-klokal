@@ -63,10 +63,21 @@ class MemberController extends BaseController {
 				$tags_actor_id[$tag_value->tag_id][$tag_value->actor_user_id] = $tag_value->actor_user_id;
 			}
 		}
-		//user list created
-		$lists = array();
-		$lists = Lists::where('user_id', '=', Session::get('id'))->get();
-		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'lists' => $lists));
+		//user as list actor
+		$list_actor = array();
+		$list_actor = Lists::where('user_id', '=', $user->id)->get();
+		
+		//user listedby
+		$listedby = array();
+		$listedby_id = array();
+		$listedby_rl = array();
+		$listedby_rl = UserList::where('user_id', '=', $user->id)->get();
+		foreach ($listedby_rl as $rl_value)
+		{
+			$listedby_id[] = $rl_value->list_id;
+		}
+		$listedby = Lists::whereIn('id',$listedby_id)->get();
+		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'list_actor' => $list_actor,'listedby' => $listedby));
 	}
 
 	public function twitterSignIn()

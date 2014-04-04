@@ -20,7 +20,7 @@
 					<li class="list-group-item main">
 							<h5 class="list-group-item-heading"> List created</h5>
 					</li>
-					@foreach($lists as $list)
+					@foreach($list_actor as $list)
 					<li class="list-group-item">
 						<div class="media">
 							<a class="pull-left" href="/lists/{<?php echo $list->slug;?>}">
@@ -43,15 +43,34 @@
 							<h5 class="list-group-item-heading"> List apart of</h5>
 					</li>
 					<li class="list-group-item">
-					{{ Form::open(array('method' => 'GET', 'url' => '/lists/add/{twitter_handle}/{user_id}/{tag_id}' , 'id' => 'add_list_form')) }}
+					{{ Form::open(array('method' => 'POST', 'url' => '/lists/addListForUser' , 'id' => 'add_list_form')) }}
 						<div class='col-sm-8'>
 							<div id="add_list_to_user">
-								<input class="typeahead form-control" autocomplete="off" id='tag_selected' type="text" placeholder="Select a List" value='' name="tags">
+								<input class="typeahead form-control" autocomplete="off" id='list_selected_title' type="text" placeholder="Select a List" value='' name="list_title">
+								<input id='list_selected_id' type="hidden" value="" name="list_id">
+								<input id='user_id' type="hidden" value="{{ $user->id }}" name="user_id">
+								<input id='user_listedby' type="hidden" value="{{Session::get('id')}}" name="user_listedby">
+								<input id="twitterHandle" type="hidden" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
 							</div>
 						</div>
 						  <input type="submit" class="btn btn-default" id="select_tag" value='Asign'/>
 					{{ Form::close() }}
 					</li>
+					@foreach($listedby as $item)
+					<li class="list-group-item">
+						<div class="media">
+							<a class="pull-left" href="/lists/{<?php echo $item->slug;?>}">
+								<img height=48 width=48 class="media-object" src="{{ $item->image }}" alt="...">
+							</a>
+							<div class="media-body" style="display: inline;">
+										<p><b>{{ $item->title }}</b></p>
+							</div><!--/.media-body-->
+							<div class="media-body" style="display: inline;">
+										<p><b>{{ $item->text }}</b></p>
+							</div><!--/.media-body-->
+						</div>
+					</li>
+					@endforeach
 				</ul>
 			</div>
 		</div>

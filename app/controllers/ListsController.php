@@ -39,34 +39,40 @@ class ListsController extends BaseController {
 			return Redirect::to('/dashboard');
 	}
 	
-	public function addToUser(){
+	public function addListForUser(){
+		$post = Input::all();
+		if($post){
+				$user_list = new Userlist();
+				$user_list->list_id = $post['list_id'];
+				$user_list->user_id = $post['user_id'];
+				$user_list->user_listedby = $post['user_listedby'];
+				$user_list->date_created = date("Y-m-d H:i:s",time());
+				$user_list->save();
+				if ($post['twitterHandle']){
+				return Redirect::to('/user/'.$post['twitterHandle']);
+			}else{
+				return Redirect::to('/dashboard');
+			}
+		}else {
+			return Redirect::to('/dashboard');
+		}
+		
 		
 	}
 	
 	public function select(){
+		$i = 0;
 		$query = Input::all();
 		$str = $query['search'];
 		$result = Lists::where('active', '=', 1)
-		->where('title', 'like' ,'%'.$str.'%')->get();
-		$list = array();
-		foreach($result as $key => $value)
-		{
-			$list[]['id'] = $value->id;
-			$list[]['title'] = $value->title;
-		}
-		dd($list);
+						->where('title', 'like' ,'%'.$str.'%')->get();
 		
-		$tags = Tag::get();
-		$list = array();
-		foreach ($tags as $tag){
-			$list[] = $tag->title;
+		foreach($result as $key => $value)
+		{	
+			$list[$i]['id'] = $value->id;
+			$list[$i]['title'] = $value->title;
+			if($i<count($result)) $i++;
 		}
 		return json_encode($list);
-		
-// 		source: [
-// 		{ id: 1, full_name: 'Toronto', first_two_letters: 'To' },
-// 		{ id: 2, full_name: 'Montreal', first_two_letters: 'Mo' }
-// 		],
-// 		displayField: 'full_name'
 	}
 }

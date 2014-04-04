@@ -15,35 +15,32 @@ $(document).ready(function(){
 		$('#update_tag').attr('action',"/tag/updatebytitle/"+twitterHandle+"/"+userId+"/"+tag_title)
 	});
 
-//	$("#add_list_to_user .typeahead").typeahead({
-//	    onSelect: function(item) {
-//	        console.log(item);
-//	    },
-//	    ajax: {
-//	        url: "/lists/select",
-//	        timeout: 500,
-//	        displayField: "title",
-//	        triggerLength: 1,
-//	        method: "get",
-//	        loadingClass: "loading-circle",
-//	        preDispatch: function (query) {
-//	            return {
-//	                search: query
-//	            }
-//	        },
-//	        
-//	        preProcess: function (data) {
-//	        	console.log(data);
-//	            showLoadingMask(false);
-//	            if (data.success === false) {
-//	                alert(1)
-//	                return false;
-//	            }
-//	            alert(2);
-//	            return data.mylist;
-//	        }
-//	    }
-//	});
+	$("#add_list_to_user .typeahead").typeahead({
+	    onSelect: function(item) {
+	        $('#list_selected_title').attr('value', item.text);
+	        $('#list_selected_id').attr('value', item.value);
+	    },
+	    ajax: {
+	        url: "/lists/select",
+	        timeout: 500,
+	        displayField: "title",
+	        triggerLength: 1,
+	        method: "get",
+	        loadingClass: "loading-circle",
+	        preDispatch: function (query) {
+	            return {
+	                search: query
+	            }
+	        },
+	        
+	        preProcess: function (data) {
+	            if (data.success === false) {
+	                return false;
+	            }
+	            return data;
+	        }
+	    },
+	});
 	
 	$('#show_add_content').click(function(){
 		if($('.show_add_list').css('visibility') == 'hidden')
