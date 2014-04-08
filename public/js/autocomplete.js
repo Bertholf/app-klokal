@@ -1,6 +1,16 @@
 
 $(document).ready(function(){
 	
+	$('#show_add_list_a').click(function(){
+		if($('#add_new_tag_div').css('visibility') == 'hidden')
+		{
+			$('#add_new_tag_div').css('visibility','visible');
+		}else if($('#add_new_tag_div').css('visibility') == 'visible')
+		{
+			$('#add_new_tag_div').css('visibility','hidden');
+		}
+	});
+	
 	$.getJSON('/getTags', function(data){
 		$('#tag_list .typeahead').typeahead({
 			 source:data,

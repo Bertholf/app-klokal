@@ -173,22 +173,25 @@
 	  <input type="submit" class="btn btn-default" id="select_tag" value='Assign'/>
 		{{ Form::close() }}
 	<br/>
-	<br/>
-	<br/>
-			
-	{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true)) }}
 	<div class='col-sm-6'>
-	    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
-	    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
-	    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
-	    <br>
-	    <input type="text" class="form-control" id="newImage" name ='newImage' placeholder="Enter a image url"/>
-	    <?php 
-// 	    echo Form::file('tagImage'); 
-	    ?>
+	<h4 class="list-group-item-heading">
+		<a id='show_add_list_a' href="javascript:;">
+			<p>Add a New Tag</p>
+		</a>
+	</h4>
 	</div>
-	  <input type="submit" class="btn btn-default" value='Add a New Tag'/>
-	{{ Form::close() }}
+	<br/>
+	<br/>
+	<div id='add_new_tag_div' style='visibility:hidden;'>
+		{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true ,'id' => 'add_new_tag_form')) }}
+		    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
+		    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
+			<div class='col-sm-6'>
+		    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
+		    </div>
+		  	<input type="submit" class="btn btn-default" value='Add a New Tag'/>
+		{{ Form::close() }}
+	</div>	
 	</div><!--/.col-sm-4-->	
 	@endif
 @stop
