@@ -39,7 +39,7 @@
 			</div><!--/.container-->
 			<div class='container top-users'>
 				<div class='lead'>
-					<a href='/users'>
+					<a href='/lists/influencers'>
 						<h4 style='text-align: center;'>See All</h4>
 					</a>
 			</div><!--/.lead-->

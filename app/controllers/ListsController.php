@@ -18,15 +18,14 @@ class ListsController extends BaseController {
 	
 	public function addList()
 	{
+		$url = '/dashboard';
 		if(Input::has('title'))
 		{
 			$list_title = Input::get('title');
 			$list_slug = str_replace(' ', '-',  strtolower(trim($list_title)));
-// 			$list_slug = str_replace('&', '-and-',  strtolower(trim($list_title)));
 			if(strpos($list_slug, '&')){
 				$list_slug = preg_replace("/&/", "-and-", $list_slug);  
 			}
-// 			$list_slug = $list_slug.''.time();
 			//input list slug already exist
 			$list_exist = Lists::where('slug' ,'=', $list_slug)->get(); 
 			if(count($list_exist)>0){
@@ -42,8 +41,12 @@ class ListsController extends BaseController {
 			$Lists->featured = 1;
 			$Lists->user_id = Session::get('id');
 			$Lists->save();
+
+			$actor = User::where('id', '=', Session::get('id'))->first();
+		    $url = "user/{$actor->twitter_handle}/{$list_slug}";
 		}
-			return Redirect::to('/dashboard');
+		
+			return Redirect::to($url);
 	}
 	
 	public function addListForUser()

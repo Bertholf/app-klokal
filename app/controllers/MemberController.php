@@ -39,8 +39,7 @@ class MemberController extends BaseController {
 		$actor = User::where('twitter_handle', '=', $twitter_handle)->first();
 		$type = Lists::where('slug', '=', $slug)
 		->where('user_id', '=', $actor->id)
-		->with('users')->first();
-		
+		->first();
 		$users = $type->users()->orderBy('klout_metric_score', 'desc')
 		->where('location_id', '=', 1)
 		->paginate(50);
