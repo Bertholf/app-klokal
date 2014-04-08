@@ -82,11 +82,24 @@ class MemberController extends BaseController {
 		$listedby_rl = UserList::where('user_id', '=', $user->id)->get();
 		foreach ($listedby_rl as $rl_value)
 		{
-			$listedby_id[] = $rl_value->list_id;
+// 			$listedby_id[] = $rl_value->list_id;
+			$listedby[] = Lists::where('list.id','=',$rl_value->list_id)
+			->join('user_list', 'list.id', '=', 'user_list.list_id')
+			->join('users', 'users.id', '=', 'user_list.user_id')
+			->orderBy('users.klout_metric_score','desc')
+			->get();
 		}
-		if(!empty($listedby_id)){
-			$listedby = Lists::whereIn('id',$listedby_id)->get();
+		
+		foreach($listedby as $listedby_key => $listedby_value){
+			foreach ($listedby_value as $listedby_k => $listedby_v){
+				$listedby[$listedby_key][$listedby_k]['rank'] = intval($listedby_k)+1;
+				if($listedby_v->user_id != $user->id){
+					unset ($listedby[$listedby_key][$listedby_k]);
+				}
+			}
+			
 		}
+// 		dd($listedby);
 		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'list_actor' => $list_actor,'listedby' => $listedby));
 	}
 

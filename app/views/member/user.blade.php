@@ -64,7 +64,8 @@
 					<li class="list-group-item main">
 							<h5 class="list-group-item-heading"> List apart of</h5>
 					</li>
-					@foreach($listedby as $item)
+					@foreach($listedby as $listedby_value)
+						@foreach($listedby_value as $item)
 					<li class="list-group-item">
 						<div class="media">
 							<a class="pull-left" href="
@@ -79,10 +80,10 @@
 							} 
 							?>
 							">
-								<img height=48 width=48 class="media-object" src="{{ $item->image }}" alt="...">
+							<img height=48 width=48 class="media-object" src="{{ $item->image }}" alt="...">
 							</a>
-							<div class="media-body" style="display: inline;">
-								<a class="pull-left" style='color: #000000;
+							<div class="media-body">
+							<a class="pull-left" style='color: #000000;
    							text-decoration: none;' href="
 							<?php 
 							if(intval($item->user_id)>0)
@@ -95,11 +96,13 @@
 							} 
 							?>
 							">
-								<p><b>{{ $item->title }}</b></p>
+							<p><b>{{ $item->title }}</b></p>
 							</a>
 							</div><!--/.media-body-->
+							<h3 class="media-heading">#{{ $item->rank }}</h3>
 						</div>
 					</li>
+						@endforeach
 					@endforeach
 				</ul>
 			</div>
