@@ -14,6 +14,15 @@ class MemberController extends BaseController {
 
 		return View::make('member.index')->withUsers($users)->withLists($lists);
 	}
+	
+	public function userList(){
+		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
+		->orderBy('klout_metric_score', 'desc')
+		->where('location_id', '=', 1)
+		->where('type_id', '=', 1)
+		->paginate(10);
+		return View::make('member.userlist', array('users'=>$users));
+	}
 
 	public function lists($slug)
 	{
@@ -76,7 +85,9 @@ class MemberController extends BaseController {
 		{
 			$listedby_id[] = $rl_value->list_id;
 		}
-		$listedby = Lists::whereIn('id',$listedby_id)->get();
+		if(!empty($listedby_id)){
+			$listedby = Lists::whereIn('id',$listedby_id)->get();
+		}
 		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'list_actor' => $list_actor,'listedby' => $listedby));
 	}
 

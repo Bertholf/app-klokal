@@ -31,6 +31,7 @@ Route::get('/getTags', 'TagController@getTags');
 Route::get('/tag/updatebytitle/{twitter_handle}/{user_id}/{tag_title}', 'TagController@updateTagByTagTitle');
 Route::get('/tag/update/{twitter_handle}/{user_id}/{tag_id}', 'TagController@updateTagByUserId');
 Route::get('/logout', 'MemberController@logout');
+Route::get('/users', 'MemberController@userList');
 
 Route::group(array('before' => 'auth'), function()
 {

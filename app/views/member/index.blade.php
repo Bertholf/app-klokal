@@ -37,6 +37,13 @@
 				@endforeach
 				</ul>
 			</div><!--/.container-->
+			<div class='container top-users'>
+				<div class='lead'>
+					<a href='/users'>
+						<h4 style='text-align: center;'>See All</h4>
+					</a>
+			</div><!--/.lead-->
+			</div>
 		</div><!-- /.carousel -->
 
 		<!-- Wrap the rest of the page in another container to center all the content. -->
