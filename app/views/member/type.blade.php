@@ -37,6 +37,7 @@
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-3-->
+				@if(Session::get('id') !== NULL && Session::get('id') == $type->user_id)
 				<div class='col-sm-3'>
 				{{ Form::open(array('method' => 'POST', 'url' => '/lists/addListForUser' , 'id' => 'add_list_form')) }}
 						<div class='col-sm-8'>
@@ -50,6 +51,8 @@
 						  <input type="submit" class="btn btn-default" id="select_tag" value='Assign'/>
 				{{ Form::close() }}
 				</div>
+				@endif
+
 		</div><!-- /.container -->
 
 @stop

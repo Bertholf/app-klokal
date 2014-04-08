@@ -38,10 +38,21 @@
 								<img height=48 width=48 class="media-object" src="{{ $list->image }}" alt="...">
 							</a>
 							<div class="media-body" style="display: inline;">
-										<p><b>{{ $list->title }}</b></p>
-							</div><!--/.media-body-->
-							<div class="media-body" style="display: inline;">
-										<p><b>{{ $list->text }}</b></p>
+								<a class="pull-left" style='color: #000000;
+   							text-decoration: none;' href="
+							<?php 
+							if(intval($list->user_id)>0)
+							{
+								$luser = User::where('id', '=', $list->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$luser->twitter_handle}/{$list->slug}");
+							}else{
+								echo url("lists/{$list->slug}");
+							} 
+							?>
+							">
+								<p><b>{{ $list->title }}</b></p>
+							</a>
 							</div><!--/.media-body-->
 						</div>
 					</li>
@@ -71,10 +82,21 @@
 								<img height=48 width=48 class="media-object" src="{{ $item->image }}" alt="...">
 							</a>
 							<div class="media-body" style="display: inline;">
-										<p><b>{{ $item->title }}</b></p>
-							</div><!--/.media-body-->
-							<div class="media-body" style="display: inline;">
-										<p><b>{{ $item->text }}</b></p>
+								<a class="pull-left" style='color: #000000;
+   							text-decoration: none;' href="
+							<?php 
+							if(intval($item->user_id)>0)
+							{
+								$liuser = User::where('id', '=', $item->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$liuser->twitter_handle}/{$item->slug}");
+							}else{
+								echo url("lists/{$item->slug}");
+							} 
+							?>
+							">
+								<p><b>{{ $item->title }}</b></p>
+							</a>
 							</div><!--/.media-body-->
 						</div>
 					</li>
@@ -138,7 +160,7 @@
 		</ul>
 	</div><!--/.col-sm-4-->
 	@endif
-	
+	@if(Session::get('id') !== NULL)
 	<div class='col-sm-4'>	
 		{{ Form::open(array('method' => 'GET', 'url' => '/tag/update/{twitter_handle}/{user_id}/{tag_id}' ,'files' => true , 'id' => 'update_tag')) }}
 	<div class='col-sm-6'>
@@ -167,8 +189,7 @@
 	</div>
 	  <input type="submit" class="btn btn-default" value='Add a New Tag'/>
 	{{ Form::close() }}
-
-
 	</div><!--/.col-sm-4-->	
+	@endif
 @stop
 

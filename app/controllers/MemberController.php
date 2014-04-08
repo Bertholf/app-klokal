@@ -175,7 +175,10 @@ class MemberController extends BaseController {
 	public function logout()
 	{
 		Auth::logout();
-
+		Session::forget('id');
+		Session::forget('twitter_handle');
+		Session::forget('location_id');
+		Session::forget('type_id');
 		return Redirect::to('/');
 	}
 }
