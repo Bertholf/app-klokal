@@ -48,6 +48,9 @@ $(document).ready(function(){
 	        $('#user_id').attr('value', item.value);
 	        $('#select_list').prop("disabled", false);
 	    },
+	    matcher: function(item){
+	    	return true;
+	    },
 	    ajax: {
 	        url: "/lists/selectuser",
 	        timeout: 500,
