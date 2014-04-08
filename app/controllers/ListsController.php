@@ -134,7 +134,9 @@ class ListsController extends BaseController {
 		$i = 0;
 		$query = Input::all();
 		$str = $query['search'];
-		$result = User::where('twitter_handle', 'like' ,'%'.$str.'%')->get();
+		$result = User::where('twitter_handle', 'like' ,'%'.$str.'%')
+		->orWhere('name', 'like' ,'%'.$str.'%')
+		->get();
 		$users = array();
 		foreach($result as $key => $value)
 		{
