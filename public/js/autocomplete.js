@@ -46,6 +46,7 @@ $(document).ready(function(){
 	    onSelect: function(item) {
 	        $('#user_name').attr('value', item.text);
 	        $('#user_id').attr('value', item.value);
+	        $('#select_list').prop("disabled", false);
 	    },
 	    ajax: {
 	        url: "/lists/selectuser",
