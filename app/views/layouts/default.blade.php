@@ -45,6 +45,10 @@
 					<span> | </span>
 					<a href="/logout">Logout</a>
 				</div>
+				@else
+				<div style="text-align: right">
+					<a href="/sign_in_with_twitter">Login</a>
+				</div>
 				@endif
 			</div>
 		</div><!--/.navbar-->
