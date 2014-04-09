@@ -30,7 +30,7 @@ class MemberController extends BaseController {
 				if($real_wgain) continue;
 				
 				$users_week_gain[] = $week_gain[$wgain_key];
-				if(count($users_week_gain) <= 5) break;
+				if(count($users_week_gain) == 5) break;
 			}
 			$count = count($users_week_gain);
 		}
@@ -52,7 +52,7 @@ class MemberController extends BaseController {
 				if($real_wloss) continue;
 				
 				$users_week_loss[] = $week_loss[$wloss_key];
-				if(count($users_week_loss) <= 5) break;
+				if(count($users_week_loss) == 5) break;
 			}
 			$countwl = count($users_week_loss);
 		}
