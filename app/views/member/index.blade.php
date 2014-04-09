@@ -187,7 +187,7 @@
 										<div class="media-body">
 											<h3 class="media-heading">
 												<span class='user-name'>{{$uw_loss->name}}</span>
-												<span class='stat text-success'>+{{round($uw_loss->klout_metric_score_week, 2)}}</span>
+												<span class='stat text-success'>-{{round($uw_loss->klout_metric_score_week, 2)}}</span>
 											</h3> 
 
 										</div><!--/.media-body-->
