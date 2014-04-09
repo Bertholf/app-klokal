@@ -10,7 +10,7 @@
 						<li class="list-group-item main">
 							<h4 class="list-group-item-heading">{{ $tag->title}}</h4>
 						</li>
-						@foreach ($users as $user)
+						@foreach ($users as $user_key=> $user)
 						<li class="list-group-item">
 							<div class="media row">
 								<div class='col-sm-2'>
@@ -19,11 +19,18 @@
 									</a>
 								</div>
 								<div class='col-sm-4'>
-									<p><b>
-										<a href="/user/{{ $user->twitter_handle}}">
-											{{ $user->name }}
-										</a>
-									</b></p>
+									<p>
+										<b>
+											<a href="/user/{{ $user->twitter_handle}}">
+												{{ $user->name }}
+											</a>
+										</b>
+									</p>
+									<p>
+									<b>
+									#{{intval($user_key)+1}}
+									</b>
+									</p>
 									<p>{{ $user->ranking }}</p>
 								</div>
 								<div class='col-sm-2'>

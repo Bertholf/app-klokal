@@ -26,7 +26,7 @@ class TagController extends BaseController {
 					->orderBy('users.klout_metric_score','desc')
 					->groupBy('user_tag.user_id')
 					->take(50)
-					->paginate(10);
+					->paginate(50);
 		return 	View::make('tag.tag', array('tag'=>$tag,'users' => $users));
 	}
 	public function addTag()
@@ -103,9 +103,9 @@ class TagController extends BaseController {
 		$user_top_tag = Tag::where('id', '=', $tag_id)
 							->orderBy('count', 'DESC')->first();
 		
-		$tag_count = UserTag::select(DB::raw(' UserTag.* , count(UserTag.user_id) as cuid'))
-						->where('UserTag.tag_id', '=', $tag_id)
-						->groupBy('UserTag.user_id')
+		$tag_count = UserTag::select(DB::raw(' user_tag.* , count(user_tag.user_id) as cuid'))
+						->where('user_tag.tag_id', '=', $tag_id)
+						->groupBy('user_tag.user_id')
 						->orderBy('cuid','DESC ')
 						->first();
 // 		dd($tag_count);

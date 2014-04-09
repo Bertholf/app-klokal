@@ -117,11 +117,17 @@
 						@foreach ($tags_info as $tag_key => $tag_value)
 						<li class="list-group-item">
 							<div class="media">
-								<a class="pull-left" href="#">
+								<a class="pull-left" href="/tag/{{$tag_value->slug}}">
 									<img height=48 width=48 class="media-object" src="{{ $tag_value->image }}" alt="...">
 								</a>
-								<div class="media-body" style="display: inline;">
-									<p><b>{{ $tag_value->title }}</b></p>
+								<div class="media-body">
+									<p>
+										<b>
+											<a class="pull-left" href="/tag/{{$tag_value->slug}}">
+												{{ $tag_value->title }}
+											</a>
+										</b>
+									</p>
 										
 								</div><!--/.media-body-->
 								<div class="media-body" style="display: inline;">
