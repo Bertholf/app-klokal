@@ -22,8 +22,8 @@ class TagController extends BaseController {
 					->first();
 		
 		$users = UserTag::where('user_tag.tag_id', '=', $tag->id)
-					->join('Users','users.id','=','user_tag.user_id')
-					->orderBy('Users.klout_metric_score','desc')
+					->join('users','users.id','=','user_tag.user_id')
+					->orderBy('users.klout_metric_score','desc')
 					->groupBy('user_tag.user_id')
 					->take(50)
 					->paginate(10);
