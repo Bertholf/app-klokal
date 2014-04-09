@@ -156,12 +156,16 @@
 							<ul class="list-group stats-list">
 								<li class="list-group-item">
 									<div class="media">
-										<a class="pull-left" href="#">
+										<a class="pull-left" href="/user/{{$uw_gain->twitter_handle}}">
 											<img class="media-object" src="{{$uw_gain->image}}" alt="...">
 										</a>
 										<div class="media-body">
 											<h3 class="media-heading">
-												<span class='user-name'>{{$uw_gain->name}}</span>
+												<span class='user-name'>
+													<a class="pull-left" href="/user/{{$uw_gain->twitter_handle}}">
+														{{$uw_gain->name}}
+													</a>
+												</span>
 												<span class='stat text-success'>+{{round($uw_gain->klout_metric_score_week, 2)}}</span>
 											</h3> 
 
@@ -181,13 +185,17 @@
 							<ul class="list-group stats-list">
 								<li class="list-group-item">
 									<div class="media">
-										<a class="pull-left" href="#">
+										<a class="pull-left" href="/user/{{$uw_loss->twitter_handle}}"">
 											<img class="media-object" src="{{$uw_loss->image}}" alt="...">
 										</a>
 										<div class="media-body">
 											<h3 class="media-heading">
-												<span class='user-name'>{{$uw_loss->name}}</span>
-												<span class='stat text-success'>-{{round($uw_loss->klout_metric_score_week, 2)}}</span>
+												<span class='user-name'>
+													<a class="pull-left" href="/user/{{$uw_loss->twitter_handle}}">
+														{{$uw_loss->name}}
+													</a>
+												</span>
+												<span class='stat text-success'>{{round($uw_loss->klout_metric_score_week, 2)}}</span>
 											</h3> 
 
 										</div><!--/.media-body-->

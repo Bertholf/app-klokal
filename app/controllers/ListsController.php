@@ -38,7 +38,7 @@ class ListsController extends BaseController {
 			$Lists->text = '';
 			$Lists->image = '';
 			$Lists->active = 1;
-			$Lists->featured = 1;
+			$Lists->featured = 0;
 			$Lists->user_id = Session::get('id');
 			$Lists->save();
 
