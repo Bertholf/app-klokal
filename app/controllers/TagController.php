@@ -16,7 +16,19 @@ class TagController extends BaseController {
 	
 		return Validator::make($input, $rules);
 	}
-	
+	public function displayTag($slug)
+	{
+		$tag = Tag::where('tag.slug', '=', $slug)
+					->first();
+		
+		$users = UserTag::where('user_tag.tag_id', '=', $tag->id)
+					->join('Users','users.id','=','user_tag.user_id')
+					->orderBy('Users.klout_metric_score','desc')
+					->groupBy('user_tag.user_id')
+					->take(50)
+					->paginate(10);
+		return 	View::make('tag.tag', array('tag'=>$tag,'users' => $users));
+	}
 	public function addTag()
 	{
 		if (Input::has('tag'))
@@ -31,11 +43,6 @@ class TagController extends BaseController {
 			}else{
 				$image = '';
 			}
-			
-// 			if (Input::hasFile('tagImage'))
-// 			{
-// 				$image = Input::file('tagImage');
-// 			}
 
 			$slug = str_replace(' ', '-',  strtolower(trim($title)));
 			$slug = str_replace('&', '-and-',  strtolower(trim($slug)));
@@ -96,11 +103,12 @@ class TagController extends BaseController {
 		$user_top_tag = Tag::where('id', '=', $tag_id)
 							->orderBy('count', 'DESC')->first();
 		
-		$tag_count = UserTag::select(DB::raw(' * , count(user_id) as cuid'))
-						->where('tag_id', '=', $tag_id)
-						->groupBy('user_id')
+		$tag_count = UserTag::select(DB::raw(' UserTag.* , count(UserTag.user_id) as cuid'))
+						->where('UserTag.tag_id', '=', $tag_id)
+						->groupBy('UserTag.user_id')
 						->orderBy('cuid','DESC ')
 						->first();
+// 		dd($tag_count);
 		//update  tag count and user_id here 
 		if($user_top_tag->count < $tag_count->cuid){
 			$tag = Tag::where('id', $tag_id)

@@ -14,12 +14,16 @@
 						<li class="list-group-item">
 							<div class="media row">
 								<div class='col-sm-2'>
-									<a class="pull-left" href="#">
+									<a class="pull-left" href="/tag/{{ $tag->slug }}">
 										<img height=48 width=48 class="media-object" src="{{ $tag->image }}" alt="...">
 									</a>
 								</div>
 								<div class='col-sm-4'>
-									<p><b>{{ $tag->title }}</b></p>
+									<p><b>
+										<a href="/tag/{{ $tag->slug }}">
+											{{ $tag->title }}
+										</a>
+									</b></p>
 									<p>{{ $tag->count }}</p>
 								</div>
 								<div class='col-sm-2'>
