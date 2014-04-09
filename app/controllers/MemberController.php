@@ -84,6 +84,7 @@ class MemberController extends BaseController {
 		{
 			$listedby[] = Lists::select('users.*','list.*','list.user_id as actor_id','user_list.*')
 			->where('list.id','=',$rl_value->list_id)
+			->where('users.location_id','=','1')
 			->join('user_list', 'list.id', '=', 'user_list.list_id')
 			->join('users', 'users.id', '=', 'user_list.user_id')
 			->orderBy('users.klout_metric_score','desc')
