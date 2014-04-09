@@ -12,7 +12,52 @@ class MemberController extends BaseController {
 				->get();
 		$lists = Lists::where('featured', '=', 1)->get();
 
-		return View::make('member.index')->withUsers($users)->withLists($lists);
+		$users_week_gain = array();
+		$i = 0;
+		$count = count($users_week_gain);
+		while($count < 5)
+		{
+			$week_gain = User::select('name', 'twitter_handle', 'klout_metric_score', 'image', 'klout_metric_score_week')
+			->orderBy('klout_metric_score_week', 'desc')
+			->where('location_id', '=', 1)
+			->where('type_id', '=', 1)
+			->skip($i*5)->take(5)
+			->get();
+			$i++;
+			foreach ($week_gain as $wgain_key=> $wgain_value)
+			{
+				$real_wgain = strpos($wgain_value->klout_metric_score_week, 'E');
+				if($real_wgain) continue;
+				
+				$users_week_gain[] = $week_gain[$wgain_key];
+				if(count($users_week_gain) <= 5) break;
+			}
+			$count = count($users_week_gain);
+		}
+		$users_week_loss = array();
+		$j = 0;
+		$countwl = count($users_week_loss);
+		while($countwl < 5)
+		{
+				$week_loss = User::select('name', 'twitter_handle', 'klout_metric_score', 'image', 'klout_metric_score_week')
+				->orderBy('klout_metric_score_week', 'asc')
+				->where('location_id', '=', 1)
+				->where('type_id', '=', 1)
+				->skip($j*5)->take(5)
+				->get();
+			$j++;
+			foreach ($week_loss as $wloss_key=> $wloss_value)
+			{
+				$real_wloss = strpos($wloss_value->klout_metric_score_week, 'E');
+				if($real_wloss) continue;
+				
+				$users_week_loss[] = $week_loss[$wloss_key];
+				if(count($users_week_loss) <= 5) break;
+			}
+			$countwl = count($users_week_loss);
+		}
+
+		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss))->withUsers($users)->withLists($lists);
 	}
 	
 	public function userList(){

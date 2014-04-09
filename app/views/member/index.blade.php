@@ -152,25 +152,24 @@
 							<div class='lead'>
 								Moved Up
 							</div><!--/.lead-->
-
+							@foreach($users_week_gain as $uw_gain)
 							<ul class="list-group stats-list">
 								<li class="list-group-item">
 									<div class="media">
 										<a class="pull-left" href="#">
-											<img class="media-object" src="holder.js/48x48" alt="...">
+											<img class="media-object" src="{{$uw_gain->image}}" alt="...">
 										</a>
 										<div class="media-body">
 											<h3 class="media-heading">
-												<span class='user-name'>James Bob</span>
-
-												<span class='stat text-success'>+4</span>
+												<span class='user-name'>{{$uw_gain->name}}</span>
+												<span class='stat text-success'>+{{round($uw_gain->klout_metric_score_week, 2)}}</span>
 											</h3> 
 
 										</div><!--/.media-body-->
 									</div><!--/.media-->
 								</li><!--/.list-group-item-->
 							</ul>
-
+							@endforeach
 
 						</div><!--/.col-md-6-->
 
@@ -178,7 +177,24 @@
 							<div class='lead'>
 								Moved Down
 							</div><!--/.lead-->
-							
+							@foreach($users_week_loss as $uw_loss)
+							<ul class="list-group stats-list">
+								<li class="list-group-item">
+									<div class="media">
+										<a class="pull-left" href="#">
+											<img class="media-object" src="{{$uw_loss->image}}" alt="...">
+										</a>
+										<div class="media-body">
+											<h3 class="media-heading">
+												<span class='user-name'>{{$uw_loss->name}}</span>
+												<span class='stat text-success'>+{{round($uw_loss->klout_metric_score_week, 2)}}</span>
+											</h3> 
+
+										</div><!--/.media-body-->
+									</div><!--/.media-->
+								</li><!--/.list-group-item-->
+							</ul>
+							@endforeach
 						</div><!--/.col-md-6-->
 					</div><!--/.row-->
 
