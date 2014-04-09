@@ -70,9 +70,9 @@
 						<div class="media">
 							<a class="pull-left" href="
 							<?php 
-							if(intval($item->user_id)>0)
+							if(intval($item->actor_id)>0)
 							{
-								$liuser = User::where('id', '=', $item->user_id)->first();
+								$liuser = User::where('id', '=', $item->actor_id)->first();
 								///user/{user.twitter_handle}/{list.slug}
 								echo url("user/{$liuser->twitter_handle}/{$item->slug}");
 							}else{
@@ -86,9 +86,9 @@
 							<a class="pull-left" style='color: #000000;
    							text-decoration: none;' href="
 							<?php 
-							if(intval($item->user_id)>0)
+							if(intval($item->actor_id)>0)
 							{
-								$liuser = User::where('id', '=', $item->user_id)->first();
+								$liuser = User::where('id', '=', $item->actor_id)->first();
 								///user/{user.twitter_handle}/{list.slug}
 								echo url("user/{$liuser->twitter_handle}/{$item->slug}");
 							}else{
