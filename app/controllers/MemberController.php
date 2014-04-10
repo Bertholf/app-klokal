@@ -10,6 +10,7 @@ class MemberController extends BaseController {
 				->where('type_id', '=', 1)
 				->take(10)
 				->get();
+
 		$lists = Lists::where('featured', '=', 1)->get();
 			
 		$users_week_gain = User::select('name', 'twitter_handle', 'klout_metric_score', 'image', 'klout_metric_score_week')
@@ -28,6 +29,7 @@ class MemberController extends BaseController {
 			->orderBy('klout_metric_score_week', 'asc')
 			->take(5)
 			->get();
+		
 		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss))->withUsers($users)->withLists($lists);
 	}
 	

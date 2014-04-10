@@ -103,12 +103,13 @@ class TagController extends BaseController {
 		$user_top_tag = Tag::where('id', '=', $tag_id)
 							->orderBy('count', 'DESC')->first();
 		
-		$tag_count = UserTag::select(DB::raw(' user_tag.* , count(user_tag.user_id) as cuid'))
+		$tag_count = UserTag::select(DB::raw(' user_tag.* , count(user_tag.user_id) as cuid, users.klout_metric_score'))
+						->join('users', 'users.id', '=', 'user_tag.user_id')
 						->where('user_tag.tag_id', '=', $tag_id)
 						->groupBy('user_tag.user_id')
 						->orderBy('cuid','DESC ')
+						->orderBy('users.klout_metric_score','desc')
 						->first();
-// 		dd($tag_count);
 		//update  tag count and user_id here 
 		if($user_top_tag->count < $tag_count->cuid){
 			$tag = Tag::where('id', $tag_id)
