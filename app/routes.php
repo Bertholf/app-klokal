@@ -33,6 +33,8 @@ Route::get('/tag/update/{twitter_handle}/{user_id}/{tag_id}', 'TagController@upd
 Route::get('/logout', 'MemberController@logout');
 Route::get('/users', 'MemberController@userList');
 
+//cron
+Route::get('/cron/updateTopics', 'CronController@updateTopics');
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/dashboard', 'MemberController@index');
