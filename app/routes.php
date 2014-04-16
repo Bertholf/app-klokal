@@ -36,6 +36,12 @@ Route::get('/users', 'MemberController@userList');
 Route::get('/cron/updateTags', 'CronController@updateTopics');
 Route::get('/cron/updateUserKloutId', 'CronController@updateUserKloutId');
 Route::get('/cron/refreshKlout', 'CronController@refreshKlout');
+//admin
+Route::get('/admin/users-new', 'AdminController@userAdd');
+Route::get('/admin/users-list', 'AdminController@userList');
+Route::get('/admin/location-list', 'AdminController@locationList');
+Route::get('/admin/categories-list', 'AdminController@CategoriesList');
+Route::get('/admin/tag-list', 'AdminController@TagList');
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/dashboard', 'MemberController@index');
