@@ -65,4 +65,199 @@ class CronController extends BaseController {
 			}
 		}
 	}
+	public function discoverKlout($TwitterUser)
+	{
+		$twitter_config = Config::get('twitter');
+		$klout = new KloutAPIv2($twitter_config['klout_key']);
+		if (isset($TwitterUser) && !empty($TwitterUser)) {
+			$user = User::where('twitter_handle', '=', $TwitterUser)->get();
+			dd($twitter_config['TwitterDataURL'].$TwitterUser); //bug
+			if(count($user) == 0){
+				$CurlHandler = curl_init($twitter_config['TwitterDataURL'].$TwitterUser);
+				curl_setopt( $CurlHandler, CURLOPT_RETURNTRANSFER, 1 );
+				curl_setopt( $CurlHandler, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT'] );
+				$CurlResult = curl_exec( $CurlHandler );
+				if (FALSE === $CurlResult)
+					throw new Exception(curl_error($CurlHandler), curl_errno($CurlHandler));
+				
+				$ResultString = json_decode($CurlResult);
+				dd(json_decode($ResultString));
+				$Account->TwitterData = json_decode($CurlResult);
+				$UserName = $Account->TwitterData->name;
+				echo $UserName;
+				$UserTwitterID = $Account->TwitterData->id_str;
+				$UserTwitterHandle = $Account->TwitterData->screen_name;
+				$UserText = $Account->TwitterData->description;
+				$UserLocation = $Account->TwitterData->location;
+				$UserImage = $Account->TwitterData->profile_image_url;
+				$UserURL = $Account->TwitterData->url;
+				$UserStatFollowers = $Account->TwitterData->followers_count;
+				$UserStatFriends = $Account->TwitterData->friends_count;
+				$UserDateSignup = date("Y-m-d H:i:s",strtotime($Account->TwitterData->created_at));
+				$UserTimeZone = $Account->TwitterData->time_zone;
+				
+				$KloutID = $klout->KloutIDLookupByName("twitter",$TwitterUser);
+				if ($KloutID > 0) {
+					echo "KloutID: $KloutID <br />";
+				
+					$CurlResult = $klout->KloutUserScore($KloutID);
+					$ResultString = json_decode($CurlResult);
+					$KloutScore = $ResultString->score;
+					$dayChanges = $ResultString->scoreDelta->dayChange;
+					$weekChanges = $ResultString->scoreDelta->weekChange;
+					$monthChanges = $ResultString->scoreDelta->monthChange;
+					
+					if (isset($KloutScore)) {
+						// Create Record
+											$user = new User();
+											$user->name = $TwitterUser;
+											$user->twitter_handle = $UserTwitterHandle;
+											$user->twitter_id = $UserTwitterID;
+											$user->image = $UserImage;
+											$user->location = mysql_real_escape_string($UserLocation);
+											$user->date_created = date('Y-m-d H:i:s',time());
+											$user->topics = $UserTopics;
+											$user->klout_metric_score = $KloutScore;
+											$user->klout_metric_score_day = $dayChanges;
+											$user->klout_metric_score_week = $weekChanges;
+											$user->klout_metric_score_month = $monthChanges;
+											$user->location_id = 1;
+											$user->type_id = 1;
+											$user->twitter_metric_followers = $UserStatFollowers;
+											$user->twitter_metric_friends = $UserStatFriends;
+											$user->twitter_date_created = $UserDateSignup; //?
+											$user->twitter_updated = date('Y-m-d H:i:s',time());
+											$user->active = 1;
+											$user->save();
+							
+											echo "<strong>$TwitterUser</strong> Added with score <strong>". round($KloutScore) ."</strong><br />";
+						echo "<br />";
+					} else {
+						echo "<strong>$TwitterUser</strong> Missing Data<br />";
+					}
+				}else{
+					echo "User <strong>$TwitterUser</strong> Has No Klout ID";
+					}
+			}else{
+				echo "User <strong>$TwitterUser</strong> Exists";
+			}
+		}else{
+			echo "No User Specified";
+		}
+		
+	}
+	public function refreshKlout()
+	{
+		$yestoday = date('Y-m-d H:i:s', strtotime('-1 day'));
+		// Set your client key and secret
+		$kloutapi_key = "9sbxzk9g43ka9975dbhzzj5p";
+		// Load the Foursquare API library
+		$klout = new KloutAPIv2($kloutapi_key);
+		$user_list = User::select ('id','klout_id','twitter_handle','klout_updated')
+		->where('active', '=', 1)
+		->where('location_id', '=', 1)
+		->where('klout_id', '>', 0)
+		->where('klout_updated', '<', $yestoday)
+		->orderBy('klout_metric_score','DESC')
+		->orderBy('twitter_updated','DESC')
+		->take(100)
+		->get();
+		foreach($user_list as $user_key => $user_value){
+			$UserID = $user_value->id;
+			$UserKloutID = $user_value->klout_id;
+			echo "<hr /><div><h1>". $user_value->twitter_handle ."</h1></div>";
+			
+			$CurlResult = $klout->KloutUserScore($user_value->klout_id);
+			$ResultString = json_decode($CurlResult);
+			$KloutScore = $ResultString->score;
+			$dayChanges = $ResultString->scoreDelta->dayChange;
+			$weekChanges = $ResultString->scoreDelta->weekChange;
+			$monthChanges = $ResultString->scoreDelta->monthChange;
+				
+			echo "<strong>Score: ". $KloutScore ."</strong><br />";
+			echo "Day: ". $dayChanges ."<br />";
+			echo "Week: ". $weekChanges ."<br />";
+			echo "Month: ". $monthChanges ."<br />";
+			
+			if ($KloutScore > 0) {
+				// Update DB
+				$user_update = User::where('id', '=', $UserID)->update(array(
+						'klout_metric_score' => $KloutScore,
+						'klout_metric_score_day' => $dayChanges,
+						'klout_metric_score_week' => $weekChanges,
+						'klout_metric_score_month' => $monthChanges,
+						));
+				echo "<br /><em>Updated scores</em>";
+			}
+			/* ************************************************** */
+			// Get Topics
+			$kloutTopicsRaw = $klout->KloutUserTopics($UserKloutID);
+			$kloutTopics = json_decode($kloutTopicsRaw);
+			
+			foreach($kloutTopics as $kloutTopic):
+			$TopicTitle = stripslashes($kloutTopic->topicData->displayName);
+			$TopicImage = stripslashes($kloutTopic->topicData->imageUrl);
+			$TopicSlug = $kloutTopic->topicData->slug;
+			$TopicStrength = stripslashes($kloutTopic->strength);
+			// Get Strength
+			if ($TopicStrength == "strong") { $UserTopicStrength = 5; }
+			elseif ($TopicStrength == "medium") { $UserTopicStrength = 3; }
+			elseif ($TopicStrength == "low") { $UserTopicStrength = 1; }
+		
+			// Does the topic exist
+			$tag = Tag::where('slug', '=',$TopicSlug)->first();
+			if(count($tag)>0) {
+					$TopicID = $tag->id;
+					echo "Topic Exists in kLokal<br />";
+			} else {				
+				$insertTag = new Tag;
+				$insertTag->title = $TopicTitle;
+				$insertTag->image = $TopicImage;
+				$insertTag->slug = $TopicSlug;
+				$insertTag->active = 1;
+				$insertTag->save();
+				$TopicID = $insertTag->id;
+					
+				echo "<div class=\"topic\">\n";
+				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" /></a>\n";
+				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added Topic to kLokal</a>\n";
+				echo "</div>";
+			}
+			
+			// Link it to the Member
+			$user_tag = UserTag::where('user_id', '=', $UserID)
+							->where('tag_id', '=', $TopicID)
+							->get();
+			
+// 			$queryTopicMux = "SELECT UserTopicID, UserTopicUpdated, UserTopicStrength FROM klokal_topic_mux WHERE UserID = '". $UserID ."' AND TopicID = '". $TopicID ."'";
+// 			$resultsTopicMux = mysql_query($queryTopicMux);
+// 			$countTopicMux = mysql_num_rows($resultsTopicMux);
+// 			if($resultsTopicMux) {
+// 				while ($dataTopicMux = mysql_fetch_array($resultsTopicMux)) {
+// 					if ($dataTopicMux["UserTopicStrength"] = 0) { //  || $dataTopicMux["UserTopicUpdated"] <
+// 						// Update DB
+// 						$updateKloutTopic = "UPDATE klokal_topic_mux SET UserTopicStrength = '". $UserTopicStrength ."', UserTopicUpdated = NOW() WHERE UserID = " . $UserID ." AND TopicID = '" . $TopicID ."'";
+// 						$resultsKloutTopic = mysql_query($updateKloutTopic);
+// 						echo "<em>Topic <strong>". $TopicTitle ."</strong> Strength Updated to <strong>". $UserTopicStrength ."</strong> (". $UserTopicStrength .")</em><br />";
+// 					} else {
+// 						echo "<em>No need to update topic <strong>". $TopicTitle ."</strong></em><br />";
+// 					}
+// 				}
+// 			} else {
+// 				$insertTopicMux = "INSERT INTO klokal_topic_mux (UserID, TopicID, UserTopicStrength) VALUES ('". $UserID ."','". $TopicID ."','". $UserTopicStrength ."')";
+// 				echo "<div class=\"topic\">\n";
+// 				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" style=\"width: 20px;\" /></a>\n";
+// 				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added topic to User</a>\n";
+// 				echo "</div>";
+// 				$resultsTopicMux = mysql_query($insertTopicMux) or die ('Topic not muxed<br />');
+// 			}
+			
+				
+			endforeach;
+			/* ************************************************** */
+		}
+		if(count($user_list) < 1){
+			echo "No profiles need updating.";
+		}
+	} 
 }
