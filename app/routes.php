@@ -35,7 +35,6 @@ Route::get('/users', 'MemberController@userList');
 //cron
 Route::get('/cron/updateTags', 'CronController@updateTopics');
 Route::get('/cron/updateUserKloutId', 'CronController@updateUserKloutId');
-Route::get('/cron/discoverKlout/{TwitterUser}', 'CronController@discoverKlout');
 Route::get('/cron/refreshKlout', 'CronController@refreshKlout');
 Route::group(array('before' => 'auth'), function()
 {

@@ -208,51 +208,44 @@ class CronController extends BaseController {
 			$tag = Tag::where('slug', '=',$TopicSlug)->first();
 			if(count($tag)>0) {
 					$TopicID = $tag->id;
-					echo "Topic Exists in kLokal<br />";
-			} else {				
-				$insertTag = new Tag;
-				$insertTag->title = $TopicTitle;
-				$insertTag->image = $TopicImage;
-				$insertTag->slug = $TopicSlug;
-				$insertTag->active = 1;
-				$insertTag->save();
-				$TopicID = $insertTag->id;
-					
-				echo "<div class=\"topic\">\n";
-				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" /></a>\n";
-				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added Topic to kLokal</a>\n";
-				echo "</div>";
+					echo "Topic".$TopicTitle." Exists in kLokal<br />";
+			} else {	
+				$tag = Tag::where('title', '=',$TopicTitle)->first();
+				if(count($tag)>0){
+					$TopicID = $tag->id;
+					echo "Topic".$TopicTitle." Exists in kLokal<br />";
+				}else{
+					$insertTag = new Tag();
+					$insertTag->title = $TopicTitle;
+					$insertTag->image = $TopicImage;
+					$insertTag->slug = $TopicSlug;
+					$insertTag->active = 1;
+					$insertTag->save();
+					$TopicID = $insertTag->id;
+						
+					echo "<div class=\"topic\">\n";
+					echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" /></a>\n";
+					echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added Topic to kLokal</a>\n";
+					echo "</div>";
+				}
 			}
 			
 			// Link it to the Member
 			$user_tag = UserTag::where('user_id', '=', $UserID)
 							->where('tag_id', '=', $TopicID)
 							->get();
-			
-// 			$queryTopicMux = "SELECT UserTopicID, UserTopicUpdated, UserTopicStrength FROM klokal_topic_mux WHERE UserID = '". $UserID ."' AND TopicID = '". $TopicID ."'";
-// 			$resultsTopicMux = mysql_query($queryTopicMux);
-// 			$countTopicMux = mysql_num_rows($resultsTopicMux);
-// 			if($resultsTopicMux) {
-// 				while ($dataTopicMux = mysql_fetch_array($resultsTopicMux)) {
-// 					if ($dataTopicMux["UserTopicStrength"] = 0) { //  || $dataTopicMux["UserTopicUpdated"] <
-// 						// Update DB
-// 						$updateKloutTopic = "UPDATE klokal_topic_mux SET UserTopicStrength = '". $UserTopicStrength ."', UserTopicUpdated = NOW() WHERE UserID = " . $UserID ." AND TopicID = '" . $TopicID ."'";
-// 						$resultsKloutTopic = mysql_query($updateKloutTopic);
-// 						echo "<em>Topic <strong>". $TopicTitle ."</strong> Strength Updated to <strong>". $UserTopicStrength ."</strong> (". $UserTopicStrength .")</em><br />";
-// 					} else {
-// 						echo "<em>No need to update topic <strong>". $TopicTitle ."</strong></em><br />";
-// 					}
-// 				}
-// 			} else {
-// 				$insertTopicMux = "INSERT INTO klokal_topic_mux (UserID, TopicID, UserTopicStrength) VALUES ('". $UserID ."','". $TopicID ."','". $UserTopicStrength ."')";
-// 				echo "<div class=\"topic\">\n";
-// 				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" style=\"width: 20px;\" /></a>\n";
-// 				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added topic to User</a>\n";
-// 				echo "</div>";
-// 				$resultsTopicMux = mysql_query($insertTopicMux) or die ('Topic not muxed<br />');
-// 			}
-			
+			if(count($user_tag) == 0){
+				$user_tag = new UserTag();
+				$user_tag->user_id = $UserID;
+				$user_tag->tag_id = $TopicID;
+				$user_tag->date_created = date('Y-m-d H:i:s',time());
+				$user_tag->actor_user_id = 0;
 				
+				echo "<div class=\"topic\">\n";
+				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\"><img src=\"". $TopicImage ."\" style=\"width: 20px;\" /></a>\n";
+				echo "  <a href=\"http://klout.com/". $TopicSlug ."\" target=\"_blank\">". $TopicTitle ." Added topic to User</a>\n";
+				echo "</div>";
+			}				
 			endforeach;
 			/* ************************************************** */
 		}
