@@ -71,7 +71,7 @@
 	                    <li><a href="/admin/users-new">Add New</a></li>
 	                  </ul>
 	                </li>
-	                <li class=""><a href="#"><i class='icon-off'> </i> Sign Out</a></li>
+	                <li class=""><a href="/logout"><i class='icon-off'> </i> Sign Out</a></li>
 	              </ul>
 	        </div><!--/.nav-collapse -->
 	      </div><!--/.container-->

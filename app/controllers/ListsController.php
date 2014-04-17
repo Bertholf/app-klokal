@@ -5,9 +5,15 @@ class ListsController extends BaseController {
 
 	public function index()
 	{
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
+		
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
 				->orderBy('klout_metric_score', 'desc')
-				->where('location_id', '=', 1)
+				->where('location_id', '=', $current_location)
 				->take(10)
 				->get();
 		$lists = Lists::orderBy('id', 'desc')

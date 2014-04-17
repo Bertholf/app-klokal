@@ -1,12 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Redirect;
+
 class MemberController extends BaseController {
 
 	public function index()
 	{
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
+		
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
 				->orderBy('klout_metric_score', 'desc')
-				->where('location_id', '=', 1)
+				->where('location_id', '=', $current_location)
 				->where('type_id', '=', 1)
 				->take(10)
 				->get();
@@ -15,7 +23,7 @@ class MemberController extends BaseController {
 			
 		$users_week_gain = User::select('name', 'twitter_handle', 'klout_metric_score', 'image', 'klout_metric_score_week')
 			->where('klout_metric_score_week', '>', 0)
-			->where('location_id', '=', 1)
+			->where('location_id', '=', $current_location)
 			->where('type_id', '=', 1)
 			->orderBy('klout_metric_score_week', 'desc')
 			->take(5)
@@ -24,19 +32,28 @@ class MemberController extends BaseController {
 
 		$users_week_loss = User::select('name', 'twitter_handle', 'klout_metric_score', 'image', 'klout_metric_score_week')
 			->where('klout_metric_score_week', '<', 0)
-			->where('location_id', '=', 1)
+			->where('location_id', '=', $current_location)
 			->where('type_id', '=', 1)
 			->orderBy('klout_metric_score_week', 'asc')
 			->take(5)
 			->get();
 		
-		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss))->withUsers($users)->withLists($lists);
+		$location_list = Location::where('LocationActive', '=', 1)
+						->orderBy('LocationID','asc')
+						->get();
+		
+		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss,'location_list' => $location_list))->withUsers($users)->withLists($lists);
 	}
 	
 	public function userList(){
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
 		->orderBy('klout_metric_score', 'desc')
-		->where('location_id', '=', 1)
+		->where('location_id', '=', $current_location)
 		->where('type_id', '=', 1)
 		->paginate(10);
 		return View::make('member.userlist', array('users'=>$users));
@@ -44,9 +61,14 @@ class MemberController extends BaseController {
 
 	public function lists($slug)
 	{
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
 		$type = Lists::where('slug', '=', $slug)->with('users')->first();
 		$users = $type->users()->orderBy('klout_metric_score', 'desc')
-				->where('location_id', '=', 1)
+				->where('location_id', '=', $current_location)
 				->paginate(50);
 
 		return View::make('member.type', array('type'=>$type, 'users'=>$users));
@@ -54,12 +76,17 @@ class MemberController extends BaseController {
 	
 	public function customlists($twitter_handle, $slug)
 	{
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
 		$actor = User::where('twitter_handle', '=', $twitter_handle)->first();
 		$type = Lists::where('slug', '=', $slug)
 		->where('user_id', '=', $actor->id)
 		->first();
 		$users = $type->users()->orderBy('klout_metric_score', 'desc')
-		->where('location_id', '=', 1)
+		->where('location_id', '=', $current_location)
 		->paginate(50);
 	
 		return View::make('member.type', array('type'=>$type, 'users'=>$users));
@@ -119,6 +146,18 @@ class MemberController extends BaseController {
 		}
 		return View::make('member.user', array('user'=>$user, 'tags_info' => $tags_info, 'tags_actor_id' => $tags_actor_id,'list_actor' => $list_actor,'listedby' => $listedby));
 	}
+	public function userChangeLocation(){
+		if(Input::has('current_location')){
+			$location_id = Input::get('current_location');
+			$location_id = (int)$location_id;
+			if($location_id>0){
+				Session::put('current_location',$location_id);
+			}else{
+				Session::put('current_location',1);
+			}
+		}
+		return Redirect::to('/');
+	}
 
 	public function twitterSignIn()
 	{
@@ -157,12 +196,35 @@ class MemberController extends BaseController {
 		$access_token = $connection->getAccessToken(Input::get('oauth_verifier'));
 		Session::put('access_token', $access_token);
 		$user_info = $connection->get('account/verify_credentials');
-
+		
+		$location = $user_info->location;
+		if(empty($location)){
+			$user_info->location_id = 1;
+		}else{
+			$location = ucwords(trim($location));
+			$location_list = Location::where('LocationTitle', '=', $location)->first();
+			if(count($location_list) == 0){
+				//add location if not exist
+				$location = new Location();
+				$location->LocationTitle = $user_info->location;
+				$location->LocationText = '';
+				$location->LocationLatitude = 0;
+				$location->LocationLongitude = 0;
+				$location->LocationRadius = 0;
+				$location->LocationImage = '';
+				$location->LocationActive = 1;
+				$location->LocationScan = 0;
+				$location->save();
+				$location_id = $location->id;
+				$user_info->location_id = $location_id;
+			}else {
+				$user_info->location_id = $location_list->LocationId; //get location id if location exist
+			}
+		}
 		if (isset($user_info->error)) {
 			return Redirect::to('/');
 	    } else {
 			$user = User::where('twitter_id', '=', $user_info->id)->first();
-
 			if(empty($user)){
 				$user = new User();
 				$user->name = $user_info->name;
@@ -170,7 +232,7 @@ class MemberController extends BaseController {
 				$user->twitter_handle = $user_info->screen_name;
 				$user->text = $user_info->description;
 				$user->location = $user_info->location;
-				$user->location_id = 1;		//@todo
+				$user->location_id = $user_info->location_id;		//@todo
 				$user->type_id = 1;		//@todo
 				$user->image = $user_info->profile_image_url;
 				$user->url = $user_info->url;
@@ -180,7 +242,6 @@ class MemberController extends BaseController {
 				$user->timezone = $user_info->time_zone;
 				
 			}
-			
 			$user->twitter_oauth_token = Session::get('oauth_token');
 			$user->twitter_oauth_secret = Session::get('oauth_token_secret');
 			$user->twitter_logged = date('Y-m-d H:i:s');
@@ -203,9 +264,9 @@ class MemberController extends BaseController {
 				
 			$user->save();
 				Session::put('id',$user->id);
-				Session::put('twitter_handle',$user_info->name);
-				Session::put('location_id',$user_info->name);
-				Session::put('type_id',$user_info->name);
+				Session::put('twitter_handle',$user_info->screen_name);
+				Session::put('current_location', $user_info->location_id);
+				Session::put('type_id',1);
 			Auth::login($user);
 					
 			return Redirect::to('/dashboard');
