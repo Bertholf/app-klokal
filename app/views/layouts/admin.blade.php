@@ -43,7 +43,7 @@
 	                  <ul class="dropdown-menu">
 	                    <li><a href="/admin/location-list">Overview</a></li>
 	                    <li class="divider"></li>
-	                    <li><a href="locations-new.html">Add New</a></li>
+	                    <li><a href="/admin/location-new">Add New</a></li>
 	                  </ul>
 	                </li>
 	                <li class='dropdown'>
@@ -51,17 +51,24 @@
 	                  <ul class="dropdown-menu">
 	                    <li><a href="/admin/categories-list">Overview</a></li>
 	                    <li class="divider"></li>
-	                    <li><a href="categories-new.html">Add New</a></li>
+	                    <li><a href="/admin/categories-new">Add New</a></li>
 	                  </ul>
 	                </li>
-	                <li class=''><a href='/admin/tag-list'><i class='icon-tags'> </i> Topics</a></li>
+	                <li class='dropdown'>
+	                	<a href='#' class="dropdown-toggle" data-toggle="dropdown"><i class='icon-tags'> </i> Topics<b class="caret"></b></a>
+	                	<ul class="dropdown-menu">
+		                    <li><a href="/admin/tag-list">Overview</a></li>
+		                    <li class="divider"></li>
+		                    <li><a href="/admin/tag-new">Add New</a></li>
+	                  </ul>
+	                </li>
 	              
 	                <li class='dropdown'>
 	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user'> </i> Users <b class="caret"></b></a>
 	                  <ul class="dropdown-menu">
 	                    <li><a href="/admin/users-list">Overview</a></li>
 	                    <li class="divider"></li>
-	                    <li><a href="users-new.html">Add New</a></li>
+	                    <li><a href="/admin/users-new">Add New</a></li>
 	                  </ul>
 	                </li>
 	                <li class=""><a href="#"><i class='icon-off'> </i> Sign Out</a></li>

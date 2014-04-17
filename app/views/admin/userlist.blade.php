@@ -84,16 +84,6 @@
                     </span>
                   </div><!--/.input-group-->
                 </div><!--/.col-sm-3-->
-
-                <div class='col-sm-6 col-sm-offset-3'>
-                   <ul>
-						<li class="list-group-item">
-							<div class="media row">
-								{{ $userlist->links() }}
-							</div><!--/.media-->
-						</li><!--/.list-group-item-->
-					</ul>
-                </div><!--/.col-sm-6-->
               </div><!--/.row user-sorting-->
 
 
@@ -138,7 +128,17 @@
               </div><!--/.box-->
             </div><!--/.col-mid-8-->
           </div><!--/.row-->
-
+	      <div class='media row'>
+			  <div class='col-md-12'>
+	              <ul style='padding-left: 0;'>
+					<li class="list-group-item">
+						<div class="media row">
+							{{ $userlist->links() }}
+						</div><!--/.media-->
+					</li><!--/.list-group-item-->
+				  </ul>
+			  </div>
+          </div><!--/.media row-->
         </div><!--/.col-xs-12-->
       </div><!--/#content-wrapper-->
     </div><!--/.container-->

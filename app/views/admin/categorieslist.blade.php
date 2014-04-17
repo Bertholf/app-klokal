@@ -30,7 +30,7 @@
                    Current Categories
                   </div><!--/.title-->
                   <div class='actions'>
-                    <a href='categories-new.html' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Category</a>
+                    <a href='/admin/categories-new' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Category</a>
                   </div>
                 </div><!--/.box-header-->
                 <div class='box-content box-no-padding'>
@@ -60,7 +60,7 @@
 	                        @endif
                         </td>
                         <td><a class='btn btn-default btn-sm' href='categories-edit.html'><i class='icon-cog'> </i> Edit</a>
-                          <a class='btn btn-default btn-sm' data-toggle='modal' href='#confirmDelete'><i class='icon-trash'> </i></a>
+                          <a class='btn btn-default btn-sm' data-toggle='modal' href="/admin/categories-delete/{{$categories_value->id}}"><i class='icon-trash'> </i></a>
                         </td>
                       </tr>
                       @endforeach

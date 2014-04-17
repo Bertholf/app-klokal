@@ -27,7 +27,7 @@ class ListsController extends BaseController {
 				$list_slug = preg_replace("/&/", "-and-", $list_slug);  
 			}
 			//input list slug already exist
-			$list_exist = Lists::where('slug' ,'=', $list_slug)->get(); 
+			$list_exist = Lists::where('slug' ,'like', $list_slug."%")->get(); 
 			if(count($list_exist)>0){
 				$count = count($list_exist)+1;
 				$list_slug = $list_slug.'-'.$count;

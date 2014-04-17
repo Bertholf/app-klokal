@@ -30,7 +30,7 @@
                    Current Locations
                   </div><!--/.title-->
                   <div class='actions'>
-                    <a href='locations-new.html' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Location</a>
+                    <a href='/admin/location-new' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Location</a>
                   </div>
                 </div><!--/.box-header-->
                 <div class='box-content box-no-padding'>
@@ -62,7 +62,7 @@
                         @endif
                         </td>
                         <td><a class='btn btn-default btn-sm' href='locations-edit.html'><i class='icon-cog'> </i> Edit</a>
-                          <a class='btn btn-default btn-sm' data-toggle='modal' href='#confirmDelete'><i class='icon-trash'> </i></a>
+                          <a class='btn btn-default btn-sm' data-toggle='modal' href="/admin/location-delete/{{$location_value->LocationID}}"><i class='icon-trash'> </i></a>
                         </td>
                       </tr>
 						@endforeach

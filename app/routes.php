@@ -37,11 +37,25 @@ Route::get('/cron/updateTags', 'CronController@updateTopics');
 Route::get('/cron/updateUserKloutId', 'CronController@updateUserKloutId');
 Route::get('/cron/refreshKlout', 'CronController@refreshKlout');
 //admin
-Route::get('/admin/users-new', 'AdminController@userAdd');
 Route::get('/admin/users-list', 'AdminController@userList');
+Route::get('/admin/users-new', 'AdminController@userAddview');
+Route::post('/admin/users-add', 'AdminController@userAdd');
+Route::get('/admin/users-delete/{id}', 'AdminController@userDelete');
+
 Route::get('/admin/location-list', 'AdminController@locationList');
+Route::get('/admin/location-new', 'AdminController@locationAddView');
+Route::post('/admin/location-add', 'AdminController@locationAdd');
+Route::get('/admin/location-delete/{id}', 'AdminController@locationDelete');
+
 Route::get('/admin/categories-list', 'AdminController@CategoriesList');
+Route::get('/admin/categories-new', 'AdminController@categoriesAddView');
+Route::post('/admin/categories-add', 'AdminController@categoriesAdd');
+Route::get('/admin/categories-delete/{id}', 'AdminController@categoriesDelete');
+
 Route::get('/admin/tag-list', 'AdminController@TagList');
+Route::get('/admin/tag-new', 'AdminController@TagAddView');
+Route::post('/admin/tag-add', 'AdminController@TagAdd');
+Route::get('/admin/tag-delete/{id}', 'AdminController@TagDelete');
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/dashboard', 'MemberController@index');
