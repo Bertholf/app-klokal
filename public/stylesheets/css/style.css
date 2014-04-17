@@ -5998,6 +5998,43 @@ ul.klout-list .list-group-item.last a:hover i {
 ul.stats-list span.stat {
   float: right;
 }
+/*---------------------------------------------------------------
+-------------- User Profile View
+-----------------------------------------------------------------*/
+.user-details {
+  position: relative;
+  padding: 0;
+}
+.user-details .user-image {
+  position: absolute;
+  top: -20px;
+  padding-top: 10px;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+}
+.user-details .user-image img {
+  clear: both;
+  margin: auto;
+  position: relative;
+}
+.user-details .user-info-block {
+  width: 100%;
+  background: #ffffff;
+  z-index: 0;
+  padding-top: 35px;
+}
+.user-details .user-info-block .user-heading {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 0;
+  padding-bottom: 10px;
+}
+.user-details .user-info-block .user-body {
+  float: left;
+  padding: 5%;
+  width: 90%;
+}
 /*
 LARGER MOBILE DEVICES
 This is for devices like the Galaxy Note or something that's

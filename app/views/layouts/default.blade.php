@@ -68,11 +68,9 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="http:///ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/holder.js"></script>
-<!-- 		<script src="/js/custom.js"></script> -->
-<!-- 		TypeError: $(...).bootstrapFileInput is not a function -->
 		<script src="/js/plugins/typeahead/bootstrap-typeahead.min.js"></script>
 		<script src="/js/autocomplete.js"></script>
 	</body>
