@@ -6,22 +6,22 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 	    <link rel="shortcut icon" href="/ico/favicon.png">
-	
+
 	    <title>Locations - New</title>
-	
+
 	    <!-- Bootstrap core CSS -->
-	    <link href="/css/bootstrap.css" rel="stylesheet">
+	    {{ HTML::style('stylesheets/css/style.css') }}
 	    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	
+
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
 	      <script src="assets/js/html5shiv.js"></script>
 	      <script src="assets/js/respond.min.js"></script>
 	    <![endif]-->
-	
+
 	    <!-- Custom styles for this template -->
-	    <link href="/css/custom.css" rel="stylesheet">
-	    <link href="/css/admin.css" rel="stylesheet">
+
+	    {{ HTML::style('stylesheets/css/admin.css') }}
   	</head>
   	 <body>
 	  <div id='wrap'>
@@ -62,7 +62,7 @@
 		                    <li><a href="/admin/tag-new">Add New</a></li>
 	                  </ul>
 	                </li>
-	              
+
 	                <li class='dropdown'>
 	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user'> </i> Users <b class="caret"></b></a>
 	                  <ul class="dropdown-menu">
@@ -76,20 +76,20 @@
 	        </div><!--/.nav-collapse -->
 	      </div><!--/.container-->
 	    </div><!--/.navbar-->
-	
+
 	    @yield('content')
 	  </div><!--/.wrap-->
 	     <!-- FOOTER -->
-	  
-	
+
+
 	  <div id='footer'>
 	    <div class='container'>
 	      <p class="pull-right"><a href="#">Back to top</a></p>
 	      <p>&copy; 2013 SaaS Venture Group &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 	    </div><!--/.container-->
 	  </div><!--/.footer-->
-	
-	
+
+
 	    <!-- Bootstrap core JavaScript
 	    ================================================== -->
 	    <!-- Placed at the end of the document so the pages load faster -->

@@ -10,7 +10,7 @@
 		<title>Klout and Klout Local</title>
 
 		<!-- Bootstrap core CSS -->
-		<link href="/css/bootstrap.css" rel="stylesheet">
+		{{ HTML::style('stylesheets/css/style.css') }}
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,10 +20,8 @@
 		<![endif]-->
 
 		<!-- Custom styles for this template -->
-		<link href="/css/custom.css" rel="stylesheet">
 	</head>
-<!-- NAVBAR
-================================================== -->
+
 	<body>
 
 	<div id='wrap'>
