@@ -27,7 +27,7 @@
                    Current Topics
                   </div><!--/.title-->
                   <div class='actions'>
-                    <a href='#newTopic' data-toggle='modal' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Topic</a>
+                    <a href='/admin/tag-new' data-toggle='modal' class='btn btn-primary btn-lrg'><i class='icon-plus-sign'> </i> Add a New Topic</a>
                   </div>
                 </div><!--/.box-header-->
                 <div class='box-content box-no-padding'>

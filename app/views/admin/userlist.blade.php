@@ -35,14 +35,14 @@
                 </div>
                 
                 <div class='col-sm-6'>
-                  <form class="form-inline" id='user-filter' role="form">
+                  <form class="form-inline" id='user-filter' role="form" method='post' action='/admin/users-search'>
                     <div class='col-sm-4' style='padding-right:0px !important; padding-left:0px !important;'>
                       <label class="sr-only" for="name">Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Name">
+                      <input type="text" class="form-control" id="name" name='name' placeholder="Name">
                     </div><!--/.col-sm-3-->
                     <div class='col-sm-3' style='padding-right:0px !important; padding-left:0px !important;'>
                       <label class="sr-only" for="location">Location</label>
-                      <select class='form-control'>
+                      <select class='form-control' name='location'>
                         <option value='' disabled selected style='display:none;'>Location</option>
                         <option value='0'>Charlotte</option>
                         <option value='1'>Hawaii</option>
@@ -53,7 +53,7 @@
                     <div class='col-sm-3' style='padding-right:0px !important; padding-left:0px !important;'>
                      
                         <label class="sr-only" for="location">Type</label>
-                        <select class='form-control'>
+                        <select class='form-control' name='type'>
                           <option value='' disabled selected style='display:none;'>Type</option>
                           <option value='0'>Conversationalist</option>
                           <option value='1'>Fans</option>

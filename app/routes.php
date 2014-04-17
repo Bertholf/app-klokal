@@ -41,11 +41,13 @@ Route::get('/admin/users-list', 'AdminController@userList');
 Route::get('/admin/users-new', 'AdminController@userAddview');
 Route::post('/admin/users-add', 'AdminController@userAdd');
 Route::get('/admin/users-delete/{id}', 'AdminController@userDelete');
+Route::post('/admin/users-search', 'AdminController@userSearch');
 
 Route::get('/admin/location-list', 'AdminController@locationList');
 Route::get('/admin/location-new', 'AdminController@locationAddView');
 Route::post('/admin/location-add', 'AdminController@locationAdd');
 Route::get('/admin/location-delete/{id}', 'AdminController@locationDelete');
+
 
 Route::get('/admin/categories-list', 'AdminController@CategoriesList');
 Route::get('/admin/categories-new', 'AdminController@categoriesAddView');

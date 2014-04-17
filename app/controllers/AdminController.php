@@ -45,13 +45,36 @@ class AdminController extends BaseController {
 	public function userList()
 	{
 		$userlist = User::orderBy('id','desc')
-						->paginate();
+						->paginate(10);
 		return View::make('admin.userlist',array('userlist' => $userlist));
 	}
 	
 	public function userSearch()
 	{
-
+		if(Input::has('name') || Input::has('location') || Input::has('type')){
+			$name = Input::get('name');
+			$location = Input::get('location');
+			$type = Input::get('type');
+			$userlist = User::where('name','like',$name."%")->paginate(10);
+			foreach($userlist as $user_key => $user_value){
+// 				dd($user_value->location_id);
+				if(Input::has('location')){
+					if($user_value->location_id != Input::get('location')) unset($userlist[$user_key]);
+				}
+				
+				if (Input::has('type')){
+					if($user_value->location_id != Input::get('type')) unset($userlist[$user_key]);
+				}
+				
+			}
+		if(count($userlist) == 0){
+			return Redirect::to('/admin/users-list');
+		}else{
+			return View::make('admin.userlist',array('userlist' => $userlist));
+		}	
+		}else{
+			return Redirect::to('/admin/users-list');
+		}
 	}
 //------------------------------user end--------------------------------
 //------------------------------location start--------------------------------
