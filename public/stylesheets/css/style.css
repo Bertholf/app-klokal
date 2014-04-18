@@ -5805,6 +5805,13 @@ a {
 .navbar-brand {
   height: auto;
 }
+#logged-in {
+  padding-top: 2em;
+  max-width: 300px;
+}
+#logged-in #user-action {
+  padding-top: 0.5em;
+}
 html,
 body {
   height: 100%;
@@ -6069,14 +6076,15 @@ you can add resource intensive styles.
   .navbar-wrapper {
     margin-top: 20px;
   }
-  /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;
+  }
+  .navbar-wrapper .navbar .sponsor {
+    padding: 25px 0px;
   }
   .carousel-caption {
     top: 40px;
   }
-  /* Bump up size of carousel content */
   .carousel-caption p {
     margin-bottom: 20px;
     font-size: 21px;
@@ -6085,8 +6093,8 @@ you can add resource intensive styles.
   .featurette-heading {
     font-size: 50px;
   }
-  .navbar .sponsor {
-    padding: 25px 0px;
+  #logged-in {
+    text-align: right;
   }
 }
 /*
