@@ -6,47 +6,18 @@
 		================================================== -->
 		<div id="top-user-container">
 			<div class='container top-users'>
-				<div class='navbar-right'>
-					<form class="form" id='user-filter' role="form" method='post' action='/change/location'>
-						<label class="sr-only" for="location">Location</label>
-						     <div class='input-group'>
-							     <select class='form-control' name='current_location'>
-							            <option value='' disabled selected style='display:none;'>
-								        <?php if(Session::get('current_location')){
-								              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
-								              if(count($location) == 1){
-								             	 echo $location->LocationTitle;
-								              }else{
-								             	 echo 'Location';
-								              }
-								              }else{
-								             	 echo "Location";
-											  }
-									   ?>
-							                        </option>
-								                    @foreach($location_list as $location_key => $location_value)
-									                    <option value="{{$location_value->LocationID}}">{{$location_value->LocationTitle}}</option>
-							                    	@endforeach
-							                    </select>
-								               <span class="input-group-btn">
-								                     <button type="submit" class="btn btn-primary">Change</button>
-								               </span><!--/.input-btn-->
-								            </div><!--/.input-group-->
-						</form>
-				</div>
-				<br/>
 			<div class='lead'>
 			<h2><?php if(Session::get('current_location')){
-								              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
-								              if(count($location) == 1){
-								             	 echo $location->LocationTitle;
-								              }else{
-								             	 echo 'Location';
-								              }
-								              }else{
-								             	 echo "Location";
-											  }
-									   ?> Top 10 Klout Scores</h2>
+		              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
+		              if(count($location) == 1){
+		             	 echo $location->LocationTitle;
+		              }else{
+		             	 echo 'Location';
+		              }
+		              }else{
+		             	 echo "Location";
+					  }
+			   ?> Top 10 Klout Scores</h2>
 			</div><!--/.lead-->
 
 				<ul class='users list-inline'>
@@ -87,7 +58,7 @@
 
 		<div class="container">
 
-			<div class='well'> 
+			<div class='well'>
 				<div class='row'>
 					<div class='col-sm-6'>
 						<div class='lead'>
@@ -103,7 +74,7 @@
 								              }else{
 								             	 echo "Location";
 											  }
-									   ?> Popular Lists 
+									   ?> Popular Lists
 						</a>
 						<small style='margin-left:20px;'>Updated daily.</small>
 						</h2>
@@ -118,7 +89,7 @@
 								<input type ='submit' class="btn btn-default" value="Go"/>
 							</span>
 						<a id='show_add_content' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
-							<i class='icon-pencil'> </i> 
+							<i class='icon-pencil'> </i>
 							<span class='icon-pencil-text'>
 								Create your own list
 							</span>
@@ -129,7 +100,7 @@
 					</div><!--/.col-sm-6-->
 				</div><!--/.row-->
 			</div><!--/.well-->
-					
+
 			<div class='row top-lists'>
 
 			@foreach ($lists as $list)
@@ -139,14 +110,14 @@
 							<h4 class="list-group-item-heading">{{ $list->title }}</h4>
 							<p class="list-group-item-text">{{ $list->text }}</p>
 						</li>
-						
-						<?php 
+
+						<?php
 						if (Session::get('current_location')){
 							$current_location = Session::get('current_location');
 						}else{
 							$current_location = 1;
 						}
-							$c = 1; 
+							$c = 1;
 							$users = $list->users()->orderBy('klout_metric_score', 'desc')
 									->where('location_id', '=', $current_location)
 									->take(3)->get();
@@ -161,7 +132,7 @@
 									<h3 class="media-heading">
 										<div class="score">{{ round($user->klout_metric_score) }}</div><!--/.score-->
 										<a href="<?php echo url("user/{$user->twitter_handle}"); ?>"><span class='user-name'>{{ $user->name }}</span></a>
-									</h3> 
+									</h3>
 									<div class='rank'>#{{ $c }}</div><!--/.div-->
 									<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
 								</div><!--/.media-body-->
@@ -169,11 +140,11 @@
 						</li><!--/.list-group-item-->
 						<?php $c++; ?>
 						@endforeach
-						
+
 						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block' 
+							<a class='btn btn-xlg btn-block'
 							href="
-							<?php 
+							<?php
 // 							if(intval($list->user_id)>0)
 // 							{
 // 								$user = User::where('id', '=', $list->user_id)->first();
@@ -181,7 +152,7 @@
 // 								echo url("user/{$user->twitter_handle}/{$list->slug}");
 // 							}else{
 // 								echo url("lists/{$list->slug}");
-// 							} 
+// 							}
 							?>
 								"
 							>
@@ -219,7 +190,7 @@
 													</a>
 												</span>
 												<span class='stat text-success'>+{{round($uw_gain->klout_metric_score_week, 2)}}</span>
-											</h3> 
+											</h3>
 
 										</div><!--/.media-body-->
 									</div><!--/.media-->
@@ -248,7 +219,7 @@
 													</a>
 												</span>
 												<span class='stat text-success'>{{round($uw_loss->klout_metric_score_week, 2)}}</span>
-											</h3> 
+											</h3>
 
 										</div><!--/.media-body-->
 									</div><!--/.media-->
