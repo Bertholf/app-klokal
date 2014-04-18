@@ -43,6 +43,7 @@
                         <th>Location</th>
                         <th>Radius</th>
                         <th>Status</th>
+                        <th>Scan</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -61,7 +62,14 @@
                         <span class='label label-default'>Inactive</span>
                         @endif
                         </td>
-                        <td><a class='btn btn-default btn-sm' href='locations-edit.html'><i class='icon-cog'> </i> Edit</a>
+                        <td data-title='Scan'>
+                        @if($location_value->LocationScan == 1)
+                        <span class='label label-success'>active</span>
+                        @else
+                        <span class='label label-default'>Inactive</span>
+                        @endif
+                        </td>
+                        <td><a class='btn btn-default btn-sm' href="/admin/location-modify/{{$location_value->LocationID}}"><i class='icon-cog'> </i> Edit</a>
                           <a class='btn btn-default btn-sm' data-toggle='modal' href="/admin/location-delete/{{$location_value->LocationID}}"><i class='icon-trash'> </i></a>
                         </td>
                       </tr>

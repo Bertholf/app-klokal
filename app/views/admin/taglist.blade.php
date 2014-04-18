@@ -59,7 +59,7 @@
 	                        @endif
                         </td>
                         <td data-title='Update'>{{$tag_value->date_updated}}</td>
-                        <td><a class='btn btn-default btn-sm' data-toggle='modal' href='#editTopic'><i class='icon-cog'> </i> Edit</a>
+                        <td><a class='btn btn-default btn-sm' data-toggle='modal' href=/admin/tag-modify/{{$tag_value->id}}><i class='icon-cog'> </i> Edit</a>
                           <a class='btn btn-default btn-sm' data-toggle='modal' href="/admin/tag-delete/{{$tag_value->id}}"><i class='icon-trash'> </i></a>
                         </td>
                       </tr>

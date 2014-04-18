@@ -32,9 +32,10 @@ class AdminController extends BaseController {
 		return Redirect::to('/admin/users-list');
 	}
 	
-	public function userDelete()
+	public function userDelete($id)
 	{
-	
+		$Lists = Lists::where('id', '=', $id)->delete();
+		return Redirect::to('/admin/users-list');
 	}
 	
 	public function userModify()
@@ -118,9 +119,45 @@ class AdminController extends BaseController {
 		return Redirect::to('/admin/location-list');
 	}
 	
+	public function locationModifyView($loaction_id)
+	{
+		if($loaction_id>0){
+			$location = Location::where('LocationID', '=', $loaction_id)
+								->first();
+			return View::make('admin.locationedit',array('location' => $location));
+		}
+		
+		return Redirect::to('/admin/location-list');
+	}
 	public function locationModify()
 	{
-	
+		if(Input::has('title') && Input::has('id')){
+			if(Input::has('description')){
+				$LocationText = Input::get('description');
+			}else{
+				$LocationText = '';
+			}
+			
+			if(Input::has('image')){
+				$LocationImage = Input::get('image');
+			}else{
+				$LocationImage = '';
+			}
+			
+			$status = Input::get('status');
+			$scan = Input::get('scan-mode');
+			$location = Location::where('LocationID', Input::get('id'))
+			->update(array( 'LocationTitle' => Input::get('title') , 
+						    'LocationText' => $LocationText,
+							'LocationLatitude' => Input::get('latitude'),
+							'LocationLongitude' => Input::get('longitude'),
+							'LocationRadius' => Input::get('radius'),
+							'LocationImage' => $LocationImage,
+							'LocationActive' => (int)$status,
+							'LocationScan' => (int)$scan
+					));
+		}
+		return Redirect::to('/admin/location-list');
 	}
 	
 	public function locationList()
@@ -135,11 +172,11 @@ class AdminController extends BaseController {
 	}
 //------------------------------location end--------------------------------
 //------------------------------List start--------------------------------
-	public function CategoriesAddView()
+	public function categoriesAddView()
 	{
 		return View::make('admin.categoriesadd');
 	}
-	public function CategoriesAdd()
+	public function categoriesAdd()
 	{
 		if(Input::has('title')){
 			$Lists = new Lists();
@@ -181,30 +218,67 @@ class AdminController extends BaseController {
 		}
 		return Redirect::to('/admin/categories-list');
 	}
-	public function CategoriesDelete($id)
+	public function categoriesDelete($id)
 	{
 		$Lists = Lists::where('id', '=', $id)->delete();
 		return Redirect::to('/admin/categories-list');
 	}
-	public function  CategoriesList()
+	public function  categoriesList()
 	{
 		$categorieslist = Lists::orderBy('id','asc')
 						->paginate(5);
 		return View::make('admin.categorieslist',array('categorieslist' => $categorieslist));
 	}
+	public function categoriesModifyView($categorie_id)
+	{
+		if($categorie_id>0){
+			$categorie = Lists::where('id', '=', $categorie_id)
+			->first();
+			return View::make('admin.categoriesedit',array('categorie' => $categorie));
+		}
+	
+		return Redirect::to('/admin/categories-list');
+	}
+	public function categoriesModify()
+	{
+		if(Input::has('title') && Input::has('id')){
+			if(Input::has('description')){
+				$Text = Input::get('description');
+			}else{
+				$Text = '';
+			}
+				
+			if(Input::has('image')){
+				$Image = Input::get('image');
+			}else{
+				$Image = '';
+			}
+				
+			$status = Input::get('status');
+			
+			$lists = Lists::where('id', Input::get('id'))
+			->update(array( 'title' => Input::get('title') ,
+					'text' => $Text,
+					'image' => $Image,
+					'active' => (int)$status,
+			));
+		}
+		return Redirect::to('/admin/categories-list');
+	}
+	
 //------------------------------List end--------------------------------
 //------------------------------Tag start-------------------------------
-	public function  TagList()
+	public function  tagList()
 	{
 		$taglist = Tag::orderBy('id','desc')
 		->paginate(10);
 		return View::make('admin.taglist',array('taglist' => $taglist));
 	}
-	public function TagAddView()
+	public function tagAddView()
 	{
 		return View::make('admin.tagadd');
 	}
-	public function TagAdd()
+	public function tagAdd()
 	{
 		if(Input::has('title')){
 		$tag = new Tag();
@@ -229,9 +303,46 @@ class AdminController extends BaseController {
 		}
 		return Redirect::to('/admin/tag-list');
 	}
-	public function TagDelete($id)
+	public function tagDelete($id)
 	{
 		$Tag = Tag::where('id', '=', $id)->delete();
+		return Redirect::to('/admin/tag-list');
+	}
+	public function tagModifyView($tag_id)
+	{
+		if($tag_id>0){
+			$tag = Tag::where('id', '=', $tag_id)
+			->first();
+			return View::make('admin.tagedit',array('tag' => $tag));
+		}
+	
+		return Redirect::to('/admin/tag-list');
+	}
+	public function tagModify()
+	{
+		if(Input::has('title') && Input::has('id')){
+			if(Input::has('description')){
+				$Text = Input::get('description');
+			}else{
+				$Text = '';
+			}
+	
+			if(Input::has('image')){
+				$Image = Input::get('image');
+			}else{
+				$Image = '';
+			}
+	
+			$status = Input::get('status');
+				
+			$lists = Tag::where('id', Input::get('id'))
+			->update(array( 'title' => Input::get('title') ,
+					'text' => $Text,
+					'image' => $Image,
+					'active' => (int)$status,
+					'date_updated' => date("Y-m-d H:i:s",time())
+			));
+		}
 		return Redirect::to('/admin/tag-list');
 	}
 	//------------------------------Tag end------------------------------

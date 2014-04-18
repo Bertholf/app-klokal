@@ -50,17 +50,24 @@ Route::get('/admin/location-list', 'AdminController@locationList');
 Route::get('/admin/location-new', 'AdminController@locationAddView');
 Route::post('/admin/location-add', 'AdminController@locationAdd');
 Route::get('/admin/location-delete/{id}', 'AdminController@locationDelete');
+Route::get('/admin/location-modify/{location_id}', 'AdminController@locationModifyView');
+Route::post('/admin/location-modify-action', 'AdminController@locationModify');
 
 
-Route::get('/admin/categories-list', 'AdminController@CategoriesList');
+Route::get('/admin/categories-list', 'AdminController@categoriesList');
 Route::get('/admin/categories-new', 'AdminController@categoriesAddView');
 Route::post('/admin/categories-add', 'AdminController@categoriesAdd');
 Route::get('/admin/categories-delete/{id}', 'AdminController@categoriesDelete');
+Route::get('/admin/categories-modify/{categorie_id}', 'AdminController@categoriesModifyView');
+Route::post('/admin/categories-modify-action', 'AdminController@categoriesModify');
 
-Route::get('/admin/tag-list', 'AdminController@TagList');
-Route::get('/admin/tag-new', 'AdminController@TagAddView');
+Route::get('/admin/tag-list', 'AdminController@tagList');
+Route::get('/admin/tag-new', 'AdminController@tagAddView');
 Route::post('/admin/tag-add', 'AdminController@TagAdd');
-Route::get('/admin/tag-delete/{id}', 'AdminController@TagDelete');
+Route::get('/admin/tag-delete/{id}', 'AdminController@tagDelete');
+Route::get('/admin/tag-modify/{tag_id}', 'AdminController@tagModifyView');
+Route::post('/admin/tag-modify-action', 'AdminController@tagModify');
+
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/dashboard', 'MemberController@index');

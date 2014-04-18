@@ -59,7 +59,7 @@
 	                        <span class='label label-default'>Inactive</span>
 	                        @endif
                         </td>
-                        <td><a class='btn btn-default btn-sm' href='categories-edit.html'><i class='icon-cog'> </i> Edit</a>
+                        <td><a class='btn btn-default btn-sm' href="/admin/categories-modify/{{$categories_value->id}}"><i class='icon-cog'> </i> Edit</a>
                           <a class='btn btn-default btn-sm' data-toggle='modal' href="/admin/categories-delete/{{$categories_value->id}}"><i class='icon-trash'> </i></a>
                         </td>
                       </tr>
