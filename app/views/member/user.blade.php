@@ -182,7 +182,6 @@
 								if(intval($item->actor_id)>0)
 								{
 									$liuser = User::where('id', '=', $item->actor_id)->first();
-									///user/{user.twitter_handle}/{list.slug}
 									echo url("user/{$liuser->twitter_handle}/{$item->slug}");
 								}else{
 									echo url("lists/{$item->slug}");

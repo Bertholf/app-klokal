@@ -102,33 +102,26 @@
                   <form role="form" class='validate-form'>
                     <div class='row'>
                       <div class="form-group col-sm-12">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" required="required" placeholder="I.E. Boston Massachusets">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name='name' required="required" placeholder="I.E. Boston Massachusets">
+                      </div>
+                    </div><!--/.row-->
+                    <div class='row'>
+                      <div class="form-group col-sm-12">
+                        <label for="twitter_id">Twitter Id</label>
+                        <input type="text" class="form-control" id="twitter_id" name='twitter_id' required="required" placeholder="I.E. Boston Massachusets">
+                      </div>
+                    </div><!--/.row-->
+                    <div class='row'>
+                      <div class="form-group col-sm-12">
+                        <label for="twitter_handle">Twitter Handle</label>
+                        <input type="text" class="form-control" id="twitter_handle" name='twitter_handle' required="required" placeholder="I.E. Boston Massachusets">
                       </div>
                     </div><!--/.row-->
                     <div class='row'>
                       <div class="form-group col-sm-12">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id='description' rows="3"></textarea>
-                      </div>
-                    </div><!--/.row-->
-                    <div class='row'> 
-                      <div class="form-group col-sm-12">
-                        <label for="description">Latitude</label>
-                        <input type="text" class="form-control" id="latitude" required="required" placeholder="30.267153">
-                      </div>
-                    </div><!--/.row-->
-                    <div class='row'> 
-                      <div class="form-group col-sm-12">
-                        <label for="description">Longitude</label>
-                        <input type="text" class="form-control" id="longitude" required="required" placeholder="-97.7430608">
-                      </div>
-                    </div><!--/.row-->
-                    <div class='row'>
-                      <div class="form-group col-sm-12">
-                        <label for="description">Radius</label>
-                        <p class='help-block'>Make sure this is in Kilometers!</p>
-                        <input type="text" class="form-control" id="Radius" required="required" placeholder="20 KM">
+                        <textarea class="form-control" id='description' name='description' rows="3"></textarea>
                       </div>
                     </div><!--/.row-->
                     <div class='row'>
@@ -141,29 +134,11 @@
                         <hr class='normal'>
                       </div>
                     </div><!--/.row-->
-
-                    <div class='row'>
-                      <div class='form-group col-sm-8'>
-                        <label for="Status">Status</label>
-                        <p class='help-block'>Do you want this to be visilbe in the system?</p>
-                        <select class="form-control" id='status'>
-                          <option>Yes, Active</option>
-                          <option>No, Inactive</option>
-                        </select>
-                        <hr class='normal'>
-                      </div><!--/.form-group-->
-                    </div><!--/.row-->
-
-
-                    <div class='row'>
-                      <div class='form-group col-sm-8'>
-                        <label for="Status">Scan Mode</label>
-                        <select class="form-control" id='scan-mode'>
-                          <option>Yes, Scan New</option>
-                          <option>No, Just Update</option>
-                        </select>
-                        <hr class='normal'>
-                      </div><!--/.form-group-->
+                    <div class='row'> 
+                      <div class="form-group col-sm-12">
+                        <label for="url">Url</label>
+                        <input type="text" class="form-control" id="url" name='url' placeholder="30.267153">
+                      </div>
                     </div><!--/.row-->
                     <div class='row'>
                       <div class='col-lg-12'>

@@ -36,49 +36,42 @@
 </div><!-- /.carousel -->
 
 <div class="container">
+
 	<div class='well'>
 		<div class='row'>
 			<div class='col-sm-6'>
 				<div class='lead'>
-					<h2>
-						<a href='/lists'>
-							<?php if(Session::get('current_location')){
-					              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
-					              if(count($location) == 1){
-					             	 echo $location->LocationTitle;
-					              }else{
-					             	 echo 'Location';
-					              }
-					              }else{
-					             	 echo "Location";
-								  }
-						    ?> Popular Lists
-						</a>
-						<small style='margin-left:20px;'>Updated daily.</small>
-					</h2>
-				</div><!--/.lead-->
-			</div><!--/.col-sm-6-->
-
+				<h2>
+				<a href='/lists'>
+					{{$currentlocation}}  Popular Lists
+				</a>
+				<small style='margin-left:20px;'>Updated daily.</small>
+				</h2>
+				</div>
+			</div><!--/.col-sm-4-->
 			<div class='col-sm-6'>
-				{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
-					<div class="input-group input-group-sm merged pull-right ">
-						<input type='text' name='title' class="form-control show_add_list" placeholder='Enter a List Title' style = 'margin-bottom: 27px; margin-left: 60px; visibility:hidden;' />
-						<span class="input-group-btn show_add_list" style='padding-left: 50px; visibility:hidden;'>
-							<input type ='submit' class="btn btn-default" value="Go"/>
-						</span>
-					<a id='show_add_content' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
-						<i class='icon-pencil'> </i>
-						<span class='icon-pencil-text'>
-							Create your own list
-						</span>
-					</a>
-					</div>
-				{{ Form::close() }}
+
+			{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
+				<div class="input-group input-group-sm merged pull-right ">
+					<input type='text' name='title' class="form-control show_add_list" placeholder='Enter a List Title' style = 'margin-bottom: 27px; margin-left: 60px; visibility:hidden;' />
+					<span class="input-group-btn show_add_list" style='padding-left: 50px; visibility:hidden;'>
+						<input type ='submit' class="btn btn-default" value="Go"/>
+					</span>
+				<a id='show_add_content' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
+					<i class='icon-pencil'> </i>
+					<span class='icon-pencil-text'>
+						Create your own list
+					</span>
+				</a>
+				</div>
+			{{ Form::close() }}
+
 			</div><!--/.col-sm-6-->
 		</div><!--/.row-->
 	</div><!--/.well-->
 
 	<div class='row top-lists'>
+
 		@foreach ($lists as $list)
 			<div class='col-sm-3'>
 				<ul class="list-group klout-list">
@@ -93,12 +86,12 @@
 					}else{
 						$current_location = 1;
 					}
-						$c = 1;
-						$users = $list->users()->orderBy('klout_metric_score', 'desc')
+						$topusers = $list->users()->orderBy('klout_metric_score', 'desc')
 								->where('location_id', '=', $current_location)
 								->take(3)->get();
+						$c = 1;
 					?>
-					@foreach ($users as $user)
+					@foreach ($topusers as $user)
 					<li class="list-group-item">
 						<div class="media">
 							<a class="pull-left" href="#">
@@ -118,48 +111,38 @@
 					@endforeach
 
 					<li class="list-group-item last">
-						<a class='btn btn-xlg btn-block' href='#'>
+						<a class='btn btn-xlg btn-block'
+						href="
+						<?php
+						if(intval($list->user_id)>0)
+						{
+							$user = User::where('id', '=', $list->user_id)->first();
+							///user/{user.twitter_handle}/{list.slug}
+							echo url("user/{$user->twitter_handle}/{$list->slug}");
+						}else{
+							echo url("lists/{$list->slug}");
+						}
+						?>
+							"
+						>
 							<i class='icon-zoom-in'> </i> View All {{ $list->title }}
 						</a>
 					</li><!--/.list-group-item-->
-
-					{{--
-						Commenting this out with blade
-						TODO: Move the logic to controller
-
-						<li class="list-group-item last">
-							<a class='btn btn-xlg btn-block'
-							href="
-							<?php
- 							if(intval($list->user_id)>0)
- 							{
- 								$user = User::where('id', '=', $list->user_id)->first();
-								///user/{user.twitter_handle}/{list.slug}
-								echo url("user/{$user->twitter_handle}/{$list->slug}");
-							}else{
- 								echo url("lists/{$list->slug}");
- 							}
-							?>
-								"
-							>
-								<i class='icon-zoom-in'> </i> View All {{ $list->title }}
-							</a>
-						</li><!--/.list-group-item-->
-					--}}
 				</ul>
 			</div><!--/.col-sm-3-->
 		@endforeach
-	</div><!--/.row top-lists-->
-
+	</div><!--/.top-lists-->
 	<div class='row'>
-		<div class='col-md-12'>
+		<div class='col-md-8'>
 			<div class='page-header'>
 				<h2>This Week's Movers and Shakers <small style='margin-left:20px;'>Who's Klout changed?</small></h2>
 			</div><!--/.page-header-->
 
 			<div class='row'>
 				<div class='col-md-6'>
-					<div class='lead'>Moved Up</div><!--/.lead-->
+					<div class='lead'>
+						Moved Up
+					</div><!--/.lead-->
 					@foreach($users_week_gain as $uw_gain)
 					<ul class="list-group stats-list">
 						<li class="list-group-item">
@@ -182,10 +165,13 @@
 						</li><!--/.list-group-item-->
 					</ul>
 					@endforeach
+
 				</div><!--/.col-md-6-->
 
 				<div class='col-md-6'>
-					<div class='lead'>Moved Down</div><!--/.lead-->
+					<div class='lead'>
+						Moved Down
+					</div><!--/.lead-->
 					@foreach($users_week_loss as $uw_loss)
 					<ul class="list-group stats-list">
 						<li class="list-group-item">
@@ -210,7 +196,14 @@
 					@endforeach
 				</div><!--/.col-md-6-->
 			</div><!--/.row-->
-		</div><!--/.col-md-12-->
+
+		</div><!--/.col-md-8-->
+
+		<div class='col-md-4'>
+			<div class='page-header'>
+				<h2>Widget</h2>
+			</div><!--/.page-header-->
+		</div><!--/.col-md-4-->
 	</div><!--/.row-->
 </div><!-- /.container -->
 
