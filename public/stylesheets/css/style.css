@@ -5816,6 +5816,7 @@ a {
 }
 .navbar #logged-in #user-action {
   padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 .navbar #logged-in #user-action #logout-btn {
   border-radius: 20px;
@@ -5946,7 +5947,38 @@ body {
   min-width: 185px;
   width: 17%;
 }
-#top-user-container .top-users .box .score {
+#top-user-container ul.users li .box .user-image {
+  text-align: center;
+  z-index: 333;
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  left: 0px;
+}
+#top-user-container ul.users li .box .user-image img {
+  margin: 0 auto;
+  padding: 0.2em;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  background: #e3e3e3;
+}
+#top-user-container ul.users li .box h4#username {
+  padding-top: 30px;
+}
+#top-user-container ul.users li .box .rank {
+  background: #ffffff;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  padding: 0px 10px;
+  position: absolute;
+  left: 10px;
+  top: -7px;
+  z-index: 2;
+}
+#top-user-container ul.users li .box .score {
   background: url("../images/score.png") repeat-x scroll 0 0 #c3492b;
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
   color: #FFFFFF;
@@ -5954,19 +5986,16 @@ body {
   padding: 0px 10px;
   position: absolute;
   right: 10px;
-  top: -5px;
+  top: -7px;
   z-index: 2;
 }
-#top-user-container .top-users .box .score .callout {
-  background: url("../images/callout.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-  bottom: -10px;
-  height: 10px;
-  position: absolute;
-  right: -2px;
-  width: 16px;
-  z-index: 100;
+#top-user-container ul.users li .box .box-info {
+  text-align: center;
 }
-#top-user-container .top-users .box a i {
+#top-user-container ul.users li .box .box-info #widget {
+  text-align: center;
+}
+#top-user-container ul.users li .box a i {
   color: #3498db;
 }
 .list-group-item.main,

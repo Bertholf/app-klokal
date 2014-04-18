@@ -23,24 +23,7 @@
 		<ul class='users list-inline'>
 		<?php $c = 1; ?>
 		@foreach ($users as $user)
-			<li>
-				<div class='box'>
-					<div class="media">
-							<a class="pull-left" href="#">
-								<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
-							</a>
-						<div class="media-body">
-							<h3 class="media-heading">#{{ $c }}</h3>
-							<h4><a href="<?php echo url("user/{$user->twitter_handle}"); ?>">{{ $user->name }}</a></h4>
-							<div class="score">
-								{{ round($user->klout_metric_score) }}
-								<span class="callout"></span>
-							</div><!--/.score-->
-							<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
-						</div><!--/.media-body-->
-					</div><!--/.media-->
-				</div><!--/.box-->
-			</li>
+			@include('layouts.partials.kloutbox')
 			<?php $c++; ?>
 		@endforeach
 		</ul>
