@@ -125,14 +125,14 @@
 							<a class='btn btn-xlg btn-block'
 							href="
 							<?php
-// 							if(intval($list->user_id)>0)
-// 							{
-// 								$user = User::where('id', '=', $list->user_id)->first();
-// 								///user/{user.twitter_handle}/{list.slug}
-// 								echo url("user/{$user->twitter_handle}/{$list->slug}");
-// 							}else{
-// 								echo url("lists/{$list->slug}");
-// 							}
+							if(intval($list->user_id)>0)
+							{
+								$user = User::where('id', '=', $list->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$user->twitter_handle}/{$list->slug}");
+							}else{
+								echo url("lists/{$list->slug}");
+							}
 							?>
 								"
 							>
