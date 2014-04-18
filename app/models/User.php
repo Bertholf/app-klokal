@@ -25,10 +25,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	public function getRankInType()
 	{
+		if (Session::get('current_location')){
+			$current_location = Session::get('current_location');
+		}else{
+			$current_location = 1;
+		}
 		$rank = User::where('klout_metric_score', '>', $this->klout_metric_score)
 				->where('type_id', '=', $this->type_id)
-				->where('location_id', '=', 1)->count();
-		
+				->where('location_id', '=', $current_location)->count();
 		return $rank+1;
 	}
 

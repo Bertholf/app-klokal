@@ -94,9 +94,14 @@
 						</li>
 						
 						<?php 
+						if (Session::get('current_location')){
+							$current_location = Session::get('current_location');
+						}else{
+							$current_location = 1;
+						}
 							$c = 1; 
 							$users = $list->users()->orderBy('klout_metric_score', 'desc')
-									->where('location_id', '=', 1)
+									->where('location_id', '=', $current_location)
 									->take(3)->get();
 						?>
 						@foreach ($users as $user)
