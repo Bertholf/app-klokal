@@ -97,12 +97,12 @@
 						}else{
 							$current_location = 1;
 						}
-							$c = 1;
-							$users = $list->users()->orderBy('klout_metric_score', 'desc')
+							$topusers = $list->users()->orderBy('klout_metric_score', 'desc')
 									->where('location_id', '=', $current_location)
 									->take(3)->get();
+							$c = 1;
 						?>
-						@foreach ($users as $user)
+						@foreach ($topusers as $user)
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">

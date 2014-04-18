@@ -202,7 +202,7 @@ class TwitterOAuth {
     curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
     curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
     curl_setopt($ci, CURLOPT_HEADER, FALSE);
-//     curl_setopt($ci, CURLOPT_PROXY, 'http://127.0.0.1:7070');
+    curl_setopt($ci, CURLOPT_PROXY, 'http://127.0.0.1:7070');
 
     switch ($method) {
       case 'POST':

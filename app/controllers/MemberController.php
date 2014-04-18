@@ -18,7 +18,7 @@ class MemberController extends BaseController {
 			$current_location = 1;
 			$currentlocation = 'Location';
 		}
-		
+
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
 				->orderBy('klout_metric_score', 'desc')
 				->where('location_id', '=', $current_location)
