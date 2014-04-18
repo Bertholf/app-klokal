@@ -26,52 +26,23 @@
 
 	<div id='wrap'>
 
-		<div class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"><img src='/images/logo.png'></a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<div class='navbar-right sponsor'>
-						<img src='/images/Klout.png'>
-					</div><!--/.navbar-right-->
-				</div><!--/.nav-collapse -->
-				@if (Auth::check())
-				<div style="text-align: right">
-					<span>Hi, </span>
-					<a href="/user/{{Auth::user()->twitter_handle}}">{{ Auth::user()->name }}</a>
-					<span> | </span>
-					<a href="/logout">Logout</a>
-				</div>
-				@else
-				<div style="text-align: right">
-					<a href="/sign_in_with_twitter">Login</a>
-				</div>
-				@endif
-			</div>
-		</div><!--/.navbar-->
+		@include('layouts.partials.navbar')
 
 		@yield('content')
 
-	</div><!--/.wrap-->
+	</div><!--/#wrap-->
 
-	<!-- FOOTER -->
-	<div id='footer'>
-		<div class='container'>
-			<p class="pull-right"><a href="#">Back to top</a></p>
-			<p>&copy; 2014 SaaS Venture Group &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</div><!--/.container-->
-	</div><!--/.footer-->
+		@include('layouts.partials.footer')
 
-
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/holder.js"></script>
 		<script src="/js/plugins/typeahead/bootstrap-typeahead.min.js"></script>
 		<script src="/js/autocomplete.js"></script>
+		@yield('view_script')
+		<script type='text/javascript'>
+			@yield('inline_scripts')
+		</script>
 	</body>
 </html>
