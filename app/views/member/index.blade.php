@@ -36,7 +36,17 @@
 				</div>
 				<br/>
 			<div class='lead'>
-			<h2>Hawaii's Top 10 Klout Scores</h2>
+			<h2><?php if(Session::get('current_location')){
+								              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
+								              if(count($location) == 1){
+								             	 echo $location->LocationTitle;
+								              }else{
+								             	 echo 'Location';
+								              }
+								              }else{
+								             	 echo "Location";
+											  }
+									   ?> Top 10 Klout Scores</h2>
 			</div><!--/.lead-->
 
 				<ul class='users list-inline'>
@@ -83,7 +93,17 @@
 						<div class='lead'>
 						<h2>
 						<a href='/lists'>
-							Hawaii's Popular Lists 
+							<?php if(Session::get('current_location')){
+								              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
+								              if(count($location) == 1){
+								             	 echo $location->LocationTitle;
+								              }else{
+								             	 echo 'Location';
+								              }
+								              }else{
+								             	 echo "Location";
+											  }
+									   ?> Popular Lists 
 						</a>
 						<small style='margin-left:20px;'>Updated daily.</small>
 						</h2>
