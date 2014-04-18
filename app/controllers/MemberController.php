@@ -8,8 +8,15 @@ class MemberController extends BaseController {
 	{
 		if (Session::get('current_location')){
 			$current_location = Session::get('current_location');
+			$clocation = Location::where('LocationID', '=', Session::get('current_location'))->first();
+			if(count($clocation) == 1){
+				$currentlocation = $clocation->LocationTitle;
+			}else{
+				$currentlocation = 'Location';
+			}
 		}else{
 			$current_location = 1;
+			$currentlocation = 'Location';
 		}
 		
 		$users = User::select('name', 'twitter_handle', 'klout_metric_score', 'image')
@@ -42,7 +49,7 @@ class MemberController extends BaseController {
 						->orderBy('LocationID','asc')
 						->get();
 		
-		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss,'location_list' => $location_list))->withUsers($users)->withLists($lists);
+		return View::make('member.index',array('users_week_gain'=>$users_week_gain, 'users_week_loss' => $users_week_loss,'location_list' => $location_list, 'currentlocation' => $currentlocation))->withUsers($users)->withLists($lists);
 	}
 	
 	public function userList(){
