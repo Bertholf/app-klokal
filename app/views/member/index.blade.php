@@ -7,17 +7,7 @@
 		<div id="top-user-container">
 			<div class='container top-users'>
 			<div class='lead'>
-			<h2><?php if(Session::get('current_location')){
-		              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
-		              if(count($location) == 1){
-		             	 echo $location->LocationTitle;
-		              }else{
-		             	 echo 'Location';
-		              }
-		              }else{
-		             	 echo "Location";
-					  }
-			   ?> Top 10 Klout Scores</h2>
+			<h2>{{$currentlocation}}  Top 10 Klout Scores</h2>
 			</div><!--/.lead-->
 
 				<ul class='users list-inline'>
@@ -64,17 +54,7 @@
 						<div class='lead'>
 						<h2>
 						<a href='/lists'>
-							<?php if(Session::get('current_location')){
-								              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
-								              if(count($location) == 1){
-								             	 echo $location->LocationTitle;
-								              }else{
-								             	 echo 'Location';
-								              }
-								              }else{
-								             	 echo "Location";
-											  }
-									   ?> Popular Lists
+							{{$currentlocation}}  Popular Lists
 						</a>
 						<small style='margin-left:20px;'>Updated daily.</small>
 						</h2>
