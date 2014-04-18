@@ -2,31 +2,17 @@
 
 @section('content')
 
-		<!-- Carousel
-		================================================== -->
-		<div id="myCarousel" class="carousel slide">
-			<!-- Indicators -->
 
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="/images/top-influencers.png" class='img-responsive' alt="Klokal Hawaii">
-					<div class="container">
-						<div class="carousel-caption">
-							<h1>You are just one click away from seeing Hawaii's top influencers!</h1>
+		<div id="welcome">
+			<div class="container">
+				<div class="welcome-caption">
+					<h1>You are just one click away from seeing Hawaii's top influencers!</h1>
+					<p><a class="btn btn-lg btn-success" href="/sign_in_with_twitter"><i class='icon-twitter'> </i> Sign in with Twitter</a></p>
+				</div> <!--welcome-caption -->
+			</div><!--/.container-->
+			<img src="/images/top-influencers.png" class='img-responsive' alt="Klokal Hawaii">
+		</div><!--/#welcome-->
 
-							<p><a class="btn btn-lg btn-success" href="/sign_in_with_twitter"><i class='icon-twitter'> </i> Sign in with Twitter</a></p>
-						</div> <!--carousel-caption -->
-					</div><!--/.container-->
-				</div> <!--/.item-active-->
-			</div><!--carousel-inner-->
-
-		</div><!-- /.carousel -->
-
-
-
-		<!-- Marketing messaging and featurettes
-		================================================== -->
-		<!-- Wrap the rest of the page in another container to center all the content. -->
 
 		<div class="container marketing">
 
