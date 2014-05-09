@@ -1,0 +1,1 @@
+$(function(){$("#toggle-location").click(function(){var o=$(this);o.hide(),$("#location-filter").collapse("show")}),$("#close-location").click(function(){var o=$(this);o.collapse("hide"),$("#location-filter").collapse("hide"),$("#toggle-location").show()})});

@@ -15,16 +15,16 @@
 
 						{{-- Show login items on interior views --}}
 
-						@if (Auth::check())
-							<div id='logged-in'>
-
-								@if (Request::is('dashboard'))
-									{{-- Show change location on dashboard for now ???--}}
-
+						@if (Request::is('dashboard'))
+							{{-- Show change location on dashboard for now ???--}}
+							<div id='change-location'>
+								<a class='btn btn-default' id='toggle-location'><i class='icon-compass'> </i> Change Location</a>
+								<div class='collapse fade' id='location-filter'>
+									<a class='btn' id='close-location'><i class="icon-remove"> </i></a>
 									<form class="form" id='user-filter' role="form" method='post' action='/change/location'>
 										<label class="sr-only" for="location">Location</label>
-									    <div class='input-group'>
-										    <select class='form-control' name='current_location'>
+										<div class='input-group'>
+										    <select class='form-control' name='current_location' id='select-location'>
 									            <option value='' disabled selected style='display:none;'>
 											        <?php if(Session::get('current_location')){
 											              $location = Location::where('LocationID', '=', Session::get('current_location'))->first();
@@ -42,12 +42,17 @@
 								                    <option value="{{$location_value->LocationID}}">{{$location_value->LocationTitle}}</option>
 						                    	@endforeach
 						                    </select>
-							               <span class="input-group-btn">
-							                     <button type="submit" class="btn btn-primary">Change</button>
-							               </span><!--/.input-btn-->
-							            </div><!--/.input-group-->
+						                    <span class='input-group-btn'>
+						                		<button type="submit" id='submit-location' class="btn btn-primary">Change</button>
+											</span>
+										</div><!--/.input-group-->
 									</form>
-								@endif
+								</div><!--/.collapse fade-->
+							</div><!--/.change-location-->
+						@endif
+
+						@if (Auth::check())
+							<div id='logged-in'>
 
 				                <div id='user-action'>
 									<span>Hi, </span>

@@ -103,6 +103,6 @@
 	    <script src="/js/plugins/fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
 	    <script src="/js/plugins/validate/jquery.validate.min.js" type="text/javascript"></script>
 	    <script src="/js/plugins/validate/additional-methods.js" type="text/javascript"></script>
-	    <script src="/js/custom.js" type="text/javascript"></script>
+	    <script src="/js/admin.js" type="text/javascript"></script>
   </body>
 </html>

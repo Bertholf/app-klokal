@@ -30,37 +30,7 @@ a{
 	margin-right:15px;
 }
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar {
-	img#sponsor-logo{
-		margin-top:2em;
-	}
-
-	.navbar-brand{
-		height:auto;
-	}
-
-	#logged-in{
-		padding-top:2em;
-		max-width:300px;
-		#user-action{
-			padding-top:0.5em;
-			padding-bottom:0.5em;
-			#logout-btn{
-				border-radius:20px;
-				background:@white;
-				border:2px solid @mediumGrey;
-
-				&:hover{
-					color:@secondaryColor;
-				}
-			}
-		}
-	}
-}
 
 
 html,
@@ -391,3 +361,6 @@ ul.stats-list span.stat{
  		}
  	}
 }
+
+
+@import "components/header.less";

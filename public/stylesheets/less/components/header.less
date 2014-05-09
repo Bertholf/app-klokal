@@ -1,0 +1,71 @@
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar {
+	img#sponsor-logo{
+		margin-top:2em;
+	}
+
+	#change-location{
+		max-width:310px;
+
+		#toggle-location{
+			margin-top:10px;
+		}
+
+		#location-filter{
+			position:relative;
+			width:100%;
+
+			#user-filter{
+				padding-left:30px;
+
+				#select-location{
+
+				}
+
+				#submit-location{
+					margin-left:10px;
+					border-bottom-left-radius: 4px;
+					border-top-left-radius: 4px;
+				}
+			}
+
+			background:@secondaryColor;
+			padding:0.5em 1em;
+			border:1px solid #efefef;
+			border-radius:0px 0px 5px 5px;
+
+			#close-location{
+				float:left;
+				margin-right:5px;
+				color:@white;
+				position:absolute;
+				left:5px;
+			}
+		}
+	}
+
+	.navbar-brand{
+		height:auto;
+	}
+
+	#logged-in{
+		padding-top:1em;
+		max-width:300px;
+		#user-action{
+			padding-top:0.5em;
+			padding-bottom:0.5em;
+			#logout-btn{
+				border-radius:20px;
+				background:@white;
+				border:2px solid @mediumGrey;
+
+				&:hover{
+					color:@secondaryColor;
+				}
+			}
+		}
+	}
+}

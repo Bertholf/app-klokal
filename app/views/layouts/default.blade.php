@@ -40,6 +40,7 @@
 		<script src="/js/holder.js"></script>
 		<script src="/js/plugins/typeahead/bootstrap-typeahead.min.js"></script>
 		<script src="/js/autocomplete.js"></script>
+		<script src="/js/user.js"></script>
 		@yield('view_script')
 		<script type='text/javascript'>
 			@yield('inline_scripts')

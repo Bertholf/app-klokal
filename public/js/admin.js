@@ -3,7 +3,7 @@
 
 $('input[type=file]').bootstrapFileInput();
 $('.file-inputs').bootstrapFileInput();
-  
+
 
 
 //Fix Jquery Validation plugin for Bootstrap 3
@@ -41,6 +41,13 @@ if (jQuery.validator) {
      content: 'hello world'
   });
 
+
+  $('#toggle-location').click(function(){
+    var $this = $(this);
+    $this.hide();
+    alert('clicked');
+    $('#location-filter').collapse('show');
+  });
 
 
 
