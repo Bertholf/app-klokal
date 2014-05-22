@@ -5874,6 +5874,12 @@ a {
 .shift-left {
   margin-right: 15px;
 }
+.lead.noBelow {
+  margin-bottom: 10px;
+}
+.lead.zeroBelow {
+  margin-bottom: 0px;
+}
 html,
 body {
   height: 100%;

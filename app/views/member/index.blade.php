@@ -41,32 +41,17 @@
 		<div class='row'>
 			<div class='col-sm-6'>
 				<div class='lead'>
-				<h2>
-				<a href='/lists'>
-					{{$currentlocation}}  Popular Lists
-				</a>
-				<small style='margin-left:20px;'>Updated daily.</small>
-				</h2>
-				</div>
-			</div><!--/.col-sm-4-->
+					<h2><a href='/lists'>{{$currentlocation}}  Popular Lists</a> <small style='margin-left:20px;'>Updated daily.</small></h2>
+				</div><!--/.lead-->
+			</div><!--/.col-sm-8-->
 			<div class='col-sm-6'>
 
-			{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
-				<div class="input-group input-group-sm merged pull-right ">
-					<input type='text' name='title' class="form-control show_add_list" placeholder='Enter a List Title' style = 'margin-bottom: 27px; margin-left: 60px; visibility:hidden;' />
-					<span class="input-group-btn show_add_list" style='padding-left: 50px; visibility:hidden;'>
-						<input type ='submit' class="btn btn-default" value="Go"/>
-					</span>
-				<a id='show_add_content' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
-					<i class='icon-pencil'> </i>
-					<span class='icon-pencil-text'>
-						Create your own list
-					</span>
+				<a href='#!' data-toggle='modal' data-target='#create-list-modal' class='btn btn-lg btn-primary pull-right' style='margin-top:13px;'>
+					<i class='icon-pencil'> </i> Create your own list
 				</a>
-				</div>
-			{{ Form::close() }}
-
 			</div><!--/.col-sm-6-->
+
+
 		</div><!--/.row-->
 	</div><!--/.well-->
 
@@ -204,5 +189,30 @@
 
 	</div><!--/.row-->
 </div><!-- /.container -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="create-list-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        	<h4 class="modal-title" id="myModalLabel">Create a List</h4>
+	      	</div>
+	      	<div class="modal-body">
+
+	      	{{ Form::open(array('method' => 'POST', 'url' => '/lists/addList' ,'files' => true , 'id' => 'add_list_form' ,'class' => 'form','role' => 'form')) }}
+				<div class='form-group'>
+					<input type='text' name='title' class="form-control" placeholder='Enter a List Title'>
+	      		</div><!--/.form-group-->
+	      	</div><!--/.modal-body-->
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        	<button type="submit" value='Go' class="btn btn-primary">Create List</button>
+	      	</div><!--/.modal-footer-->
+	      	{{ Form::close() }}
+	    </div>
+	</div>
+</div>
 
 @stop
