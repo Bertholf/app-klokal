@@ -81,7 +81,7 @@
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
+									<img height=48 width=48 class="media-object img-circle" src="{{ $user->image }}" alt="...">
 								</a>
 								<div class="media-body">
 									<h3 class="media-heading">
@@ -136,7 +136,7 @@
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="/user/{{$uw_gain->twitter_handle}}">
-									<img class="media-object" src="{{$uw_gain->image}}" alt="...">
+									<img class="media-object img-circle" src="{{$uw_gain->image}}" alt="...">
 								</a>
 								<div class="media-body">
 									<h3 class="media-heading">
@@ -165,7 +165,7 @@
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="/user/{{$uw_loss->twitter_handle}}"">
-									<img class="media-object" src="{{$uw_loss->image}}" alt="...">
+									<img class="media-object img-circle" src="{{$uw_loss->image}}" alt="...">
 								</a>
 								<div class="media-body">
 									<h3 class="media-heading">

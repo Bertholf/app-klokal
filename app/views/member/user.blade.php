@@ -29,103 +29,76 @@
 				    </div><!--/.well-->
 
 		        </div><!--/.col-md-4-->
-				@if($tags_info)
+
 				<div class='col-sm-4'>
 					<ul class="list-group klout-list">
 						<li class="list-group-item main">
 							<h4 class="list-group-item-heading">Tags List</h4>
 						</li>
-						@foreach ($tags_info as $tag_key => $tag_value)
-						<li class="list-group-item">
-							<div class="media">
-								<a class="pull-left" href="/tag/{{$tag_value->slug}}">
-									<img height=48 width=48 class="media-object" src="{{ $tag_value->image }}" alt="...">
-								</a>
-								<div class="media-body">
-									<p>
-										<b>
-											<a class="pull-left" href="/tag/{{$tag_value->slug}}">
-												{{ $tag_value->title }}
-											</a>
-										</b>
-									</p>
+						@if($tags_info)
+							@foreach ($tags_info as $tag_key => $tag_value)
+							<li class="list-group-item">
+								<div class="media">
+									<a class="pull-left" href="/tag/{{$tag_value->slug}}">
+										<img height=48 width=48 class="media-object" src="{{ $tag_value->image }}" alt="...">
+									</a>
+									<div class="media-body">
+										<p>
+											<strong><a class="pull-left" href="/tag/{{$tag_value->slug}}"> {{ $tag_value->title }}</strong>
+										</p>
+									</div><!--/.media-body-->
+									<div class="media-body" style="display: inline;">
+										@foreach ($tags_actor_id[$tag_key] as $id)
+											@if($id != 0)
+											<?php
+												$actor = User::where('id' ,'=', $id)->first();
+												if($actor){
+													$image = $actor->image;
+													$twitter_handle = $actor->twitter_handle;
+												}else{
+													$image = '';
+													$twitter_handle = '';
+												}
+											?>
+										<a class="pull-left" href="/user/<?php echo $twitter_handle;?>">
+											<img height=48 width=48 class="media-object" src="
+											<?php
+												echo $image;
+											?>
+											" alt="...">
+										</a>
+											@endif
+										@endforeach
+									</div><!--/.media-body-->
+									<div class="media-body" style='float:right;'>
+										<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
+											<span class="glyphicon glyphicon-chevron-up" ></span>
+										</a>
+									</div>
+								</div><!--/.media-->
+							</li><!--/.list-group-item-->
+							@endforeach
+						@else
+						<li class='list-group-item'>
+							<div class='lead noBelow'>
+								No tags have been assigned to this user.
+							</div>
+						</li>
+						@endif
 
-								</div><!--/.media-body-->
-								<div class="media-body" style="display: inline;">
-									@foreach ($tags_actor_id[$tag_key] as $id)
-										@if($id != 0)
-										<?php
-											$actor = User::where('id' ,'=', $id)->first();
-											if($actor){
-												$image = $actor->image;
-												$twitter_handle = $actor->twitter_handle;
-											}else{
-												$image = '';
-												$twitter_handle = '';
-											}
-										?>
-									<a class="pull-left" href="/user/<?php echo $twitter_handle;?>">
-										<img height=48 width=48 class="media-object" src="
-										<?php
-											echo $image;
-										?>
-										" alt="...">
-									</a>
-										@endif
-									@endforeach
-								</div><!--/.media-body-->
-								<div class="media-body" style='float:right;'>
-									<a class="pull-left" href="/tag/update/<?php echo $user->twitter_handle ; ?>/<?php echo $user->id;?>/<?php  echo $tag_value->id;?>" alt='+ 1'>
-										<span class="glyphicon glyphicon-chevron-up" ></span>
-									</a>
-								</div>
-							</div><!--/.media-->
-						</li><!--/.list-group-item-->
-						@endforeach
 						<li class="list-group-item">
 							<div class="media row">
-
+								@if(Session::get('id') !== NULL)
+									<div class='col-xs-12'>
+									<a href='#!' class='btn btn-primary' data-toggle='modal' data-target='#assign-existing-tag-modal'>Assign an Existing Tag</a>
+									<a href='#!' class='btn btn-primary' data-toggle='modal' data-target='#assign-new-tag-modal'>Assign a New Tag</a>
+									</div><!--/.col-xs-12-->
+								@endif
 							</div><!--/.media-->
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-4-->
-				@endif
-				@if(Session::get('id') !== NULL)
-				<div class='col-sm-4'>
-					<div class='row'>
-						<div class='col-xs-12'>
-							<h4>Assign an Existing Tag</h4>
-							{{ Form::open(array('method' => 'GET', 'url' => '/tag/update/{twitter_handle}/{user_id}/{tag_id}' ,'files' => true , 'id' => 'update_tag')) }}
-								<div class='input-group' id='tag_list'>
-									<input class="typeahead form-control" autocomplete="off" id='tag_selected' type="text" placeholder="Select a Tag" value='' name="tags">
-									<div class='input-group-btn'>
-									  	<input type="submit" class="btn btn-default" id="select_tag" value='Assign'/>
-									</div><!--/.input-group-btn-->
-								</div><!--/.input-group-->
-								  	<input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
-								    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
-							{{ Form::close() }}
-						</div><!--/.col-xs-12-->
-					</div><!--/.row-->
-					<div class='row'>
-						<div class='col-xs-12'>
-							<h4>Add a New Tag</h4>
-							<div id='add_new_tag_div'>
-								{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true ,'id' => 'add_new_tag_form')) }}
-								    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
-								    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
-									<div class='input-group'>
-										    <input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
-									    <div class='input-group-btn'>
-										  	<input type="submit" class="btn btn-default" value='Add a New Tag'/>
-										</div><!--/.input-group-btn-->
-									</div><!--/.input-group-->
-								{{ Form::close() }}
-							</div><!--/#add_new_tag_div-->
-						</div><!--/.col-sm-12-->
-					</div><!--/.row-->
-				</div><!--/.col-sm-4-->
-				@endif
+
 			</div><!--/.row-->
 			<div class='row'>
 				<div class='col-sm-6'>
@@ -218,5 +191,58 @@
 		</div><!--/.#content-wrapper-->
 	</div><!--/.row-->
 </div><!--/.container-->
+
+<div class="modal fade" id="assign-existing-tag-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        	<h4 class="modal-title" id="myModalLabel">Assign a Tag</h4>
+	      	</div>
+	      	<div class="modal-body">
+	      		{{ Form::open(array('method' => 'GET', 'url' => '/tag/update/{twitter_handle}/{user_id}/{tag_id}' ,'files' => true , 'id' => 'update_tag')) }}
+				<div class='form-group' id='tag_list'>
+					<input class="typeahead form-control" autocomplete="off" id='tag_selected' type="text" placeholder="Select a Tag" value='' name="tags">
+				</div><!--/.form-group-->
+			  	<input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
+			    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
+	      	</div><!--/.modal-body-->
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        	<button type="submit" value='Assign' id='select_tag' class="btn btn-primary">Assign Tag</button>
+	      	</div><!--/.modal-footer-->
+	      	{{ Form::close() }}
+	    </div><!--/.modal-content-->
+	</div><!--/.modal-dialogue-->
+</div><!--/.modal-->
+
+<div class="modal fade" id="assign-new-tag-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        	<h4 class="modal-title" id="myModalLabel">Create a Tag</h4>
+	      	</div>
+	      	<div class="modal-body">
+	      		<div id='add_new_tag_div'>
+					{{ Form::open(array('method' => 'POST', 'url' => '/tag/add' ,'files' => true ,'id' => 'add_new_tag_form')) }}
+				    <input type="hidden" class="form-control" id="userId" name ='userId' value="{{ $user->id }}"/>
+				    <input type="hidden" class="form-control" id="twitterHandle" name ='twitterHandle' value="{{ $user->twitter_handle }}"/>
+					<div class='form-group'>
+						<input type="text" class="form-control" id="newTag" name ='tag' placeholder="Enter a New Tag"/>
+					</div><!--/.form-group-->
+				</div><!--/#add_new_tag_div-->
+	      	</div><!--/.modal-body-->
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        	<button type="submit" value='Assign' id='select_tag' class="btn btn-primary">Create Tag</button>
+	      	</div><!--/.modal-footer-->
+	      	{{ Form::close() }}
+	    </div><!--/.modal-content-->
+	</div><!--/.modal-dialogue-->
+</div><!--/.modal-->
+
+
+
 @stop
 
