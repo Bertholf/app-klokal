@@ -5778,6 +5778,79 @@ button.close {
 /* ------
 Overide Bootstrap LESS Mixins
 ---------*/
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar img#sponsor-logo {
+  margin-top: 2em;
+}
+.navbar #change-location {
+  max-width: 310px;
+}
+.navbar #change-location #toggle-location {
+  margin-top: 10px;
+}
+.navbar #change-location #location-filter {
+  position: relative;
+  width: 100%;
+  background: #34495e;
+  padding: 0.5em 1em;
+  border: 1px solid #efefef;
+  border-radius: 0px 0px 5px 5px;
+}
+.navbar #change-location #location-filter #user-filter {
+  padding-left: 30px;
+}
+.navbar #change-location #location-filter #user-filter #submit-location {
+  margin-left: 10px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.navbar #change-location #location-filter #close-location {
+  float: left;
+  margin-right: 5px;
+  color: #ffffff;
+  position: absolute;
+  left: 5px;
+}
+.navbar .navbar-brand {
+  height: auto;
+}
+.navbar #logged-in {
+  padding-top: 1em;
+  max-width: 300px;
+}
+.navbar #logged-in #user-action {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.navbar #logged-in #user-action #logout-btn {
+  border-radius: 20px;
+  background: #ffffff;
+  border: 2px solid #e3e3e3;
+}
+.navbar #logged-in #user-action #logout-btn:hover {
+  color: #34495e;
+}
+ul#home-popular-lists {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+ul#home-popular-lists > li {
+  list-style-type: none;
+  display: inline-block;
+  width: 100%;
+}
+@media only screen and (min-width: 767px) {
+  ul#home-popular-lists > li {
+    width: 48%;
+    float: left;
+    margin-right: 4%;
+  }
+  ul#home-popular-lists > li:nth-child(2n+0) {
+    margin-right: 0px;
+  }
+}
 /*********************
 General Theme
 *********************/
@@ -6062,60 +6135,6 @@ ul.stats-list span.stat {
   float: left;
   padding: 5%;
   width: 90%;
-}
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar img#sponsor-logo {
-  margin-top: 2em;
-}
-.navbar #change-location {
-  max-width: 310px;
-}
-.navbar #change-location #toggle-location {
-  margin-top: 10px;
-}
-.navbar #change-location #location-filter {
-  position: relative;
-  width: 100%;
-  background: #34495e;
-  padding: 0.5em 1em;
-  border: 1px solid #efefef;
-  border-radius: 0px 0px 5px 5px;
-}
-.navbar #change-location #location-filter #user-filter {
-  padding-left: 30px;
-}
-.navbar #change-location #location-filter #user-filter #submit-location {
-  margin-left: 10px;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-}
-.navbar #change-location #location-filter #close-location {
-  float: left;
-  margin-right: 5px;
-  color: #ffffff;
-  position: absolute;
-  left: 5px;
-}
-.navbar .navbar-brand {
-  height: auto;
-}
-.navbar #logged-in {
-  padding-top: 1em;
-  max-width: 300px;
-}
-.navbar #logged-in #user-action {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-.navbar #logged-in #user-action #logout-btn {
-  border-radius: 20px;
-  background: #ffffff;
-  border: 2px solid #e3e3e3;
-}
-.navbar #logged-in #user-action #logout-btn:hover {
-  color: #34495e;
 }
 /*
 LARGER MOBILE DEVICES

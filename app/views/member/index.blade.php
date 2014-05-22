@@ -71,69 +71,72 @@
 	</div><!--/.well-->
 
 	<div class='row top-lists'>
+		<div class='col-xs-12'>
+			<ul id='home-popular-lists'>
+			@foreach ($lists as $list)
+				<li>
+					<ul class="list-group klout-list">
+						<li class="list-group-item main">
+							<h4 class="list-group-item-heading">{{ $list->title }}</h4>
+							<p class="list-group-item-text">{{ $list->text }}</p>
+						</li>
 
-		@foreach ($lists as $list)
-			<div class='col-sm-3'>
-				<ul class="list-group klout-list">
-					<li class="list-group-item main">
-						<h4 class="list-group-item-heading">{{ $list->title }}</h4>
-						<p class="list-group-item-text">{{ $list->text }}</p>
-					</li>
-
-					<?php
-					if (Session::get('current_location')){
-						$current_location = Session::get('current_location');
-					}else{
-						$current_location = 1;
-					}
-						$topusers = $list->users()->orderBy('klout_metric_score', 'desc')
-								->where('location_id', '=', $current_location)
-								->take(3)->get();
-						$c = 1;
-					?>
-					@foreach ($topusers as $user)
-					<li class="list-group-item">
-						<div class="media">
-							<a class="pull-left" href="#">
-								<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
-							</a>
-							<div class="media-body">
-								<h3 class="media-heading">
-									<div class="score">{{ round($user->klout_metric_score) }}</div><!--/.score-->
-									<a href="<?php echo url("user/{$user->twitter_handle}"); ?>"><span class='user-name'>{{ $user->name }}</span></a>
-								</h3>
-								<div class='rank'>#{{ $c }}</div><!--/.div-->
-								<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
-							</div><!--/.media-body-->
-						</div><!--/.media-->
-					</li><!--/.list-group-item-->
-					<?php $c++; ?>
-					@endforeach
-
-					<li class="list-group-item last">
-						<a class='btn btn-xlg btn-block'
-						href="
 						<?php
-						if(intval($list->user_id)>0)
-						{
-							$user = User::where('id', '=', $list->user_id)->first();
-							///user/{user.twitter_handle}/{list.slug}
-							echo url("user/{$user->twitter_handle}/{$list->slug}");
+						if (Session::get('current_location')){
+							$current_location = Session::get('current_location');
 						}else{
-							echo url("lists/{$list->slug}");
+							$current_location = 1;
 						}
+							$topusers = $list->users()->orderBy('klout_metric_score', 'desc')
+									->where('location_id', '=', $current_location)
+									->take(3)->get();
+							$c = 1;
 						?>
-							"
-						>
-							<i class='icon-zoom-in'> </i> View All {{ $list->title }}
-						</a>
-					</li><!--/.list-group-item-->
-				</ul>
-			</div><!--/.col-sm-3-->
-		@endforeach
+						@foreach ($topusers as $user)
+						<li class="list-group-item">
+							<div class="media">
+								<a class="pull-left" href="#">
+									<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
+								</a>
+								<div class="media-body">
+									<h3 class="media-heading">
+										<div class="score">{{ round($user->klout_metric_score) }}</div><!--/.score-->
+										<a href="<?php echo url("user/{$user->twitter_handle}"); ?>"><span class='user-name'>{{ $user->name }}</span></a>
+									</h3>
+									<div class='rank'>#{{ $c }}</div><!--/.div-->
+									<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{ $user->twitter_handle }}&dnt=false&show_count=false" style="width:300px; height:20px;"></iframe>
+								</div><!--/.media-body-->
+							</div><!--/.media-->
+						</li><!--/.list-group-item-->
+						<?php $c++; ?>
+						@endforeach
+
+						<li class="list-group-item last">
+							<a class='btn btn-xlg btn-block'
+							href="
+							<?php
+							if(intval($list->user_id)>0)
+							{
+								$user = User::where('id', '=', $list->user_id)->first();
+								///user/{user.twitter_handle}/{list.slug}
+								echo url("user/{$user->twitter_handle}/{$list->slug}");
+							}else{
+								echo url("lists/{$list->slug}");
+							}
+							?>
+								"
+							>
+								<i class='icon-zoom-in'> </i> View All {{ $list->title }}
+							</a>
+						</li><!--/.list-group-item-->
+					</ul>
+				</li>
+			@endforeach
+			</ul>
+		</div><!--/.col-xs-12-->
 	</div><!--/.top-lists-->
 	<div class='row'>
-		<div class='col-md-8'>
+		<div class='col-md-12'>
 			<div class='page-header'>
 				<h2>This Week's Movers and Shakers <small style='margin-left:20px;'>Who's Klout changed?</small></h2>
 			</div><!--/.page-header-->
@@ -197,13 +200,8 @@
 				</div><!--/.col-md-6-->
 			</div><!--/.row-->
 
-		</div><!--/.col-md-8-->
+		</div><!--/.col-md-12-->
 
-		<div class='col-md-4'>
-			<div class='page-header'>
-				<h2>Widget</h2>
-			</div><!--/.page-header-->
-		</div><!--/.col-md-4-->
 	</div><!--/.row-->
 </div><!-- /.container -->
 

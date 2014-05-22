@@ -1,0 +1,19 @@
+ul#home-popular-lists{
+	margin-left:0px;
+	padding-left:0px;
+	> li{
+		list-style-type: none;
+		display:inline-block;
+		width:100%;
+
+		@media only screen and (min-width: 767px) {
+			width:48%;
+			float:left;
+			margin-right:4%;
+
+			&:nth-child(2n+0){
+				margin-right:0px;
+			}
+		}//media query
+	}
+}
