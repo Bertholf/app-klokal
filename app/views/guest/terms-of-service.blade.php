@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="page-header">
+<div class="interior-page-header">
 	<div class="container">
 		<h1>Terms of Service</h1>
 	</div><!--/.container-->

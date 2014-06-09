@@ -5851,14 +5851,16 @@ ul#home-popular-lists > li {
     margin-right: 0px;
   }
 }
-.page-header {
+.interior-page-header {
   margin-bottom: 60px;
   background-color: #6F9CBA;
   position: relative;
-  text-align: center;
   color: #fff;
   overflow: hidden;
   margin-top: -20px;
+}
+.interior-page-header h1 {
+  margin-bottom: 20px;
 }
 #content-wrapper {
   margin-bottom: 60px;
