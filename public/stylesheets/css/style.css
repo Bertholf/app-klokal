@@ -5851,6 +5851,18 @@ ul#home-popular-lists > li {
     margin-right: 0px;
   }
 }
+.page-header {
+  margin-bottom: 60px;
+  background-color: #6F9CBA;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  margin-top: -20px;
+}
+#content-wrapper {
+  margin-bottom: 60px;
+}
 /*********************
 General Theme
 *********************/
@@ -5922,7 +5934,7 @@ body {
   overflow: hidden;
 }
 #welcome .container {
-  z-index: 99999;
+  z-index: 888;
   position: relative;
 }
 #welcome .container .welcome-caption {

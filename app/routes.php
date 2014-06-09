@@ -14,6 +14,8 @@
 
 // Homepage
 Route::get('/', 'GuestController@index');
+Route::get('/terms-of-service', 'GuestController@termsOfService');
+Route::get('/privacy', 'GuestController@privacyPolicy');
 Route::get('/lists', 'ListsController@index');
 Route::post('/lists/addListForUser', 'ListsController@addListForUser');
 Route::get('/lists/select', 'ListsController@select');

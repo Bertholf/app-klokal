@@ -8,4 +8,14 @@ class GuestController extends BaseController {
 		return View::make('guest.index');
 	}
 
+	public function termsOfService()
+	{
+		return View::make('guest.terms-of-service');
+	}
+
+	public function privacyPolicy()
+	{
+		return View::make('guest.privacy');
+	}
+
 }
