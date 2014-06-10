@@ -1,0 +1,79 @@
+
+/*---------------------------------------------------------------
+-------------- User Profile View
+-----------------------------------------------------------------*/
+
+.user-details {
+	position: relative;
+	padding: 0;
+
+	h3#username{
+		margin-bottom:10px;
+	}
+
+	.rank {
+		background:@white;
+		box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+		font-size: 20px;
+		padding: 0px 10px;
+		z-index: 2;
+		display:inline-block;
+	}
+
+	.score {
+		background: url("../images/score.png") repeat-x scroll 0 0 #C3492B;
+		box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+		color: #FFFFFF;
+		font-size: 20px;
+		padding: 0px 10px;
+		display:inline-block;
+		z-index: 2;
+	}
+
+	#last-updated{
+		font-size: 80%;
+		color:@gray-light;
+		font-style: italic;
+		margin-top:10px;
+		float:left;
+		display:block;
+	}
+}
+
+
+
+.user-stats{
+	background: rgb(255, 255, 255);
+	border:1px solid @gray-lighter;
+
+	ul#stat-list{
+		margin-bottom:0px;
+		> li{
+			padding:10px 15px;
+
+			.stat{
+				width:70%;
+				@media only screen and (max-width: 767px) {
+
+				}//Media
+				display:inline-block;
+			}
+
+			.score{
+				font-weight:600;
+				width:25%;
+
+				@media only screen and (max-width: 767px) {
+
+				}//Media
+
+
+				display:inline-block;
+			}
+
+			&:nth-child(odd){
+				background:@gray-lighter;
+			}
+		}
+	}
+}

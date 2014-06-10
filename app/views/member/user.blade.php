@@ -5,33 +5,60 @@
 	<div class='row'>
 		<div class='col-xs-12' id='content-wrapper'>
 			<div class='row'>
-				<div class="col-sm-4 col-md-4">
+				<div class="col-sm-6">
 					<div class='well'>
 						<div class='user-details clearfix'>
-							<div class="user-image">
-								<img src='{{ $user->image }}' alt='{{ $user->name }}' class='img-responsive img-circle'>
-							</div><!--/.user-image-->
-							<div class="user-info-block">
-				                <div class="user-heading">
-				                    <h3>{{ $user->name }}</h3>
-				                    <span class="help-block">@ {{ $user->twitter_handle }}</span>
-				                </div><!--/.user-heading-->
-				                <div class="user-body">
-		                            <p><label>Ranked: </label>#{{ $user->getRankInType() }}</p>
-									<p><label>Score: </label>{{ round($user->klout_metric_score) }}</p>
-									<p><label>Score Day: </label>{{ round($user->klout_metric_score_day) }}</p>
-									<p><label>Score Week: </label>{{ round($user->klout_metric_score_week) }}</p>
-									<p><label>Score Month: </label>{{ round($user->klout_metric_score_month) }}</p>
-									<p><label>Updated: </label>{{ $user->klout_updated }}</p>
-				                </div><!--/user-body-->
-				            </div><!--/.user-info-block-->
+
+							<div class='media'>
+								<span class='pull-left'>
+									<img src='{{ $user->image }}' alt='{{ $user->name }}' class='img-responsive img-circle'>
+								</span>
+								<div class='media-body'>
+
+									<h3 class='media-heading' id='username'>{{ $user->name }} <small>@ {{ $user->twitter_handle }}</small></h3>
+
+									<div class='row'>
+										<div class='col-sm-6'>
+											<div class='rank'>
+												Ranked # {{ $user->getRankInType() }}
+											</div><!--/.rank-->
+										</div><!--/.col-sm-3-->
+										<div class='col-sm-6 mobile-down'>
+											<div class='score'>
+												Klout Score: {{ round($user->klout_metric_score) }}
+											</div><!--/.score-->
+										</div><!--/.col-sm-3-->
+									</div><!--/.row-->
+									<div class='row'>
+										<div class='col-sm-12'>
+											<div id='last-updated'><i class='icon-time'> </i> Last updated: {{ $user->klout_updated }}</div>
+										</div><!--/.col-xs-12-->
+									</div><!--/.row-->
+								</div><!--/.media-body-->
+							</div><!--/.media-->
+
 				        </div><!--/.user-details-->
 				    </div><!--/.well-->
 
 		        </div><!--/.col-md-4-->
+		        <div class='col-sm-4 col-sm-offset-2'>
+		        	<div class='row'>
+						<div class='col-sm-12'>
+							<div class='user-stats'>
+								<ul class='list-unstyled list-striped' id='stat-list'>
+									<li><span class='stat'>Today's Score:</span> <span class='score'>{{ round($user->klout_metric_score_day) }}</span></li>
+									<li><span class='stat'>This Week's Score:</span> <span class='score'>{{ round($user->klout_metric_score_week) }}</span></li>
+									<li><span class='stat'>This Month's Score:</span> <span class='score'>{{ round($user->klout_metric_score_month) }}</span></li>
+								</ul><!--/.list-inline-->
+							</div><!--/.user-stats-->
+						</div><!--/.col-sm-12-->
+					</div><!--/.row-->
+		        </div><!--/.col-sm-4-->
 
+			</div><!--/.row-->
+			<div class='row shift-down'>
 				<div class='col-sm-4'>
-					<ul class="list-group klout-list">
+					<ul class="list-group klout-list" id='user-tags'>
 						<li class="list-group-item main">
 							<h4 class="list-group-item-heading">Tags List</h4>
 						</li>
@@ -98,10 +125,7 @@
 						</li><!--/.list-group-item-->
 					</ul>
 				</div><!--/.col-sm-4-->
-
-			</div><!--/.row-->
-			<div class='row'>
-				<div class='col-sm-6'>
+				<div class='col-sm-4'>
 					<ul class="list-group klout-list">
 						<li class="list-group-item main"><h5 class="list-group-item-heading"> List created</h5></li>
 						@foreach($list_actor as $list)
@@ -142,9 +166,9 @@
 						</li>
 						@endforeach
 					</ul>
-				</div><!--/.col-sm-6-->
-				<div class='col-sm-6'>
-					<ul class="list-group klout-list">
+				</div><!--/.col-sm-4-->
+				<div class='col-sm-4'>
+					<ul class="list-group klout-list" id='user-klout-list'>
 						<li class="list-group-item main"><h5 class="list-group-item-heading"> List apart of</h5></li>
 						@foreach($listedby as $listedby_value)
 							@foreach($listedby_value as $item)
@@ -186,7 +210,7 @@
 							@endforeach
 						@endforeach
 					</ul>
-				</div><!--/.col-sm-6-->
+				</div><!--/.col-sm-4-->
 			</div><!--/.row-->
 		</div><!--/.#content-wrapper-->
 	</div><!--/.row-->
@@ -243,6 +267,11 @@
 </div><!--/.modal-->
 
 
+
+@stop
+
+
+@section('inline_scripts')
 
 @stop
 

@@ -1,6 +1,7 @@
 @import "components/header.less";
 @import "components/popular-lists.less";
 @import "components/interior-view.less";
+@import "components/user-profile.less";
 
 /*********************
 General Theme
@@ -34,6 +35,9 @@ a{
 	margin-right:15px;
 }
 
+.shift-down{
+	margin-top:15px;
+}
 
 .lead.noBelow{
 	margin-bottom:10px;
@@ -331,45 +335,3 @@ ul.stats-list span.stat{
 	float:right;
 }
 
-
-/*---------------------------------------------------------------
--------------- User Profile View
------------------------------------------------------------------*/
-
-.user-details {
-	position: relative;
-	padding: 0;
-
-	.user-image {
-		position: absolute;
-		top:-20px;
-		padding-top:10px;
-		z-index: 1;
-		width: 100%;
-		text-align: center;
-
- 		img {
- 			clear: both;
- 			margin: auto;
- 			position: relative;
- 		}
- 	}
-	.user-info-block {
-		width: 100%;
-		background: rgb(255, 255, 255);
-		z-index: 0;
-		padding-top: 35px;
-
-		.user-heading {
-			width: 100%;
-			text-align: center;
-			margin: 10px 0 0;
-			padding-bottom:10px;
-		}
- 		.user-body {
- 			float: left;
- 			padding: 5%;
- 			width: 90%;
- 		}
- 	}
-}

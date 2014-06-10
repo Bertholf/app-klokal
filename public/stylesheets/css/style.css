@@ -5865,6 +5865,63 @@ ul#home-popular-lists > li {
 #content-wrapper {
   margin-bottom: 60px;
 }
+/*---------------------------------------------------------------
+-------------- User Profile View
+-----------------------------------------------------------------*/
+.user-details {
+  position: relative;
+  padding: 0;
+}
+.user-details h3#username {
+  margin-bottom: 10px;
+}
+.user-details .rank {
+  background: #ffffff;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  padding: 0px 10px;
+  z-index: 2;
+  display: inline-block;
+}
+.user-details .score {
+  background: url("../images/score.png") repeat-x scroll 0 0 #c3492b;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 0px 10px;
+  display: inline-block;
+  z-index: 2;
+}
+.user-details #last-updated {
+  font-size: 80%;
+  color: #999999;
+  font-style: italic;
+  margin-top: 10px;
+  float: left;
+  display: block;
+}
+.user-stats {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+}
+.user-stats ul#stat-list {
+  margin-bottom: 0px;
+}
+.user-stats ul#stat-list > li {
+  padding: 10px 15px;
+}
+.user-stats ul#stat-list > li .stat {
+  width: 70%;
+  display: inline-block;
+}
+.user-stats ul#stat-list > li .score {
+  font-weight: 600;
+  width: 25%;
+  display: inline-block;
+}
+.user-stats ul#stat-list > li:nth-child(odd) {
+  background: #eeeeee;
+}
 /*********************
 General Theme
 *********************/
@@ -5887,6 +5944,9 @@ a {
 }
 .shift-left {
   margin-right: 15px;
+}
+.shift-down {
+  margin-top: 15px;
 }
 .lead.noBelow {
   margin-bottom: 10px;
@@ -6118,43 +6178,6 @@ ul.klout-list .list-group-item:last-of-type a i {
 }
 ul.stats-list span.stat {
   float: right;
-}
-/*---------------------------------------------------------------
--------------- User Profile View
------------------------------------------------------------------*/
-.user-details {
-  position: relative;
-  padding: 0;
-}
-.user-details .user-image {
-  position: absolute;
-  top: -20px;
-  padding-top: 10px;
-  z-index: 1;
-  width: 100%;
-  text-align: center;
-}
-.user-details .user-image img {
-  clear: both;
-  margin: auto;
-  position: relative;
-}
-.user-details .user-info-block {
-  width: 100%;
-  background: #ffffff;
-  z-index: 0;
-  padding-top: 35px;
-}
-.user-details .user-info-block .user-heading {
-  width: 100%;
-  text-align: center;
-  margin: 10px 0 0;
-  padding-bottom: 10px;
-}
-.user-details .user-info-block .user-body {
-  float: left;
-  padding: 5%;
-  width: 90%;
 }
 /*
 LARGER MOBILE DEVICES
