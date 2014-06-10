@@ -24,7 +24,7 @@
 						<li class="list-group-item">
 							<div class="media">
 								<a class="pull-left" href="#">
-									<img height=48 width=48 class="media-object" src="{{ $user->image }}" alt="...">
+									<img height=48 width=48 class="media-object img-circle img-responsive" src="{{ $user->image }}" alt="...">
 								</a>
 								<div class="media-body">
 									<h3 class="media-heading">
