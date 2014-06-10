@@ -5784,6 +5784,17 @@ Overide Bootstrap LESS Mixins
 .navbar img#sponsor-logo {
   margin-top: 2em;
 }
+.navbar .navbar-header {
+  float: left;
+}
+@media only screen and (max-width: 767px) {
+  .navbar .navbar-header a.navbar-brand img {
+    max-width: 150px;
+  }
+}
+.navbar .navbar-right {
+  float: right;
+}
 .navbar #change-location {
   max-width: 310px;
 }
@@ -5921,17 +5932,6 @@ ul#home-popular-lists > li {
 }
 .user-stats ul#stat-list > li:nth-child(odd) {
   background: #eeeeee;
-}
-.navbar-header {
-  float: left;
-}
-@media only screen and (max-width: 767px) {
-  .navbar-header a.navbar-brand img {
-    max-width: 150px;
-  }
-}
-.navbar-right {
-  float: right;
 }
 /* Top Users
 -------------------------------------------------- */

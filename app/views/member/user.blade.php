@@ -31,7 +31,7 @@
 									</div><!--/.row-->
 									<div class='row'>
 										<div class='col-sm-12'>
-											<div id='last-updated'><i class='icon-time'> </i> Last updated: {{ $user->klout_updated }}</div>
+											<div id='last-updated'><i class='icon-time'> </i> Last updated <time class='timeago' datetime="{{ $user->klout_updated }}"></time> </div>
 										</div><!--/.col-xs-12-->
 									</div><!--/.row-->
 								</div><!--/.media-body-->
@@ -271,7 +271,15 @@
 @stop
 
 
+@section('view_script')
+{{HTML::script('js/plugins/timeago/jquery.timeago.js')}}
+@stop
+
 @section('inline_scripts')
+
+jQuery(document).ready(function() {
+  jQuery("time.timeago").timeago();
+});
 
 @stop
 
