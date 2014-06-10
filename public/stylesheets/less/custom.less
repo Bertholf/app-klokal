@@ -3,6 +3,7 @@
 @import "components/interior-view.less";
 @import "components/user-profile.less";
 @import "components/navbar.less";
+@import "components/top-users.less";
 
 /*********************
 General Theme
@@ -166,103 +167,7 @@ body {
 
 
 
-/* Top Users
--------------------------------------------------- */
 
-
-#top-user-container{
-	padding: 20px 0 40px;
-	background:@secondaryColor;
-	width:100%;
-	overflow:hidden;
-	top:-20px;
-	position:relative;
-
-	.lead{
-		color:#fff;
-	}
-
-	ul.users li{
-		margin:1em 1em;
-		box-sizing:border-box;
-		-webkit-box-sizing:border-box;
-		-moz-box-sizing:border-box;
-		background:#fff;
-		border-radius:4px;
-		-webkit-border-radius:4px;
-		-moz-border-radius:4px;
-		padding:10px;
-		position: relative;
-		min-width: 185px;
-		width: 17%;
-
-		.box {
-			.user-image{
-				text-align: center;
-				z-index: 333;
-				position: absolute;
-				top: -20px;
-				width:100%;
-				left:0px;
-
-
-				img{
-					margin:0 auto;
-					padding:0.2em;
-					border-radius:30px;
-					-webkit-border-radius:30px;
-					-moz-border-radius:30px;
-					-ms-border-radius:30px;
-					-o-border-radius:30px;
-					background:@mediumGrey;
-				}
-			}
-
-			h4#username{
-				padding-top:30px;
-			}
-
-			.rank {
-				background:@white;
-				box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-				font-size: 20px;
-				padding: 0px 10px;
-				position: absolute;
-				left: 10px;
-				top: -7px;
-				z-index: 2;
-			}
-
-			.score {
-				background: url("../images/score.png") repeat-x scroll 0 0 #C3492B;
-				box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-				color: #FFFFFF;
-				font-size: 20px;
-				padding: 0px 10px;
-				position: absolute;
-				right: 10px;
-				top: -7px;
-				z-index: 2;
-			}
-
-			.box-info{
-				text-align: center;
-
-				#widget{
-					text-align:center;
-				}
-			}
-
-			a{
-				i{
-					color:#3498db;
-				}
-			}
-		}
-
-	}
-
-}
 
 
 .list-group-item.main, .list-group-item.main:hover, .list-group-item.main:focus {

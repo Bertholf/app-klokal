@@ -1,0 +1,120 @@
+/* Top Users
+-------------------------------------------------- */
+
+
+#top-user-container{
+	padding: 20px 0 40px;
+	background:@secondaryColor;
+	width:100%;
+	overflow:hidden;
+	top:-20px;
+	position:relative;
+
+	.lead{
+		color:#fff;
+	}
+
+	ul.users{
+		margin-left:0px;
+		padding-left:0px;
+
+		> li{
+			margin-bottom:2em;
+			box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			background:#fff;
+			border-radius:4px;
+			-webkit-border-radius:4px;
+			-moz-border-radius:4px;
+			padding:10px;
+			position: relative;
+			min-width: 185px;
+			width:100%;
+
+			@media only screen and (min-width: 480px) {
+				width:48%;
+				margin-right:2%;
+				&:nth-child(even){
+					margin-right:0px;
+				}
+			}
+
+			@media only screen and (min-width: 767px) {
+				width: 17%;
+				margin:1em 1em;
+				&:nth-child(even){
+					margin-right:1em;
+				}
+
+			}//media
+
+			.box {
+				.user-image{
+					text-align: center;
+					z-index: 333;
+					position: absolute;
+					top: -20px;
+					width:100%;
+					left:0px;
+
+
+					img{
+						margin:0 auto;
+						padding:0.1em;
+						border-radius:100%;
+						-webkit-border-radius:100%;
+						-moz-border-radius:100%;
+						-ms-border-radius:100%;
+						-o-border-radius:100%;
+						background:@mediumGrey;
+					}
+				}
+
+				h4#username{
+					padding-top:30px;
+				}
+
+				.rank {
+					background:@white;
+					box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+					font-size: 20px;
+					padding: 0px 10px;
+					position: absolute;
+					left: 10px;
+					top: -7px;
+					z-index: 2;
+				}
+
+				.score {
+					background: url("../images/score.png") repeat-x scroll 0 0 #C3492B;
+					box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+					color: #FFFFFF;
+					font-size: 20px;
+					padding: 0px 10px;
+					position: absolute;
+					right: 10px;
+					top: -7px;
+					z-index: 2;
+				}
+
+				.box-info{
+					text-align: center;
+
+					#widget{
+						text-align:center;
+					}
+				}
+
+				a{
+					i{
+						color:#3498db;
+					}
+				}
+			}
+
+		}
+
+	}
+
+}

@@ -5933,6 +5933,106 @@ ul#home-popular-lists > li {
 .navbar-right {
   float: right;
 }
+/* Top Users
+-------------------------------------------------- */
+#top-user-container {
+  padding: 20px 0 40px;
+  background: #34495e;
+  width: 100%;
+  overflow: hidden;
+  top: -20px;
+  position: relative;
+}
+#top-user-container .lead {
+  color: #fff;
+}
+#top-user-container ul.users {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+#top-user-container ul.users > li {
+  margin-bottom: 2em;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background: #fff;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 10px;
+  position: relative;
+  min-width: 185px;
+  width: 100%;
+}
+@media only screen and (min-width: 480px) {
+  #top-user-container ul.users > li {
+    width: 48%;
+    margin-right: 2%;
+  }
+  #top-user-container ul.users > li:nth-child(even) {
+    margin-right: 0px;
+  }
+}
+@media only screen and (min-width: 767px) {
+  #top-user-container ul.users > li {
+    width: 17%;
+    margin: 1em 1em;
+  }
+  #top-user-container ul.users > li:nth-child(even) {
+    margin-right: 1em;
+  }
+}
+#top-user-container ul.users > li .box .user-image {
+  text-align: center;
+  z-index: 333;
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  left: 0px;
+}
+#top-user-container ul.users > li .box .user-image img {
+  margin: 0 auto;
+  padding: 0.1em;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  background: #e3e3e3;
+}
+#top-user-container ul.users > li .box h4#username {
+  padding-top: 30px;
+}
+#top-user-container ul.users > li .box .rank {
+  background: #ffffff;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  padding: 0px 10px;
+  position: absolute;
+  left: 10px;
+  top: -7px;
+  z-index: 2;
+}
+#top-user-container ul.users > li .box .score {
+  background: url("../images/score.png") repeat-x scroll 0 0 #c3492b;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 0px 10px;
+  position: absolute;
+  right: 10px;
+  top: -7px;
+  z-index: 2;
+}
+#top-user-container ul.users > li .box .box-info {
+  text-align: center;
+}
+#top-user-container ul.users > li .box .box-info #widget {
+  text-align: center;
+}
+#top-user-container ul.users > li .box a i {
+  color: #3498db;
+}
 /*********************
 General Theme
 *********************/
@@ -6058,84 +6158,6 @@ body {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
-}
-/* Top Users
--------------------------------------------------- */
-#top-user-container {
-  padding: 20px 0 40px;
-  background: #34495e;
-  width: 100%;
-  overflow: hidden;
-  top: -20px;
-  position: relative;
-}
-#top-user-container .lead {
-  color: #fff;
-}
-#top-user-container ul.users li {
-  margin: 1em 1em;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  background: #fff;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  padding: 10px;
-  position: relative;
-  min-width: 185px;
-  width: 17%;
-}
-#top-user-container ul.users li .box .user-image {
-  text-align: center;
-  z-index: 333;
-  position: absolute;
-  top: -20px;
-  width: 100%;
-  left: 0px;
-}
-#top-user-container ul.users li .box .user-image img {
-  margin: 0 auto;
-  padding: 0.2em;
-  border-radius: 30px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  -o-border-radius: 30px;
-  background: #e3e3e3;
-}
-#top-user-container ul.users li .box h4#username {
-  padding-top: 30px;
-}
-#top-user-container ul.users li .box .rank {
-  background: #ffffff;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-  font-size: 20px;
-  padding: 0px 10px;
-  position: absolute;
-  left: 10px;
-  top: -7px;
-  z-index: 2;
-}
-#top-user-container ul.users li .box .score {
-  background: url("../images/score.png") repeat-x scroll 0 0 #c3492b;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-  color: #FFFFFF;
-  font-size: 20px;
-  padding: 0px 10px;
-  position: absolute;
-  right: 10px;
-  top: -7px;
-  z-index: 2;
-}
-#top-user-container ul.users li .box .box-info {
-  text-align: center;
-}
-#top-user-container ul.users li .box .box-info #widget {
-  text-align: center;
-}
-#top-user-container ul.users li .box a i {
-  color: #3498db;
 }
 .list-group-item.main,
 .list-group-item.main:hover,
