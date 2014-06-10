@@ -5922,6 +5922,17 @@ ul#home-popular-lists > li {
 .user-stats ul#stat-list > li:nth-child(odd) {
   background: #eeeeee;
 }
+.navbar-header {
+  float: left;
+}
+@media only screen and (max-width: 767px) {
+  .navbar-header a.navbar-brand img {
+    max-width: 150px;
+  }
+}
+.navbar-right {
+  float: right;
+}
 /*********************
 General Theme
 *********************/

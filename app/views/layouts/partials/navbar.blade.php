@@ -54,8 +54,10 @@
 						<div id='logged-in'>
 			                <div id='user-action'>
 			                	@if (Auth::check())
+
 								<span>Hi, </span>
 								<a href="/user/{{Auth::user()->twitter_handle}}">{{ Auth::user()->name }}</a>
+
 								<a href="/logout" class='btn shift-right' id='logout-btn'><i class='icon-off'> </i></a>
 
 								@else
