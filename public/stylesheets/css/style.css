@@ -5862,6 +5862,15 @@ ul#home-popular-lists > li {
     margin-right: 0px;
   }
 }
+ul.stats-list > li .user-name {
+  position: relative;
+  top: 10px;
+  display: inline-block;
+}
+ul.stats-list > li .stat {
+  position: relative;
+  top: 10px;
+}
 .interior-page-header {
   margin-bottom: 60px;
   background-color: #6F9CBA;

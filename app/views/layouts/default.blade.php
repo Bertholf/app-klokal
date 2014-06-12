@@ -43,12 +43,14 @@
 		<script src="/js/user.js"></script>
 		@yield('view_script')
 		<script type='text/javascript'>
-			@yield('inline_scripts')
+			$(function() {
+				@yield('inline_scripts')
 
-			// Replace any of our broken images
-			$('img').error(function(){
-			        $(this).attr('src', '/images/placeholder.png');
-			});
+				// Replace any of our broken images
+				$('img').error(function(){
+				        $(this).attr('src', '/images/placeholder.png');
+				});
+			})
 		</script>
 	</body>
 </html>

@@ -88,7 +88,7 @@
 												}
 											?>
 										<a class="pull-left" href="/user/<?php echo $twitter_handle;?>">
-											<img height=48 width=48 class="media-object" src="
+											<img height=48 width=48 class="media-object img-responsive img-circle" src="
 											<?php
 												echo $image;
 											?>
@@ -277,9 +277,9 @@
 
 @section('inline_scripts')
 
-jQuery(document).ready(function() {
-  jQuery("time.timeago").timeago();
-});
+
+  $("time.timeago").timeago();
+
 
 @stop
 
