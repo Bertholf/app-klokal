@@ -44,6 +44,11 @@
 		@yield('view_script')
 		<script type='text/javascript'>
 			@yield('inline_scripts')
+
+			// Replace any of our broken images
+			$('img').error(function(){
+			        $(this).attr('src', '/images/placeholder.png');
+			});
 		</script>
 	</body>
 </html>
