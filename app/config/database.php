@@ -54,14 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-// 			'host'      => 'saas-production.ci0onk8zahio.us-east-1.rds.amazonaws.com',
-// 			'database'  => 'klokal',
-// 			'username'  => 'saasventures',
-// 			'password'  => 'saas123456789',
-			'host'      => 'localhost',
+ 			'host'      => 'saas-production.ci0onk8zahio.us-east-1.rds.amazonaws.com',
 			'database'  => 'klokal',
-			'username'  => 'saas',
-			'password'  => '5445',
+			'username'  => 'saasventures',
+			'password'  => 'saas123456789',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
